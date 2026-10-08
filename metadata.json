@@ -1,0 +1,6 @@
+{
+  "name": "PixelPulse - Gaming Blog & Reviews",
+  "description": "Honest reviews, in-depth impressions, score breakdowns, and modern gaming stories.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
