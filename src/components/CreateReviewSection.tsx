@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { GameReview } from '../types';
 import { DEFAULT_PRESET_IMAGES } from '../data/defaultReviews';
-import { PlusCircle, Sparkles, Image, Star, CheckCircle2, ChevronDown, ChevronUp } from 'lucide-react';
+import { PlusCircle, ChevronDown, ChevronUp } from 'lucide-react';
 
 interface CreateReviewSectionProps {
   onAddReview: (review: GameReview) => void;
@@ -40,24 +40,39 @@ export const CreateReviewSection: React.FC<CreateReviewSectionProps> = ({
     const numRating = Math.min(10, Math.max(1, parseFloat(rating) || 8.0));
     const finalImage = image.trim() || DEFAULT_PRESET_IMAGES[0].url;
 
-    const detailedProse = summary.trim().split(/\s+/).length >= 150
-      ? summary.trim()
-      : `${summary.trim()}\n\nFrom our hands-on evaluation on ${platform || 'PC and current-gen consoles'}, the title demonstrates commendable mechanical coherence and confident artistic vision. The gameplay loop establishes a steady cadence of challenge and reward, giving players meaningful agency in how they navigate environmental hazards and tactical encounters.\n\nVisually and acoustically, the production values shine through deliberate art direction and evocative audio composition that together construct a cohesive, immersive atmosphere. While occasional pacing wrinkles or difficulty spikes may surface during extended sessions, the overarching adventure delivers a deeply memorable experience that stands tall within the ${genre} genre and earns our enthusiastic recommendation.`;
+    // Detailed editorial prose
+    const wordsCount = summary.trim().split(/\s+/).filter(Boolean).length;
+    let detailedProse = summary.trim();
+
+    if (wordsCount < 150) {
+      detailedProse = `${summary.trim()}
+
+From our comprehensive hands-on evaluation on ${platform || 'PC and current-gen consoles'}, the title demonstrates commendable mechanical coherence and confident artistic vision that immediately grabs the player's attention. The moment-to-moment gameplay loop establishes a steady, finely tuned cadence of escalating challenge and tactile reward. Every encounter demands thoughtful positioning, strategic resource management, and disciplined execution, offering players genuine agency in how they approach tactical engagements and environmental navigation.
+
+Beyond its mechanical foundation, the title excels in crafting a living, breathing world packed with atmospheric environmental storytelling. Every cavern, corridor, and vista reflects meticulous worldbuilding, where subtle visual motifs and ambient soundscapes convey narrative depth without relying on intrusive exposition. Sound design plays an equally pivotal role: concussive acoustic effects during tense action beats seamlessly transition into delicate, meditative musical motifs during quiet moments of exploration, elevating the overall emotional gravity.
+
+The progression systems offer generous room for player expression and buildcrafting. Rather than restricting players to rigid predetermined paths, the game encourages creative experimentation with diverse playstyles, weaponry loadouts, and tactical perks. While minor pacing wrinkles or difficulty spikes may surface during extended sessions, the overarching adventure delivers an extraordinary, deeply memorable experience that stands tall within the ${genre} genre and easily earns its place in the pixcel.gg archive. Whether you are a seasoned genre veteran or a curious newcomer, this outstanding title delivers hours of thrilling gameplay that honors the classic arcade spirit.`;
+    }
+
+    const newSlug = title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)+/g, '') || `review-${Date.now()}`;
 
     const newReview: GameReview = {
-      id: `review-${Date.now()}`,
+      id: newSlug,
       title: title.trim(),
       genre: genre.trim(),
       rating: parseFloat(numRating.toFixed(1)),
       image: finalImage,
-      summary: summary.trim(),
+      summary: summary.trim().slice(0, 300),
       fullReview: detailedProse,
       date: new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
       author: author.trim() || 'pixcel.gg Staff',
       platform: platform.trim() || 'Multiplatform',
       playtime: playtime.trim() || 'Completed review playthrough',
-      pros: pro.trim() ? [pro.trim(), 'Responsive controls and pacing'] : ['Solid core mechanics', 'High presentation quality'],
-      cons: con.trim() ? [con.trim()] : ['Occasional difficulty spikes'],
+      pros: pro.trim() ? [pro.trim(), 'Responsive controls and arcade pacing'] : ['Solid core mechanics and deep buildcraft', 'Superb audio-visual atmosphere'],
+      cons: con.trim() ? [con.trim()] : ['Occasional late-game difficulty spikes'],
       breakdown: {
         gameplay: Math.min(10, parseFloat((numRating + 0.1).toFixed(1))),
         graphics: Math.min(10, parseFloat((numRating).toFixed(1))),
@@ -85,42 +100,39 @@ export const CreateReviewSection: React.FC<CreateReviewSectionProps> = ({
   };
 
   return (
-    <section id="publish-section" className="mb-12 bg-[#1a1d2e] border border-[#2b3048] rounded-2xl overflow-hidden transition-all shadow-xl">
-      {/* Accordion / Header Bar */}
+    <section id="publish-section" className="mb-12 bg-[#0c0c0c] border-4 border-[#ffe600] shadow-[6px_6px_0px_#ffe600] font-aptos">
+      {/* Accordion / Header Bar in Aptos Bold */}
       <button
         onClick={onToggleOpen}
-        className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-[#141724]/40 transition-colors cursor-pointer"
+        className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-[#141414] transition-colors cursor-pointer"
       >
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-lg bg-[#ff4655]/15 border border-[#ff4655]/30 flex items-center justify-center text-[#ff4655]">
-            <PlusCircle className="w-5 h-5" />
+          <div className="w-9 h-9 bg-[#ffe600] border-2 border-black flex items-center justify-center text-black">
+            <PlusCircle className="w-5 h-5 stroke-[3]" />
           </div>
           <div>
-            <h2 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
-              <span>Publish a New Game Review</span>
-              <span className="text-xs font-mono font-normal text-[#ff4655] bg-[#ff4655]/10 px-2 py-0.5 rounded">
-                Editorial Desk
-              </span>
+            <h2 className="text-base sm:text-xl font-bold text-[#ffe600] flex flex-wrap items-center gap-2">
+              <span>+ Post a New Game Review</span>
             </h2>
-            <p className="text-xs text-[#9da3af] mt-0.5">
+            <p className="text-xs sm:text-sm text-[#a3a3a3] mt-0.5 font-normal">
               Submit your impressions, score breakdown, and verdict to the pixcel.gg archive
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 text-xs font-semibold text-[#9da3af]">
-          <span>{isOpen ? 'Collapse Form' : 'Expand Form'}</span>
+        <div className="flex items-center gap-2 text-xs font-bold text-[#ffe600] uppercase tracking-wider">
+          <span>{isOpen ? 'Collapse' : 'Expand Form'}</span>
           {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
         </div>
       </button>
 
-      {/* Form Body */}
+      {/* Form Body in Aptos font with bold labels */}
       {isOpen && (
-        <form onSubmit={handleSubmit} className="p-6 pt-2 border-t border-[#2b3048]/80 space-y-6">
+        <form onSubmit={handleSubmit} className="p-6 pt-2 border-t-2 border-[#2b2b2b] space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {/* Game Title */}
             <div className="space-y-1.5">
-              <label htmlFor="gameTitle" className="block text-xs font-bold uppercase tracking-wider text-[#9da3af]">
+              <label htmlFor="gameTitle" className="block text-xs font-bold text-[#ffe600] uppercase tracking-wider">
                 Game Title *
               </label>
               <input
@@ -130,17 +142,15 @@ export const CreateReviewSection: React.FC<CreateReviewSectionProps> = ({
                 placeholder="e.g. Black Myth: Wukong"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="w-full bg-[#111320] border border-[#2b3048] rounded-lg px-3.5 py-2.5 text-sm text-white placeholder-[#7b8096] focus:border-[#ff4655] focus:outline-none"
+                className="w-full bg-[#121212] border-2 border-[#333333] px-3.5 py-2.5 text-sm text-white placeholder-[#666666] focus:border-[#ffe600] focus:outline-none"
               />
             </div>
 
             {/* Genre */}
             <div className="space-y-1.5">
-              <div className="flex items-center justify-between">
-                <label htmlFor="gameGenre" className="block text-xs font-bold uppercase tracking-wider text-[#9da3af]">
-                  Genre *
-                </label>
-              </div>
+              <label htmlFor="gameGenre" className="block text-xs font-bold text-[#ffe600] uppercase tracking-wider">
+                Genre *
+              </label>
               <input
                 id="gameGenre"
                 type="text"
@@ -148,16 +158,15 @@ export const CreateReviewSection: React.FC<CreateReviewSectionProps> = ({
                 placeholder="e.g. Action RPG or Sci-Fi Shooter"
                 value={genre}
                 onChange={(e) => setGenre(e.target.value)}
-                className="w-full bg-[#111320] border border-[#2b3048] rounded-lg px-3.5 py-2.5 text-sm text-white placeholder-[#7b8096] focus:border-[#ff4655] focus:outline-none"
+                className="w-full bg-[#121212] border-2 border-[#333333] px-3.5 py-2.5 text-sm text-white placeholder-[#666666] focus:border-[#ffe600] focus:outline-none"
               />
-              {/* Quick Genre Suggestions */}
               <div className="flex flex-wrap gap-1.5 pt-1">
                 {quickGenres.map((g) => (
                   <button
                     key={g}
                     type="button"
                     onClick={() => setGenre(g)}
-                    className="text-[11px] px-2 py-0.5 rounded bg-[#111320] text-[#9da3af] hover:text-white hover:border-[#ff4655] border border-[#2b3048] transition-colors"
+                    className="text-xs font-semibold px-2 py-0.5 bg-[#1a1a1a] text-[#888888] hover:text-[#ffe600] hover:border-[#ffe600] border border-[#333333] cursor-pointer"
                   >
                     {g}
                   </button>
@@ -165,201 +174,133 @@ export const CreateReviewSection: React.FC<CreateReviewSectionProps> = ({
               </div>
             </div>
 
-            {/* Rating */}
+            {/* Score */}
             <div className="space-y-1.5">
-              <div className="flex items-center justify-between">
-                <label htmlFor="gameRating" className="block text-xs font-bold uppercase tracking-wider text-[#9da3af]">
-                  Rating (out of 10) *
-                </label>
-                <span className="text-sm font-bold text-amber-400 flex items-center gap-1 tabular-nums font-mono">
-                  <Star className="w-3.5 h-3.5 fill-amber-400" />
-                  {rating} / 10
-                </span>
-              </div>
-              <div className="flex items-center gap-3">
-                <input
-                  id="gameRating"
-                  type="number"
-                  min="1"
-                  max="10"
-                  step="0.1"
-                  required
-                  placeholder="9.2"
-                  value={rating}
-                  onChange={(e) => setRating(e.target.value)}
-                  className="w-28 bg-[#111320] border border-[#2b3048] rounded-lg px-3.5 py-2.5 text-sm text-white focus:border-[#ff4655] focus:outline-none tabular-nums font-mono"
-                />
-                <input
-                  type="range"
-                  min="1"
-                  max="10"
-                  step="0.1"
-                  value={rating}
-                  onChange={(e) => setRating(e.target.value)}
-                  className="flex-1 accent-[#ff4655] cursor-pointer"
-                />
-              </div>
-            </div>
-
-            {/* Platform & Hours */}
-            <div className="grid grid-cols-2 gap-3">
-              <div className="space-y-1.5">
-                <label htmlFor="gamePlatform" className="block text-xs font-bold uppercase tracking-wider text-[#9da3af]">
-                  Platforms
-                </label>
-                <input
-                  id="gamePlatform"
-                  type="text"
-                  placeholder="PC, PS5, Xbox"
-                  value={platform}
-                  onChange={(e) => setPlatform(e.target.value)}
-                  className="w-full bg-[#111320] border border-[#2b3048] rounded-lg px-3 py-2.5 text-sm text-white placeholder-[#7b8096] focus:border-[#ff4655] focus:outline-none"
-                />
-              </div>
-              <div className="space-y-1.5">
-                <label htmlFor="gamePlaytime" className="block text-xs font-bold uppercase tracking-wider text-[#9da3af]">
-                  Playtime Logged
-                </label>
-                <input
-                  id="gamePlaytime"
-                  type="text"
-                  placeholder="e.g. 45 hours"
-                  value={playtime}
-                  onChange={(e) => setPlaytime(e.target.value)}
-                  className="w-full bg-[#111320] border border-[#2b3048] rounded-lg px-3 py-2.5 text-sm text-white placeholder-[#7b8096] focus:border-[#ff4655] focus:outline-none"
-                />
-              </div>
-            </div>
-
-            {/* Image URL & Preset Selection */}
-            <div className="md:col-span-2 space-y-2">
-              <label htmlFor="gameImage" className="block text-xs font-bold uppercase tracking-wider text-[#9da3af]">
-                Image URL *
-              </label>
-              <div className="flex gap-2">
-                <div className="relative flex-1">
-                  <Image className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#7b8096]" />
-                  <input
-                    id="gameImage"
-                    type="url"
-                    placeholder="https://images.unsplash.com/... or choose preset below"
-                    value={image}
-                    onChange={(e) => setImage(e.target.value)}
-                    className="w-full bg-[#111320] border border-[#2b3048] rounded-lg pl-9 pr-3.5 py-2.5 text-sm text-white placeholder-[#7b8096] focus:border-[#ff4655] focus:outline-none"
-                  />
-                </div>
-              </div>
-
-              {/* Quick Preset Artwork Picker */}
-              <div className="pt-1">
-                <span className="text-[11px] text-[#7b8096] block mb-1.5">
-                  Or select curated gaming concept art (1-click autofill):
-                </span>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                  {DEFAULT_PRESET_IMAGES.map((preset) => (
-                    <button
-                      key={preset.name}
-                      type="button"
-                      onClick={() => setImage(preset.url)}
-                      className={`flex items-center gap-2 p-1.5 rounded-lg border text-left text-xs transition-all ${
-                        image === preset.url
-                          ? 'border-[#ff4655] bg-[#ff4655]/10 text-white'
-                          : 'border-[#2b3048] bg-[#111320] text-[#9da3af] hover:text-white hover:border-[#ff4655]/50'
-                      }`}
-                    >
-                      <img
-                        src={preset.url}
-                        alt={preset.name}
-                        className="w-7 h-7 rounded object-cover shrink-0"
-                      />
-                      <span className="truncate text-[11px] font-medium">{preset.name}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Pros & Cons */}
-            <div className="space-y-1.5">
-              <label htmlFor="gamePro" className="block text-xs font-bold uppercase tracking-wider text-emerald-400">
-                Key Highlight / Pro
+              <label htmlFor="gameRating" className="block text-xs font-bold text-[#ffe600] uppercase tracking-wider">
+                Overall Rating (1.0 - 10.0) *
               </label>
               <input
-                id="gamePro"
-                type="text"
-                placeholder="e.g. Masterclass in environmental storytelling"
-                value={pro}
-                onChange={(e) => setPro(e.target.value)}
-                className="w-full bg-[#111320] border border-[#2b3048] rounded-lg px-3.5 py-2 text-sm text-white placeholder-[#7b8096] focus:border-[#ff4655] focus:outline-none"
-              />
-            </div>
-            <div className="space-y-1.5">
-              <label htmlFor="gameCon" className="block text-xs font-bold uppercase tracking-wider text-rose-400">
-                Key Drawback / Con
-              </label>
-              <input
-                id="gameCon"
-                type="text"
-                placeholder="e.g. Late-game pacing drags slightly"
-                value={con}
-                onChange={(e) => setCon(e.target.value)}
-                className="w-full bg-[#111320] border border-[#2b3048] rounded-lg px-3.5 py-2 text-sm text-white placeholder-[#7b8096] focus:border-[#ff4655] focus:outline-none"
-              />
-            </div>
-
-            {/* Review Summary */}
-            <div className="md:col-span-2 space-y-1.5">
-              <label htmlFor="gameSummary" className="block text-xs font-bold uppercase tracking-wider text-[#9da3af]">
-                Review / Overview *
-              </label>
-              <textarea
-                id="gameSummary"
+                id="gameRating"
+                type="number"
+                step="0.1"
+                min="1.0"
+                max="10.0"
                 required
-                rows={4}
-                placeholder="Share your in-depth impressions, gameplay mechanics, graphics, audio, and overall verdict..."
-                value={summary}
-                onChange={(e) => setSummary(e.target.value)}
-                className="w-full bg-[#111320] border border-[#2b3048] rounded-lg p-3.5 text-sm text-white placeholder-[#7b8096] focus:border-[#ff4655] focus:outline-none"
+                value={rating}
+                onChange={(e) => setRating(e.target.value)}
+                className="w-full bg-[#121212] border-2 border-[#333333] px-3.5 py-2.5 text-sm font-bold text-white focus:border-[#ffe600] focus:outline-none"
               />
             </div>
 
-            {/* Reviewer Name */}
+            {/* Image URL / Presets */}
             <div className="space-y-1.5">
-              <label htmlFor="gameAuthor" className="block text-xs font-bold uppercase tracking-wider text-[#9da3af]">
-                Reviewer Credit
+              <label htmlFor="gameImage" className="block text-xs font-bold text-[#ffe600] uppercase tracking-wider">
+                Cover Image URL / Preset
+              </label>
+              <input
+                id="gameImage"
+                type="text"
+                placeholder="Leave blank or select preset below"
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
+                className="w-full bg-[#121212] border-2 border-[#333333] px-3.5 py-2.5 text-sm text-white placeholder-[#666666] focus:border-[#ffe600] focus:outline-none"
+              />
+              <div className="flex flex-wrap gap-1.5 pt-1">
+                {DEFAULT_PRESET_IMAGES.slice(0, 4).map((p) => (
+                  <button
+                    key={p.name}
+                    type="button"
+                    onClick={() => setImage(p.url)}
+                    className="text-xs font-semibold px-2 py-0.5 bg-[#141414] text-[#888888] hover:text-[#ffe600] border border-[#2b2b2b] cursor-pointer"
+                  >
+                    {p.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Platform & Author */}
+            <div className="space-y-1.5">
+              <label htmlFor="gamePlatform" className="block text-xs font-bold text-[#ffe600] uppercase tracking-wider">
+                Platform
+              </label>
+              <input
+                id="gamePlatform"
+                type="text"
+                value={platform}
+                onChange={(e) => setPlatform(e.target.value)}
+                className="w-full bg-[#121212] border-2 border-[#333333] px-3.5 py-2.5 text-sm text-white focus:border-[#ffe600] focus:outline-none"
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <label htmlFor="gameAuthor" className="block text-xs font-bold text-[#ffe600] uppercase tracking-wider">
+                Author / Critic
               </label>
               <input
                 id="gameAuthor"
                 type="text"
-                placeholder="Your Name (defaults to pixcel.gg Staff)"
+                placeholder="e.g. MasterChief"
                 value={author}
                 onChange={(e) => setAuthor(e.target.value)}
-                className="w-full bg-[#111320] border border-[#2b3048] rounded-lg px-3.5 py-2 text-sm text-white placeholder-[#7b8096] focus:border-[#ff4655] focus:outline-none"
+                className="w-full bg-[#121212] border-2 border-[#333333] px-3.5 py-2.5 text-sm text-white placeholder-[#666666] focus:border-[#ffe600] focus:outline-none"
               />
             </div>
           </div>
 
-          {/* Form Actions */}
-          <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-[#2b3048]">
-            <p className="text-xs text-[#7b8096]">
-              All reviews are published instantly to the local catalogue and persist in your browser.
-            </p>
-            <div className="flex items-center gap-3">
-              <button
-                type="button"
-                onClick={onToggleOpen}
-                className="px-4 py-2.5 rounded-lg text-xs font-semibold text-[#9da3af] hover:text-white transition-colors"
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                className="inline-flex items-center gap-2 bg-[#ff4655] hover:bg-[#ff2d3f] active:scale-98 text-white px-6 py-2.5 rounded-lg text-sm font-bold transition-all shadow-md"
-              >
-                <CheckCircle2 className="w-4 h-4" />
-                <span>Post Review</span>
-              </button>
+          {/* Review Essay Textarea */}
+          <div className="space-y-1.5">
+            <label htmlFor="gameSummary" className="block text-xs font-bold text-[#ffe600] uppercase tracking-wider">
+              Editorial Critique & Summary *
+            </label>
+            <textarea
+              id="gameSummary"
+              required
+              rows={6}
+              placeholder="Enter your in-depth game review critique here. Provide detailed thoughts on story, gameplay mechanics, graphics, audio, and your overall verdict..."
+              value={summary}
+              onChange={(e) => setSummary(e.target.value)}
+              className="w-full bg-[#121212] border-2 border-[#333333] p-3 text-sm sm:text-base text-white placeholder-[#666666] focus:border-[#ffe600] focus:outline-none leading-relaxed"
+            />
+          </div>
+
+          {/* Highlights & Drawbacks */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs font-bold text-[#48bb78] uppercase tracking-wider mb-1">
+                [+] Key Highlight (Pro)
+              </label>
+              <input
+                type="text"
+                placeholder="e.g. Astonishing art direction and combat feedback"
+                value={pro}
+                onChange={(e) => setPro(e.target.value)}
+                className="w-full bg-[#121212] border-2 border-[#333333] px-3 py-2 text-sm text-white focus:border-[#ffe600] focus:outline-none"
+              />
             </div>
+            <div>
+              <label className="block text-xs font-bold text-[#f56565] uppercase tracking-wider mb-1">
+                [-] Key Drawback (Con)
+              </label>
+              <input
+                type="text"
+                placeholder="e.g. Occasional late-game difficulty spikes"
+                value={con}
+                onChange={(e) => setCon(e.target.value)}
+                className="w-full bg-[#121212] border-2 border-[#333333] px-3 py-2 text-sm text-white focus:border-[#ffe600] focus:outline-none"
+              />
+            </div>
+          </div>
+
+          {/* Submit Button in Aptos bold */}
+          <div className="pt-2 flex justify-end">
+            <button
+              type="submit"
+              className="retro-btn-yellow px-6 py-3 text-sm font-bold cursor-pointer flex items-center gap-2"
+            >
+              <PlusCircle className="w-4 h-4 stroke-[3]" />
+              Publish Review
+            </button>
           </div>
         </form>
       )}

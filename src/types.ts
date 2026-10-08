@@ -33,4 +33,4 @@ export interface GameReview {
 }
 
 export type SortOption = 'highest_rated' | 'newest' | 'oldest' | 'alphabetical';
-export type RatingFilterOption = 'all' | 'masterpieces' | 'great' | 'good';
+export type RatingFilterOption = 'all' | 'masterpiece' | 'great' | 'good';

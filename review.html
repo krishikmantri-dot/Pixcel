@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pixcel.gg - Game Review</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-black: #000000;
+      --card-bg: #0d0d0d;
+      --accent-yellow: #ffe600;
+      --accent-hover: #fff04d;
+      --text-main: #f5f5f5;
+      --text-muted: #999999;
+      --border-color: #2b2b2b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-black);
+      color: var(--text-main);
+      font-family: 'Aptos', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      padding-bottom: 60px;
+    }
+
+    ::selection {
+      background-color: var(--accent-yellow);
+      color: #000000;
+    }
+
+    /* Only titles in 8-bit font */
+    .font-8bit {
+      font-family: 'Press Start 2P', monospace;
+    }
+
+    header {
+      background-color: #0a0a0a;
+      border-bottom: 4px solid var(--accent-yellow);
+      padding: 16px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      color: var(--accent-yellow);
+      font-family: 'Press Start 2P', monospace;
+      font-size: 1.1rem;
+      text-decoration: none;
+    }
+
+    .brand span {
+      color: #ffffff;
+    }
+
+    .btn-retro {
+      background-color: var(--accent-yellow);
+      color: #000000;
+      border: 2px solid #ffffff;
+      padding: 8px 16px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 3px 3px 0px #000000;
+    }
+
+    .btn-retro:hover {
+      background-color: var(--accent-hover);
+      box-shadow: 4px 4px 0px var(--accent-yellow);
+      transform: translate(-1px, -1px);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .badge-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .badge-yellow {
+      background-color: var(--accent-yellow);
+      color: #000000;
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .badge-outline {
+      border: 2px solid var(--accent-yellow);
+      color: var(--accent-yellow);
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    /* Only Title in 8-bit */
+    .blog-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 1.8rem;
+      color: var(--accent-yellow);
+      line-height: 1.4;
+      margin-bottom: 20px;
+    }
+
+    .meta-box {
+      background: var(--card-bg);
+      border: 2px solid var(--border-color);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      padding: 16px;
+      margin-bottom: 30px;
+    }
+
+    .meta-box div span:first-child {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .meta-box div span:last-child {
+      font-size: 1rem;
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .hero-img-box {
+      border: 4px solid var(--accent-yellow);
+      box-shadow: 6px 6px 0px var(--accent-yellow);
+      overflow: hidden;
+      margin-bottom: 30px;
+      background: #000000;
+    }
+
+    .hero-img-box img {
+      width: 100%;
+      max-height: 500px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .verdict-box {
+      background: #141410;
+      border: 3px solid var(--accent-yellow);
+      box-shadow: 5px 5px 0px var(--accent-yellow);
+      padding: 24px;
+      margin-bottom: 30px;
+      font-size: 1.15rem;
+      font-weight: 500;
+    }
+
+    .critique-section {
+      margin-bottom: 40px;
+    }
+
+    .critique-title {
+      color: var(--accent-yellow);
+      font-size: 1.1rem;
+      font-weight: 800;
+      border-bottom: 2px solid var(--accent-yellow);
+      padding-bottom: 10px;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .critique-p {
+      background: #0d0d0d;
+      border-left: 4px solid var(--accent-yellow);
+      padding: 20px;
+      margin-bottom: 16px;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #e5e5e5;
+    }
+
+    .pros-cons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    @media (max-width: 768px) {
+      .pros-cons {
+        grid-template-columns: 1fr;
+      }
+      .blog-title {
+        font-size: 1.3rem;
+      }
+    }
+
+    .pro-box {
+      background: #0d150d;
+      border: 2px solid #38a169;
+      box-shadow: 4px 4px 0px #38a169;
+      padding: 20px;
+    }
+
+    .con-box {
+      background: #180d0d;
+      border: 2px solid #e53e3e;
+      box-shadow: 4px 4px 0px #e53e3e;
+      padding: 20px;
+    }
+
+    .box-title {
+      font-size: 0.9rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    ul {
+      list-style-type: none;
+    }
+
+    ul li {
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="/" class="btn-retro">← Back to Reviews</a>
+    <a href="/" class="brand">PIXCEL<span>.GG</span></a>
+    <div></div>
+  </header>
+
+  <main class="container">
+    <div class="badge-bar">
+      <span id="genreBadge" class="badge-yellow">GENRE</span>
+      <span id="ratingBadge" class="badge-outline">★ 9.8 / 10</span>
+    </div>
+
+    <!-- Title ONLY in 8-bit font -->
+    <h1 id="blogTitle" class="blog-title">Loading Review...</h1>
+
+    <div class="meta-box">
+      <div>
+        <span>Critic</span>
+        <span id="metaAuthor">-</span>
+      </div>
+      <div>
+        <span>Platform</span>
+        <span id="metaPlatform">-</span>
+      </div>
+      <div>
+        <span>Playtime</span>
+        <span id="metaPlaytime">-</span>
+      </div>
+      <div>
+        <span>Date</span>
+        <span id="metaDate" style="color: var(--accent-yellow);">-</span>
+      </div>
+    </div>
+
+    <div class="hero-img-box">
+      <img id="heroImage" src="" alt="Game Art" />
+    </div>
+
+    <div class="verdict-box">
+      <div style="font-size: 0.85rem; font-weight: 800; color: var(--accent-yellow); margin-bottom: 8px; text-transform: uppercase;">Executive Verdict</div>
+      <p id="verdictSummary">"..."</p>
+    </div>
+
+    <section class="critique-section">
+      <div class="critique-title">
+        <span>In-Depth Editorial Critique</span>
+      </div>
+      <div id="critiqueContent"></div>
+    </section>
+
+    <div class="pros-cons">
+      <div class="pro-box">
+        <div class="box-title" style="color: #48bb78;">[+] Key Highlights</div>
+        <ul id="prosList"></ul>
+      </div>
+      <div class="con-box">
+        <div class="box-title" style="color: #f56565;">[-] Drawbacks</div>
+        <ul id="consList"></ul>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 40px;">
+      <a href="/" class="btn-retro" style="padding: 12px 24px;">
+        ← Return to All Reviews
+      </a>
+    </div>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const blogId = params.get('id') || params.get('review') || 'elden-ring-shadow-erdtree';
+
+    let reviews = [];
+    try {
+      const stored = localStorage.getItem('pixcel_gg_reviews_v5') || localStorage.getItem('pixcel_gg_reviews_v4');
+      if (stored) reviews = JSON.parse(stored);
+    } catch(e) {}
+
+    let review = reviews.find(r => r.id === blogId);
+    if (!review) {
+      review = {
+        id: 'elden-ring-shadow-erdtree',
+        title: 'Elden Ring: Shadow of the Erdtree',
+        genre: 'Action RPG',
+        rating: 9.8,
+        image: '/games/elden_ring.jpg',
+        author: 'Elena Rostova',
+        platform: 'PC · PS5 · Xbox Series X',
+        playtime: '52 hours logged',
+        date: 'Oct 12, 2024',
+        summary: "FromSoftware has achieved what few developers in gaming history could dream of: matching, and in many respects surpassing, the monumental standard established by the 2022 Game of the Year. Shadow of the Erdtree delivers fifty hours of breathless dark fantasy exploration across the Land of Shadow, uniting peerless vertical level architecture, eight inventive weapon classes, and unforgettable boss battles into a certified masterpiece.",
+        fullReview: "FromSoftware has achieved what few developers in gaming history could dream of: matching, and in many respects surpassing, the monumental standard established by the 2022 Game of the Year. Shadow of the Erdtree transports the Tarnished across the ethereal veil directly into the Land of Shadow—a densely layered, labyrinthine continent that elevates vertical map architecture into high art. Rather than simply expanding outward like conventional open-world sequels, director Hidetaka Miyazaki folded the geography upon itself. Vast chasms plunge thousands of feet down to forgotten cerulean coastlines, while crumbling gothic citadels like the Belurat Tower Settlement and the Shadow Keep interlock seamlessly with subterranean tombs, hidden spiritsprings, and towering golden spires.\n\nEvery winding ravine, jagged cliffside, and shadowed catacomb holds secrets that challenge even the most hardened Souls veterans. The expansion introduces eight completely new weapon categories that fundamentally revitalize buildcrafting and experimental loadouts. Players can ditch heavy broadswords to master kinetic hand-to-hand martial arts, execute lightning-fast combos with reverse-grip blades, launch devastating thrusting shields, or throw spinning throwing daggers across crowded arenas. Crucially, the addition of the Scadutree Blessing progression mechanic prevents over-leveled characters from steamrolling the campaign. By tying attack power and physical damage negation directly to collectible fragments scattered across the world, FromSoftware ingeniously incentivizes thorough environmental exploration before forcing players to step into the fog gates of monumental demigods.\n\nThe boss encounters themselves rank among the most spectacular and punishing ever designed. Battles against Messmer the Impaler, the Divine Beast Dancing Lion, and Rellana, Twin Moon Knight combine staggering visual pageantry with ruthless mechanical precision. Bosses execute intricate multi-phase dance-like attack patterns accompanied by operatic orchestral crescendos that demand total rhythmic mastery, tight dodge timings, and disciplined stamina management. Learning the telegraphs for Messmer's fiery serpentine onslaughts or navigating the blinding lunar magic of Castle Ensis transforms every duel into an unforgettable trial of patience, reflexes, and tactical adaptation.\n\nBeyond its relentless combat challenge lies an evocative, tragedy-laden narrative that finally unravels the enigmatic motivations of Kind Miquella. Watching the young demigod divest himself of his royal blood, his divine golden flesh, and his loving heart to create a gentle age of compassion carries palpable heartbreak, especially as you uncover St. Trina's mournful warnings buried deep in stone fissures. Backed by jaw-dropping art direction, exceptional musical composition, and sixty hours of peerless dark fantasy atmosphere, Shadow of the Erdtree stands as an undisputed landmark that redefines what a video game expansion can achieve. From the haunting glow of the Scadutree to the solemn beauty of the Shaman Village, this expansion represents a crowning achievement in modern action role-playing game design that will be celebrated for decades to come.",
+        pros: ['Peerless vertical level architecture and hidden zones', 'Eight versatile and inventive new weapon categories', 'Memorable boss fights with unmatched cinematic scoring'],
+        cons: ['Punishing late-game difficulty spike for casual builds', 'Frame pacing dips in complex particle-heavy arenas']
+      };
+    }
+
+    document.title = review.title + " - pixcel.gg";
+    document.getElementById('blogTitle').innerText = review.title;
+    document.getElementById('genreBadge').innerText = review.genre.toUpperCase();
+    document.getElementById('ratingBadge').innerText = '★ ' + Number(review.rating).toFixed(1) + ' / 10';
+    document.getElementById('metaAuthor').innerText = review.author;
+    document.getElementById('metaPlatform').innerText = review.platform;
+    document.getElementById('metaPlaytime').innerText = review.playtime;
+    document.getElementById('metaDate').innerText = review.date;
+    document.getElementById('heroImage').src = review.image;
+    document.getElementById('verdictSummary').innerText = '"' + review.summary + '"';
+
+    const paragraphs = review.fullReview.split('\n\n');
+    const critiqueDiv = document.getElementById('critiqueContent');
+    critiqueDiv.innerHTML = '';
+    paragraphs.forEach(p => {
+      const pElem = document.createElement('p');
+      pElem.className = 'critique-p';
+      pElem.innerText = p;
+      critiqueDiv.appendChild(pElem);
+    });
+
+    const prosList = document.getElementById('prosList');
+    prosList.innerHTML = '';
+    (review.pros || []).forEach(p => {
+      const li = document.createElement('li');
+      li.innerText = '✔ ' + p;
+      prosList.appendChild(li);
+    });
+
+    const consList = document.getElementById('consList');
+    consList.innerHTML = '';
+    (review.cons || []).forEach(c => {
+      const li = document.createElement('li');
+      li.innerText = '✖ ' + c;
+      consList.appendChild(li);
+    });
+  </script>
+</body>
+</html>

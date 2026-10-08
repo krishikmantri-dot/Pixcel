@@ -19,60 +19,60 @@ export const Navbar: React.FC<NavbarProps> = ({
   onSearchChange,
 }) => {
   return (
-    <header className="sticky top-0 z-50 bg-[#141724]/95 backdrop-blur-md border-b border-[#2b3048]">
+    <header className="sticky top-0 z-50 bg-[#0a0a0a]/95 backdrop-blur-md border-b-4 border-[#ffe600] font-aptos">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between gap-4">
-        {/* Zone 1: Brand title wordmark */}
+        {/* Brand title wordmark with 8-bit font ONLY */}
         <a
-          href="#"
-          className="flex items-center gap-2.5 text-xl sm:text-2xl font-bold tracking-tight text-white hover:text-[#ff4655] transition-colors shrink-0"
+          href="/"
+          className="flex items-center gap-2.5 text-white hover:text-[#ffe600] transition-colors shrink-0 group"
         >
-          <span className="w-8 h-8 rounded-lg bg-[#ff4655]/15 border border-[#ff4655]/30 flex items-center justify-center text-[#ff4655]">
-            <Gamepad2 className="w-5 h-5" />
+          <span className="w-9 h-9 bg-[#ffe600] border-2 border-black flex items-center justify-center text-black shadow-[2px_2px_0px_#ffffff] group-hover:scale-105 transition-transform">
+            <Gamepad2 className="w-5 h-5 stroke-[2.5]" />
           </span>
-          <span className="font-heading font-extrabold uppercase tracking-wider">
-            Pixcel<span className="text-[#ff4655]">.gg</span>
+          <span className="font-8bit text-base sm:text-xl text-[#ffe600] tracking-wider">
+            PIXCEL<span className="text-white">.GG</span>
           </span>
         </a>
 
-        {/* Zone 2: Nav Links (Clean typography, single line) */}
-        <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-[#9da3af]">
+        {/* Nav Links in Aptos with bold weights */}
+        <nav className="hidden md:flex items-center gap-7 text-sm font-semibold text-[#a3a3a3]">
           <a
             href="#reviews-section"
-            className="hover:text-white transition-colors hover:underline underline-offset-8 decoration-[#ff4655]"
+            className="hover:text-[#ffe600] transition-colors hover:underline underline-offset-8 decoration-[#ffe600]"
           >
             Reviews
           </a>
           <a
             href="#featured-spotlight"
-            className="hover:text-white transition-colors hover:underline underline-offset-8 decoration-[#ff4655]"
+            className="hover:text-[#ffe600] transition-colors hover:underline underline-offset-8 decoration-[#ffe600]"
           >
             Spotlight
           </a>
           <a
             href="#hall-of-fame"
-            className="hover:text-white transition-colors hover:underline underline-offset-8 decoration-[#ff4655]"
+            className="hover:text-[#ffe600] transition-colors hover:underline underline-offset-8 decoration-[#ffe600]"
           >
             Hall of Fame
           </a>
           <a
             href="#editorial-ethics"
-            className="hover:text-white transition-colors hover:underline underline-offset-8 decoration-[#ff4655]"
+            className="hover:text-[#ffe600] transition-colors hover:underline underline-offset-8 decoration-[#ffe600]"
           >
-            Editorial Ethics
+            Ethics
           </a>
         </nav>
 
-        {/* Zone 3: Primary Actions */}
+        {/* Primary Actions in Aptos font */}
         <div className="flex items-center gap-3">
           {/* Quick Search */}
           <div className="relative hidden sm:block w-44 lg:w-56">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9da3af]" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#ffe600]" />
             <input
               type="text"
-              placeholder="Search games..."
+              placeholder="Search reviews..."
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
-              className="w-full bg-[#111320] border border-[#2b3048] rounded-lg pl-9 pr-3 py-1.5 text-xs text-white placeholder-[#7b8096] focus:outline-none focus:border-[#ff4655] transition-colors"
+              className="w-full bg-[#111111] border-2 border-[#333333] pl-9 pr-3 py-1.5 text-sm text-white placeholder-[#777777] focus:outline-none focus:border-[#ffe600] transition-colors font-medium"
             />
           </div>
 
@@ -80,23 +80,23 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             onClick={onFilterBookmarked}
             aria-label="View saved reviews"
-            className={`p-2 rounded-lg border text-xs font-semibold flex items-center gap-1.5 transition-colors ${
+            className={`p-2 border-2 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer ${
               isFilteringBookmarked
-                ? 'bg-[#ff4655] border-[#ff4655] text-white'
-                : 'bg-[#1a1d2e] border-[#2b3048] text-[#9da3af] hover:text-white hover:border-[#ff4655]/50'
+                ? 'bg-[#ffe600] border-[#ffe600] text-black shadow-[2px_2px_0px_#ffffff]'
+                : 'bg-[#141414] border-[#333333] text-[#ffe600] hover:border-[#ffe600]'
             }`}
             title="Saved reading list"
           >
             <Bookmark className="w-4 h-4 fill-current" />
-            <span className="tabular-nums font-mono text-xs">{bookmarksCount}</span>
+            <span className="tabular-nums font-bold text-xs">{bookmarksCount}</span>
           </button>
 
           {/* Publish Action Button */}
           <button
             onClick={onOpenPublish}
-            className="flex items-center gap-2 bg-[#ff4655] hover:bg-[#ff2d3f] active:scale-98 text-white px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all whitespace-nowrap shadow-sm"
+            className="retro-btn-yellow flex items-center gap-2 px-3.5 py-2 text-xs sm:text-sm font-bold whitespace-nowrap cursor-pointer"
           >
-            <PlusCircle className="w-4 h-4" />
+            <PlusCircle className="w-4 h-4 stroke-[3]" />
             <span>Post Review</span>
           </button>
         </div>

@@ -13,25 +13,24 @@ import { CreateReviewSection } from './components/CreateReviewSection';
 import { FilterBar } from './components/FilterBar';
 import { ReviewCard } from './components/ReviewCard';
 import { ReviewListCard } from './components/ReviewListCard';
-import { ReviewModal } from './components/ReviewModal';
+import { ReviewDetailPage } from './components/ReviewDetailPage';
 import { Footer } from './components/Footer';
 import { Sparkles, Gamepad2, BookmarkX, RotateCcw } from 'lucide-react';
 
-const STORAGE_KEY_REVIEWS = 'pixelpulse_reviews_v3';
-const STORAGE_KEY_BOOKMARKS = 'pixelpulse_bookmarks_v3';
+const STORAGE_KEY_REVIEWS = 'pixcel_gg_reviews_v5';
+const STORAGE_KEY_BOOKMARKS = 'pixcel_gg_bookmarks_v5';
 
 export default function App() {
-  // Initialize reviews from localStorage or defaults with real photos & full 150+ word text
+  // Initialize reviews from localStorage or defaults
   const [reviews, setReviews] = useState<GameReview[]>(() => {
     try {
       const stored =
         localStorage.getItem(STORAGE_KEY_REVIEWS) ||
-        localStorage.getItem('pixelpulse_reviews_v2') ||
-        localStorage.getItem('pixelpulse_reviews_v1');
+        localStorage.getItem('pixcel_gg_reviews_v4') ||
+        localStorage.getItem('pixelpulse_reviews_v3');
       if (stored) {
         const parsed = JSON.parse(stored);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          // Always map default reviews to their updated real photo paths and 150+ word reviews
           const initialMap = new Map(INITIAL_BLOGS.map((item) => [item.id, item]));
           return parsed.map((item: GameReview) => {
             const initialItem = initialMap.get(item.id);
@@ -77,23 +76,23 @@ export default function App() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  // Helper to extract review ID from the current browser URL (supports /review/:id, ?review=:id, or #/review/:id)
+  // Helper to extract review ID from the current browser URL
   const extractReviewIdFromUrl = (): string | null => {
     if (typeof window === 'undefined') return null;
 
-    // Check pathname: e.g. /review/elden-ring-shadow-erdtree
-    const pathMatch = window.location.pathname.match(/^\/review\/([^/?#]+)/i);
+    // Check pathname: e.g. /review/elden-ring-shadow-erdtree or /blog/elden-ring-shadow-erdtree
+    const pathMatch = window.location.pathname.match(/^\/(?:review|blog)\/([^/?#]+)/i);
     if (pathMatch && pathMatch[1]) {
       return decodeURIComponent(pathMatch[1]);
     }
 
-    // Check query param: ?review=elden-ring-shadow-erdtree
+    // Check query param: ?review=elden-ring-shadow-erdtree or ?id=...
     const searchParams = new URLSearchParams(window.location.search);
-    const queryReview = searchParams.get('review');
+    const queryReview = searchParams.get('review') || searchParams.get('id') || searchParams.get('blog');
     if (queryReview) return queryReview;
 
-    // Check hash: #/review/elden-ring-shadow-erdtree
-    const hashMatch = window.location.hash.match(/^#\/?review\/([^/?#]+)/i);
+    // Check hash: #/review/elden-ring-shadow-erdtree or #review-elden-ring-shadow-erdtree
+    const hashMatch = window.location.hash.match(/^#\/?(?:review|blog)[/-]([^/?#]+)/i);
     if (hashMatch && hashMatch[1]) {
       return decodeURIComponent(hashMatch[1]);
     }
@@ -101,10 +100,12 @@ export default function App() {
     return null;
   };
 
-  // Open a review and update browser URL to its unique URL
+  // Open a review
   const handleOpenReview = (review: GameReview, updateHistory = true) => {
     setSelectedReview(review);
     document.title = `${review.title} - pixcel.gg`;
+    window.scrollTo({ top: 0, behavior: 'instant' });
+
     if (updateHistory && typeof window !== 'undefined') {
       const targetUrl = `/review/${review.id}`;
       if (window.location.pathname !== targetUrl) {
@@ -113,12 +114,14 @@ export default function App() {
     }
   };
 
-  // Close review and revert browser URL to /
+  // Close review and return to home
   const handleCloseReview = (updateHistory = true) => {
     setSelectedReview(null);
     document.title = 'pixcel.gg - Gaming Blog & Reviews';
+    window.scrollTo({ top: 0, behavior: 'instant' });
+
     if (updateHistory && typeof window !== 'undefined') {
-      if (window.location.pathname.startsWith('/review/')) {
+      if (window.location.pathname.startsWith('/review/') || window.location.pathname.startsWith('/blog/')) {
         window.history.pushState(null, '', '/');
       }
     }
@@ -208,7 +211,6 @@ export default function App() {
     setReviews((prev) => [newReview, ...prev]);
     setIsPublishOpen(false);
 
-    // Scroll to the reviews section smoothly
     const elem = document.getElementById('reviews-section');
     if (elem) {
       elem.scrollIntoView({ behavior: 'smooth' });
@@ -218,13 +220,13 @@ export default function App() {
   // Add comment to review
   const handleAddComment = (
     reviewId: string,
-    commentData: Omit<ReviewComment, 'id' | 'likes' | 'date'>
+    commentData: Omit<ReviewComment, 'id' | 'likes'>
   ) => {
     const newComment: ReviewComment = {
       id: `comment-${Date.now()}`,
       author: commentData.author,
       text: commentData.text,
-      date: 'Just now',
+      date: commentData.date || 'Just now',
       likes: 1,
     };
 
@@ -239,6 +241,26 @@ export default function App() {
             setSelectedReview(updated);
           }
           return updated;
+        }
+        return r;
+      })
+    );
+    showToast('Your comment has been posted!');
+  };
+
+  // Like a comment
+  const handleLikeComment = (reviewId: string, commentId: string) => {
+    setReviews((prev) =>
+      prev.map((r) => {
+        if (r.id === reviewId) {
+          const updatedComments = (r.comments || []).map((c) =>
+            c.id === commentId ? { ...c, likes: c.likes + 1 } : c
+          );
+          const updatedReview = { ...r, comments: updatedComments };
+          if (selectedReview?.id === reviewId) {
+            setSelectedReview(updatedReview);
+          }
+          return updatedReview;
         }
         return r;
       })
@@ -258,12 +280,10 @@ export default function App() {
   const filteredReviews = useMemo(() => {
     return reviews
       .filter((r) => {
-        // Bookmarked filter
         if (isFilteringBookmarked && !bookmarkedIds.includes(r.id)) {
           return false;
         }
 
-        // Search query
         if (searchQuery.trim()) {
           const q = searchQuery.toLowerCase();
           const matchTitle = r.title.toLowerCase().includes(q);
@@ -276,13 +296,11 @@ export default function App() {
           }
         }
 
-        // Genre filter
         if (selectedGenre !== 'all' && r.genre !== selectedGenre) {
           return false;
         }
 
-        // Rating filter
-        if (selectedRatingFilter === 'masterpieces' && r.rating < 9.5) {
+        if (selectedRatingFilter === 'masterpiece' && r.rating < 9.5) {
           return false;
         }
         if (selectedRatingFilter === 'great' && r.rating < 9.0) {
@@ -319,16 +337,49 @@ export default function App() {
     selectedSort,
   ]);
 
+  // If a review is selected, redirect to the Review Detail Page!
+  if (selectedReview) {
+    return (
+      <div className="min-h-screen bg-[#000000] text-[#f5f5f5] flex flex-col font-aptos selection:bg-[#ffe600] selection:text-black">
+        {/* Toast Notification */}
+        {toastMessage && (
+          <aside
+            role="status"
+            aria-live="polite"
+            className="fixed bottom-6 right-6 z-50 bg-[#121212] border-2 border-[#ffe600] text-white px-4 py-2.5 shadow-[4px_4px_0px_#ffe600] text-xs font-bold flex items-center gap-2.5 animate-fadeIn"
+          >
+            <Sparkles className="w-4 h-4 text-[#ffe600]" />
+            <span>{toastMessage}</span>
+          </aside>
+        )}
+
+        <ReviewDetailPage
+          review={selectedReview}
+          allReviews={reviews}
+          onBack={() => handleCloseReview(true)}
+          onNavigateToReview={(rev) => handleOpenReview(rev, true)}
+          isBookmarked={bookmarkedIds.includes(selectedReview.id)}
+          onToggleBookmark={(id) => handleToggleBookmark(id)}
+          onAddComment={handleAddComment}
+          onLikeComment={handleLikeComment}
+        />
+
+        <Footer />
+      </div>
+    );
+  }
+
+  // Main Catalogue View
   return (
-    <div className="min-h-screen bg-[#0f111a] text-[#f0f0f5] flex flex-col font-sans selection:bg-[#ff4655] selection:text-white">
+    <div className="min-h-screen bg-[#000000] text-[#f5f5f5] flex flex-col font-aptos selection:bg-[#ffe600] selection:text-black">
       {/* Toast Notification */}
       {toastMessage && (
         <aside
           role="status"
           aria-live="polite"
-          className="fixed bottom-6 right-6 z-50 bg-[#141724] border border-[#ff4655] text-white px-4 py-2.5 rounded-xl shadow-2xl text-xs sm:text-sm font-semibold flex items-center gap-2.5 animate-fadeIn"
+          className="fixed bottom-6 right-6 z-50 bg-[#121212] border-2 border-[#ffe600] text-white px-4 py-2.5 shadow-[4px_4px_0px_#ffe600] text-xs font-bold flex items-center gap-2.5 animate-fadeIn"
         >
-          <Sparkles className="w-4 h-4 text-[#ff4655]" />
+          <Sparkles className="w-4 h-4 text-[#ffe600]" />
           <span>{toastMessage}</span>
         </aside>
       )}
@@ -350,25 +401,26 @@ export default function App() {
       {/* Main Container */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16">
         {/* Editorial Sub-header / Brand Kicker */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-8 border-b border-[#2b3048]">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-8 border-b-4 border-[#ffe600] gap-4">
           <div>
-            <h1 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight uppercase font-heading">
-              Pixcel<span className="text-[#ff4655]">.gg</span> Gaming Chronicle
+            {/* Main title in 8-bit font */}
+            <h1 className="text-xl sm:text-3xl font-8bit text-[#ffe600] tracking-wide uppercase">
+              PIXCEL<span className="text-white">.GG</span> GAMING CHRONICLE
             </h1>
-            <p className="text-xs sm:text-sm text-[#9da3af] mt-1">
-              Honest Reviews, In-Depth Impressions & Modern Gaming Stories
+            <p className="text-sm sm:text-base text-[#a3a3a3] mt-1 font-medium">
+              In-Depth Reviews · Honest Ratings · Modern Gaming Stories
             </p>
           </div>
 
-          <div className="flex items-center gap-3 mt-4 sm:mt-0 text-xs">
-            <span className="text-[#7b8096]">
-              Catalogue Size: <strong className="text-white font-mono">{reviews.length}</strong> Titles
+          <div className="flex items-center gap-3 text-xs font-semibold">
+            <span className="text-[#888888]">
+              Catalogue: <strong className="text-[#ffe600] font-bold">{reviews.length}</strong> Titles
             </span>
-            <span aria-hidden="true" className="text-[#2b3048]">·</span>
+            <span>·</span>
             <button
               onClick={handleResetToDefaults}
-              className="text-[#9da3af] hover:text-[#ff4655] flex items-center gap-1 transition-colors"
-              title="Reset default 10 reviews"
+              className="text-[#a3a3a3] hover:text-[#ffe600] flex items-center gap-1 transition-colors cursor-pointer font-bold"
+              title="Reset to 10 curated reviews"
             >
               <RotateCcw className="w-3.5 h-3.5" />
               <span>Reset Data</span>
@@ -404,19 +456,20 @@ export default function App() {
         <div id="reviews-section" className="scroll-mt-24">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
-              <span className="w-1.5 h-6 bg-[#ff4655] rounded-full" />
-              <h2 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight font-heading">
+              <span className="w-2.5 h-6 bg-[#ffe600]" />
+              {/* Section title in 8-bit font */}
+              <h2 className="text-lg sm:text-2xl font-8bit text-white tracking-wide">
                 {isFilteringBookmarked
-                  ? 'Saved Reading List'
+                  ? 'SAVED READING LIST'
                   : searchQuery.trim()
-                  ? `Search Results for "${searchQuery}"`
-                  : 'Latest Game Reviews'}
+                  ? `SEARCH: "${searchQuery.toUpperCase()}"`
+                  : 'LATEST GAME REVIEWS'}
               </h2>
             </div>
             {isFilteringBookmarked && (
               <button
                 onClick={() => setIsFilteringBookmarked(false)}
-                className="text-xs text-[#ff4655] hover:underline font-semibold"
+                className="text-xs font-bold text-[#ffe600] hover:underline cursor-pointer"
               >
                 ← Back to All Reviews
               </button>
@@ -477,20 +530,20 @@ export default function App() {
             )
           ) : (
             /* Empty State */
-            <div className="p-12 text-center rounded-2xl bg-[#141724] border border-[#2b3048] my-6">
-              <div className="w-12 h-12 rounded-xl bg-[#ff4655]/10 border border-[#ff4655]/20 text-[#ff4655] flex items-center justify-center mx-auto mb-4">
+            <div className="p-12 text-center bg-[#0c0c0c] border-3 border-[#333333] my-6 font-aptos">
+              <div className="w-14 h-14 bg-[#141414] border-2 border-[#ffe600] text-[#ffe600] flex items-center justify-center mx-auto mb-4">
                 {isFilteringBookmarked ? (
-                  <BookmarkX className="w-6 h-6" />
+                  <BookmarkX className="w-7 h-7" />
                 ) : (
-                  <Gamepad2 className="w-6 h-6" />
+                  <Gamepad2 className="w-7 h-7" />
                 )}
               </div>
               <h3 className="text-lg font-bold text-white mb-2">
                 {isFilteringBookmarked
                   ? 'No Saved Reviews Yet'
-                  : 'No Matching Game Reviews Found'}
+                  : 'No Matching Reviews Found'}
               </h3>
-              <p className="text-xs sm:text-sm text-[#9da3af] max-w-md mx-auto mb-6">
+              <p className="text-sm text-[#a3a3a3] max-w-md mx-auto mb-6">
                 {isFilteringBookmarked
                   ? 'Bookmark reviews by clicking the bookmark icon on any review card to read them later.'
                   : `We couldn't find any reviews matching your current filters or query. Try resetting filters or post a new review.`}
@@ -503,31 +556,21 @@ export default function App() {
                     setSearchQuery('');
                     setIsFilteringBookmarked(false);
                   }}
-                  className="px-4 py-2 rounded-lg bg-[#1a1d2e] border border-[#2b3048] text-xs font-semibold text-white hover:border-[#ff4655] transition-colors"
+                  className="px-4 py-2 border-2 border-[#333333] text-xs font-bold text-white hover:border-[#ffe600] cursor-pointer"
                 >
-                  Reset All Filters
+                  Reset Filters
                 </button>
                 <button
                   onClick={() => setIsPublishOpen(true)}
-                  className="px-4 py-2 rounded-lg bg-[#ff4655] hover:bg-[#ff2d3f] text-xs font-semibold text-white transition-colors"
+                  className="retro-btn-yellow px-4 py-2 text-xs font-bold cursor-pointer"
                 >
-                  Post a Review Now
+                  Post Review Now
                 </button>
               </div>
             </div>
           )}
         </div>
       </main>
-
-      {/* In-Depth Review Modal */}
-      <ReviewModal
-        review={selectedReview}
-        onClose={() => handleCloseReview()}
-        isBookmarked={selectedReview ? bookmarkedIds.includes(selectedReview.id) : false}
-        onToggleBookmark={(id) => handleToggleBookmark(id)}
-        onAddComment={handleAddComment}
-        onToast={showToast}
-      />
 
       {/* Editorial Footer */}
       <Footer />

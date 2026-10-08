@@ -1,6 +1,6 @@
 import React from 'react';
 import { GameReview } from '../types';
-import { Star, Bookmark, ArrowUpRight, MessageSquare, Clock } from 'lucide-react';
+import { Star, Bookmark, ArrowRight } from 'lucide-react';
 import { getGameCoverFallback } from '../utils/imageFallback';
 
 interface ReviewListCardProps {
@@ -19,14 +19,14 @@ export const ReviewListCard: React.FC<ReviewListCardProps> = ({
   return (
     <article
       onClick={() => onSelect(review)}
-      className="group bg-[#1a1d2e] border border-[#2b3048] hover:border-[#ff4655]/60 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-xl cursor-pointer flex flex-col sm:flex-row items-stretch"
+      className="group bg-[#0c0c0c] border-3 border-[#333333] hover:border-[#ffe600] transition-all duration-200 hover:shadow-[5px_5px_0px_#ffe600] cursor-pointer flex flex-col sm:flex-row items-stretch font-aptos"
     >
       {/* Image Container */}
-      <div className="relative sm:w-64 md:w-72 shrink-0 aspect-[16/9] sm:aspect-auto overflow-hidden bg-[#111320]">
+      <div className="relative sm:w-64 md:w-80 shrink-0 aspect-[16/9] sm:aspect-auto overflow-hidden bg-[#000000] border-b-2 sm:border-b-0 sm:border-r-3 border-[#333333] group-hover:border-[#ffe600]">
         <img
           src={review.image}
           alt={review.title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           referrerPolicy="no-referrer"
           onError={(e) => {
             const target = e.currentTarget;
@@ -34,94 +34,65 @@ export const ReviewListCard: React.FC<ReviewListCardProps> = ({
             target.src = getGameCoverFallback(review.title, review.genre);
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1a1d2e] via-transparent to-transparent sm:hidden" />
       </div>
 
-      {/* Content */}
+      {/* Content in Aptos font */}
       <div className="p-5 flex-1 flex flex-col justify-between">
         <div>
           {/* Header row: Genre · Platform · Rating */}
           <div className="flex items-center justify-between gap-2 mb-2">
-            <div className="flex items-center gap-2 text-xs text-[#9da3af] font-medium">
-              <span className="text-[#ff4655] font-semibold">{review.genre}</span>
-              <span aria-hidden="true" className="text-[#2b3048]">·</span>
-              <span>{review.platform}</span>
+            <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-[#888888]">
+              <span className="text-black bg-[#ffe600] px-2 py-0.5 font-bold uppercase">{review.genre}</span>
+              <span>·</span>
+              <span className="text-[#cccccc]">{review.platform}</span>
               {review.playtime && (
                 <>
-                  <span aria-hidden="true" className="text-[#2b3048]">·</span>
-                  <span className="flex items-center gap-1 text-[#7b8096]">
-                    <Clock className="w-3 h-3" />
-                    {review.playtime}
-                  </span>
+                  <span>·</span>
+                  <span className="text-[#ffe600]">{review.playtime}</span>
                 </>
               )}
             </div>
 
-            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#111320] border border-[#2b3048] text-amber-400 text-xs font-bold font-mono">
-              <Star className="w-3.5 h-3.5 fill-amber-400" />
-              <span>{Number(review.rating).toFixed(1)}</span>
-              <span className="text-[#7b8096] text-[10px]">/10</span>
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1 px-2.5 py-1 bg-[#000000] border-2 border-[#ffe600] text-[#ffe600] text-xs font-bold shadow-[2px_2px_0px_#ffe600]">
+                <Star className="w-3.5 h-3.5 fill-current" />
+                <span>{Number(review.rating).toFixed(1)}</span>
+              </div>
+
+              <button
+                onClick={(e) => onToggleBookmark(review.id, e)}
+                className={`p-1.5 border-2 transition-colors cursor-pointer ${
+                  isBookmarked
+                    ? 'bg-[#ffe600] text-black border-[#ffe600]'
+                    : 'bg-[#141414] text-[#ffe600] border-[#333333] hover:border-[#ffe600]'
+                }`}
+                title={isBookmarked ? 'Remove bookmark' : 'Bookmark review'}
+              >
+                <Bookmark className="w-3.5 h-3.5 fill-current" />
+              </button>
             </div>
           </div>
 
-          <h3 className="text-xl font-bold text-white group-hover:text-[#ff4655] transition-colors mb-2">
-            <a
-              href={`/review/${review.id}`}
-              onClick={(e) => {
-                e.preventDefault();
-                onSelect(review);
-              }}
-              className="hover:underline"
-            >
-              {review.title}
-            </a>
-          </h3>
+          {/* ONLY Title is in 8-bit font */}
+          <h2 className="text-lg sm:text-xl font-8bit text-white group-hover:text-[#ffe600] transition-colors leading-snug mb-3">
+            {review.title}
+          </h2>
 
-          <p className="text-xs sm:text-sm text-[#9da3af] line-clamp-2 leading-relaxed mb-4">
+          {/* Summary */}
+          <p className="text-sm sm:text-base text-[#a3a3a3] line-clamp-2 leading-relaxed mb-4 font-normal">
             {review.summary}
           </p>
         </div>
 
-        {/* Footer info */}
-        <div className="pt-3 border-t border-[#2b3048] flex items-center justify-between text-xs text-[#7b8096]">
-          <div className="flex items-center gap-2">
-            <span>By <strong className="text-white font-medium">{review.author}</strong></span>
-            <span aria-hidden="true">·</span>
-            <span>{review.date}</span>
-          </div>
+        {/* Footer */}
+        <div className="pt-3 border-t-2 border-[#1f1f1f] flex items-center justify-between text-xs">
+          <span className="text-[#777777] font-medium">
+            By <strong className="text-white font-bold">{review.author}</strong> · {review.date}
+          </span>
 
-          <div className="flex items-center gap-3">
-            {review.comments && review.comments.length > 0 && (
-              <span className="flex items-center gap-1 text-[#9da3af]">
-                <MessageSquare className="w-3.5 h-3.5" />
-                <span className="tabular-nums font-mono">{review.comments.length}</span>
-              </span>
-            )}
-
-            <button
-              onClick={(e) => onToggleBookmark(review.id, e)}
-              aria-label="Bookmark review"
-              className={`p-1.5 rounded border transition-colors ${
-                isBookmarked
-                  ? 'bg-[#ff4655] border-[#ff4655] text-white'
-                  : 'bg-[#111320] border-[#2b3048] text-[#9da3af] hover:text-white hover:border-[#ff4655]'
-              }`}
-            >
-              <Bookmark className={`w-3.5 h-3.5 ${isBookmarked ? 'fill-current' : ''}`} />
-            </button>
-
-            <a
-              href={`/review/${review.id}`}
-              onClick={(e) => {
-                e.preventDefault();
-                onSelect(review);
-              }}
-              className="text-[#ff4655] group-hover:translate-x-0.5 transition-transform flex items-center gap-0.5 font-semibold"
-            >
-              Read
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </a>
-          </div>
+          <span className="font-bold text-xs text-[#ffe600] flex items-center gap-1 group-hover:underline">
+            Read Review <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+          </span>
         </div>
       </div>
     </article>

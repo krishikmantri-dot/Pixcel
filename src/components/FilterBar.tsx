@@ -43,15 +43,15 @@ export const FilterBar: React.FC<FilterBarProps> = ({
     isBookmarkedOnly;
 
   return (
-    <div className="space-y-4 mb-8">
-      {/* Genre Segmented Tabs (Functional Buttons) */}
-      <div className="flex items-center gap-1.5 overflow-x-auto pb-1.5 scrollbar-thin">
+    <div className="space-y-4 mb-8 font-aptos">
+      {/* Genre Segmented Tabs in Aptos Bold */}
+      <div className="flex items-center gap-2 overflow-x-auto pb-2">
         <button
           onClick={() => onSelectGenre('all')}
-          className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+          className={`px-3.5 py-1.5 text-xs font-bold whitespace-nowrap transition-all cursor-pointer border-2 uppercase tracking-wide ${
             selectedGenre === 'all'
-              ? 'bg-[#ff4655] text-white shadow-sm'
-              : 'bg-[#1a1d2e] border border-[#2b3048] text-[#9da3af] hover:text-white hover:border-[#ff4655]/40'
+              ? 'bg-[#ffe600] text-black border-[#ffe600] shadow-[2px_2px_0px_#ffffff]'
+              : 'bg-[#121212] border-[#333333] text-[#a3a3a3] hover:text-white hover:border-[#ffe600]'
           }`}
         >
           All Genres
@@ -61,10 +61,10 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           <button
             key={g}
             onClick={() => onSelectGenre(g)}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+            className={`px-3.5 py-1.5 text-xs font-bold whitespace-nowrap transition-all cursor-pointer border-2 uppercase tracking-wide ${
               selectedGenre === g
-                ? 'bg-[#ff4655] text-white shadow-sm'
-                : 'bg-[#1a1d2e] border border-[#2b3048] text-[#9da3af] hover:text-white hover:border-[#ff4655]/40'
+                ? 'bg-[#ffe600] text-black border-[#ffe600] shadow-[2px_2px_0px_#ffffff]'
+                : 'bg-[#121212] border-[#333333] text-[#a3a3a3] hover:text-white hover:border-[#ffe600]'
             }`}
           >
             {g}
@@ -72,33 +72,33 @@ export const FilterBar: React.FC<FilterBarProps> = ({
         ))}
       </div>
 
-      {/* Control Strip: Sort, Rating Tier, View Mode & Counter */}
-      <div className="flex flex-wrap items-center justify-between gap-3 p-3 rounded-xl bg-[#141724] border border-[#2b3048] text-xs">
-        <div className="flex flex-wrap items-center gap-2">
-          {/* Rating Tier Filter */}
-          <div className="flex items-center gap-1">
-            <span className="text-[#7b8096] text-[11px] font-semibold uppercase tracking-wider mr-1 hidden sm:inline">
-              Rating:
-            </span>
+      {/* Controls Strip: Sort, Rating, View Mode, Count in Aptos font */}
+      <div className="bg-[#0c0c0c] border-2 border-[#2b2b2b] p-3 flex flex-wrap items-center justify-between gap-3 text-xs">
+        {/* Left: Rating and Sorting Filters */}
+        <div className="flex flex-wrap items-center gap-3">
+          {/* Rating filter dropdown */}
+          <div className="flex items-center gap-1.5 text-xs font-bold text-[#888888]">
+            <SlidersHorizontal className="w-3.5 h-3.5 text-[#ffe600]" />
+            <span className="uppercase tracking-wider">Rating:</span>
             <select
               value={selectedRatingFilter}
               onChange={(e) => onSelectRatingFilter(e.target.value as RatingFilterOption)}
-              className="bg-[#111320] border border-[#2b3048] rounded-md px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-[#ff4655]"
+              className="bg-[#161616] border border-[#333333] text-white text-xs font-semibold px-2 py-1 focus:outline-none focus:border-[#ffe600] cursor-pointer"
             >
-              <option value="all">Any Rating</option>
-              <option value="masterpieces">Masterpieces (9.5+)</option>
-              <option value="great">Essential (9.0+)</option>
-              <option value="good">Recommended (8.0+)</option>
+              <option value="all">All Scores</option>
+              <option value="masterpiece">★ 9.5+ Masterpieces</option>
+              <option value="great">★ 9.0+ Exceptional</option>
+              <option value="good">★ 8.0+ Recommended</option>
             </select>
           </div>
 
-          {/* Sort By Dropdown */}
-          <div className="flex items-center gap-1">
-            <SlidersHorizontal className="w-3.5 h-3.5 text-[#7b8096] hidden sm:inline" />
+          {/* Sort selector */}
+          <div className="flex items-center gap-1.5 text-xs font-bold text-[#888888]">
+            <span className="uppercase tracking-wider">Sort:</span>
             <select
               value={selectedSort}
               onChange={(e) => onSelectSort(e.target.value as SortOption)}
-              className="bg-[#111320] border border-[#2b3048] rounded-md px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-[#ff4655]"
+              className="bg-[#161616] border border-[#333333] text-white text-xs font-semibold px-2 py-1 focus:outline-none focus:border-[#ffe600] cursor-pointer"
             >
               <option value="highest_rated">Highest Rated</option>
               <option value="newest">Newest First</option>
@@ -106,45 +106,48 @@ export const FilterBar: React.FC<FilterBarProps> = ({
               <option value="alphabetical">Title (A-Z)</option>
             </select>
           </div>
-
-          {/* Active Filter Clear Tag */}
-          {isFiltered && (
-            <button
-              onClick={onResetAllFilters}
-              className="flex items-center gap-1 px-2.5 py-1 rounded bg-[#ff4655]/15 text-[#ff4655] hover:bg-[#ff4655]/25 border border-[#ff4655]/30 text-[11px] font-semibold transition-colors"
-            >
-              <span>Reset Filters</span>
-              <X className="w-3 h-3" />
-            </button>
-          )}
         </div>
 
-        {/* View Mode & Count */}
+        {/* Right: View mode and Reset */}
         <div className="flex items-center gap-3">
-          <span className="text-[#9da3af] tabular-nums font-mono text-[11px]">
-            {filteredCount} {filteredCount === 1 ? 'Review' : 'Reviews'}
-          </span>
-
-          <div className="flex items-center bg-[#111320] border border-[#2b3048] rounded-md p-0.5">
+          <div className="flex items-center gap-1 border border-[#333333] p-0.5 bg-[#141414]">
             <button
               onClick={() => onToggleViewMode('grid')}
-              aria-label="Grid layout"
-              className={`p-1.5 rounded transition-colors ${
-                viewMode === 'grid' ? 'bg-[#ff4655] text-white' : 'text-[#7b8096] hover:text-white'
+              className={`p-1.5 text-xs transition-colors cursor-pointer ${
+                viewMode === 'grid'
+                  ? 'bg-[#ffe600] text-black font-bold'
+                  : 'text-[#888888] hover:text-white'
               }`}
+              title="Grid View"
             >
-              <LayoutGrid className="w-3.5 h-3.5" />
+              <LayoutGrid className="w-4 h-4" />
             </button>
             <button
               onClick={() => onToggleViewMode('list')}
-              aria-label="List layout"
-              className={`p-1.5 rounded transition-colors ${
-                viewMode === 'list' ? 'bg-[#ff4655] text-white' : 'text-[#7b8096] hover:text-white'
+              className={`p-1.5 text-xs transition-colors cursor-pointer ${
+                viewMode === 'list'
+                  ? 'bg-[#ffe600] text-black font-bold'
+                  : 'text-[#888888] hover:text-white'
               }`}
+              title="List View"
             >
-              <List className="w-3.5 h-3.5" />
+              <List className="w-4 h-4" />
             </button>
           </div>
+
+          <span className="text-xs font-bold text-[#ffe600] uppercase tracking-wider">
+            {filteredCount} Reviews
+          </span>
+
+          {isFiltered && (
+            <button
+              onClick={onResetAllFilters}
+              className="text-xs font-bold text-[#ff4444] hover:text-white flex items-center gap-1 cursor-pointer transition-colors"
+            >
+              <X className="w-3.5 h-3.5" />
+              <span>Reset</span>
+            </button>
+          )}
         </div>
       </div>
     </div>
