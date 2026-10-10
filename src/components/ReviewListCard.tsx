@@ -25,7 +25,7 @@ export const ReviewListCard: React.FC<ReviewListCardProps> = ({
       <div className="relative sm:w-64 md:w-80 shrink-0 aspect-[16/9] sm:aspect-auto overflow-hidden bg-[#000000] border-b-2 sm:border-b-0 sm:border-r-3 border-[#333333] group-hover:border-[#ffe600]">
         <img
           src={review.image}
-          alt={review.title}
+          alt={review.imageAlt || `${review.title} review cover artwork`}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           referrerPolicy="no-referrer"
           onError={(e) => {

@@ -38,6 +38,11 @@ export default function App() {
               return {
                 ...item,
                 image: initialItem.image,
+                imageAlt: initialItem.imageAlt,
+                metaTitle: initialItem.metaTitle,
+                metaDescription: initialItem.metaDescription,
+                seoHeadings: initialItem.seoHeadings,
+                aeoQuestions: initialItem.aeoQuestions,
                 summary: initialItem.summary,
                 fullReview: initialItem.fullReview,
               };
@@ -76,6 +81,115 @@ export default function App() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
+  // Helper to sync SEO metadata (Title tag max 60 chars, Meta Description max 160 chars, Schema.org JSON-LD)
+  const applySeoMetadata = (review: GameReview | null) => {
+    if (typeof document === 'undefined') return;
+
+    if (review) {
+      const metaTitle = review.metaTitle || (review.title.length > 40 ? `${review.title.slice(0, 36)}... Review` : `${review.title} Review: Score Breakdown`);
+      const metaDesc = review.metaDescription || `In-depth ${review.title} review covering gameplay mechanics, graphics, and performance. Read our full score breakdown now.`;
+
+      document.title = metaTitle;
+
+      let descTag = document.querySelector('meta[name="description"]');
+      if (!descTag) {
+        descTag = document.createElement('meta');
+        descTag.setAttribute('name', 'description');
+        document.head.appendChild(descTag);
+      }
+      descTag.setAttribute('content', metaDesc);
+
+      let ogTitle = document.querySelector('meta[property="og:title"]');
+      if (ogTitle) ogTitle.setAttribute('content', metaTitle);
+      let ogDesc = document.querySelector('meta[property="og:description"]');
+      if (ogDesc) ogDesc.setAttribute('content', metaDesc);
+
+      let twTitle = document.querySelector('meta[name="twitter:title"]');
+      if (twTitle) twTitle.setAttribute('content', metaTitle);
+      let twDesc = document.querySelector('meta[name="twitter:description"]');
+      if (twDesc) twDesc.setAttribute('content', metaDesc);
+
+      // Schema.org JSON-LD structured data for Review and FAQPage (AEO)
+      let schemaScript = document.getElementById('pixcel-schema-jsonld') as HTMLScriptElement | null;
+      if (!schemaScript) {
+        schemaScript = document.createElement('script');
+        schemaScript.id = 'pixcel-schema-jsonld';
+        schemaScript.type = 'application/ld+json';
+        document.head.appendChild(schemaScript);
+      }
+
+      const aeoFaq = review.aeoQuestions && review.aeoQuestions.length > 0
+        ? review.aeoQuestions
+        : [
+            {
+              question: `Is ${review.title} worth playing in 2024?`,
+              answer: `Yes, based on our in-depth evaluation and score of ${review.rating.toFixed(1)}/10, ${review.title} delivers a standout experience on ${review.platform}.`
+            },
+            {
+              question: `What are the critical strengths of ${review.title}?`,
+              answer: review.summary
+            }
+          ];
+
+      const schemaData = {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Review",
+            "itemReviewed": {
+              "@type": "VideoGame",
+              "name": review.title,
+              "genre": review.genre,
+              "gamePlatform": review.platform
+            },
+            "author": {
+              "@type": "Person",
+              "name": review.author
+            },
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": review.rating,
+              "bestRating": "10",
+              "worstRating": "1"
+            },
+            "reviewBody": review.summary
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": aeoFaq.map((qa) => ({
+              "@type": "Question",
+              "name": qa.question,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": qa.answer
+              }
+            }))
+          }
+        ]
+      };
+      schemaScript.textContent = JSON.stringify(schemaData);
+    } else {
+      document.title = 'pixcel.gg - Gaming Blog & Reviews';
+      const defaultDesc = 'Honest reviews, in-depth impressions, score breakdowns, and modern gaming stories at pixcel.gg.';
+
+      const descTag = document.querySelector('meta[name="description"]');
+      if (descTag) descTag.setAttribute('content', defaultDesc);
+
+      const ogTitle = document.querySelector('meta[property="og:title"]');
+      if (ogTitle) ogTitle.setAttribute('content', 'pixcel.gg - Gaming Blog & Reviews');
+      const ogDesc = document.querySelector('meta[property="og:description"]');
+      if (ogDesc) ogDesc.setAttribute('content', defaultDesc);
+
+      const twTitle = document.querySelector('meta[name="twitter:title"]');
+      if (twTitle) twTitle.setAttribute('content', 'pixcel.gg - Gaming Blog & Reviews');
+      const twDesc = document.querySelector('meta[name="twitter:description"]');
+      if (twDesc) twDesc.setAttribute('content', defaultDesc);
+
+      const schemaScript = document.getElementById('pixcel-schema-jsonld');
+      if (schemaScript) schemaScript.remove();
+    }
+  };
+
   // Helper to extract review ID from the current browser URL
   const extractReviewIdFromUrl = (): string | null => {
     if (typeof window === 'undefined') return null;
@@ -103,7 +217,7 @@ export default function App() {
   // Open a review
   const handleOpenReview = (review: GameReview, updateHistory = true) => {
     setSelectedReview(review);
-    document.title = `${review.title} - pixcel.gg`;
+    applySeoMetadata(review);
     window.scrollTo({ top: 0, behavior: 'instant' });
 
     if (updateHistory && typeof window !== 'undefined') {
@@ -117,7 +231,7 @@ export default function App() {
   // Close review and return to home
   const handleCloseReview = (updateHistory = true) => {
     setSelectedReview(null);
-    document.title = 'pixcel.gg - Gaming Blog & Reviews';
+    applySeoMetadata(null);
     window.scrollTo({ top: 0, behavior: 'instant' });
 
     if (updateHistory && typeof window !== 'undefined') {
@@ -137,11 +251,11 @@ export default function App() {
           handleOpenReview(found, false);
         } else {
           setSelectedReview(null);
-          document.title = 'pixcel.gg - Gaming Blog & Reviews';
+          applySeoMetadata(null);
         }
       } else {
         setSelectedReview(null);
-        document.title = 'pixcel.gg - Gaming Blog & Reviews';
+        applySeoMetadata(null);
       }
     };
 

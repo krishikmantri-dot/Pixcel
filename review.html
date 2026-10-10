@@ -3,7 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pixcel.gg - Game Review</title>
+  <title id="docTitle">Elden Ring Erdtree Review: Masterpiece or Too Hard?</title>
+  <meta id="metaDescription" name="description" content="Honest Elden Ring Erdtree review covering boss fights, weapons, and world design. Discover whether FromSoftware's dark DLC is worth playing today." />
+  <meta id="ogTitle" property="og:title" content="Elden Ring Erdtree Review: Masterpiece or Too Hard?" />
+  <meta id="ogDescription" property="og:description" content="Honest Elden Ring Erdtree review covering boss fights, weapons, and world design. Discover whether FromSoftware's dark DLC is worth playing today." />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -78,6 +83,7 @@
       text-decoration: none;
       display: inline-block;
       box-shadow: 3px 3px 0px #000000;
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
     }
 
     .btn-retro:hover {
@@ -119,9 +125,9 @@
     /* Only Title in 8-bit */
     .blog-title {
       font-family: 'Press Start 2P', monospace;
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       color: var(--accent-yellow);
-      line-height: 1.4;
+      line-height: 1.5;
       margin-bottom: 20px;
     }
 
@@ -176,19 +182,30 @@
       font-weight: 500;
     }
 
-    .critique-section {
-      margin-bottom: 40px;
-    }
-
-    .critique-title {
+    .heading-keyword-two {
       color: var(--accent-yellow);
-      font-size: 1.1rem;
+      font-size: 1.3rem;
       font-weight: 800;
       border-bottom: 2px solid var(--accent-yellow);
       padding-bottom: 10px;
       margin-bottom: 24px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
+    }
+
+    .heading-keyword-three {
+      color: var(--accent-yellow);
+      font-size: 1.15rem;
+      font-weight: 800;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 8px;
+      margin: 30px 0 20px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .critique-section {
+      margin-bottom: 40px;
     }
 
     .critique-p {
@@ -199,6 +216,42 @@
       font-size: 1.05rem;
       line-height: 1.7;
       color: #e5e5e5;
+    }
+
+    .aeo-section {
+      background: #0e0e0c;
+      border: 2px solid var(--accent-yellow);
+      box-shadow: 5px 5px 0px var(--accent-yellow);
+      padding: 24px;
+      margin-bottom: 35px;
+    }
+
+    .aeo-header {
+      color: var(--accent-yellow);
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    .aeo-item {
+      background: #141412;
+      border-left: 4px solid var(--accent-yellow);
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .aeo-question {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .aeo-answer {
+      font-size: 0.95rem;
+      color: #cccccc;
+      line-height: 1.6;
     }
 
     .pros-cons {
@@ -213,7 +266,7 @@
         grid-template-columns: 1fr;
       }
       .blog-title {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
       }
     }
 
@@ -256,19 +309,19 @@
     <div></div>
   </header>
 
-  <main class="container">
+  <main class="container" itemscope itemtype="https://schema.org/Review">
     <div class="badge-bar">
       <span id="genreBadge" class="badge-yellow">GENRE</span>
       <span id="ratingBadge" class="badge-outline">★ 9.8 / 10</span>
     </div>
 
-    <!-- Title ONLY in 8-bit font -->
-    <h1 id="blogTitle" class="blog-title">Loading Review...</h1>
+    <!-- Heading 1: ONLY Title in 8-bit font, closely related to keyword -->
+    <h1 id="blogTitle" class="blog-title font-8bit" itemprop="name">Loading Review...</h1>
 
     <div class="meta-box">
       <div>
         <span>Critic</span>
-        <span id="metaAuthor">-</span>
+        <span id="metaAuthor" itemprop="author">-</span>
       </div>
       <div>
         <span>Platform</span>
@@ -284,20 +337,30 @@
       </div>
     </div>
 
+    <!-- Image with Alt Text -->
     <div class="hero-img-box">
-      <img id="heroImage" src="" alt="Game Art" />
+      <img id="heroImage" src="" alt="Game review gameplay capture" />
     </div>
 
     <div class="verdict-box">
       <div style="font-size: 0.85rem; font-weight: 800; color: var(--accent-yellow); margin-bottom: 8px; text-transform: uppercase;">Executive Verdict</div>
-      <p id="verdictSummary">"..."</p>
+      <p id="verdictSummary" itemprop="reviewBody">"..."</p>
     </div>
 
+    <!-- Heading 2: Second Keyword-Focused Heading -->
+    <h2 id="headingTwo" class="heading-keyword-two">Gameplay Impressions, Mechanics & Exploration</h2>
+
     <section class="critique-section">
-      <div class="critique-title">
-        <span>In-Depth Editorial Critique</span>
-      </div>
       <div id="critiqueContent"></div>
+    </section>
+
+    <!-- Heading 3: Third Keyword-Focused Heading -->
+    <h3 id="headingThree" class="heading-keyword-three">Performance Benchmarks, Difficulty Curve & Final Score Verdict</h3>
+
+    <!-- 2 Q&A Articles/Paragraphs for AEO purposes -->
+    <section class="aeo-section" itemscope itemtype="https://schema.org/FAQPage">
+      <h3 class="aeo-header">Quick Answers & Search Highlights (AEO)</h3>
+      <div id="aeoContainer"></div>
     </section>
 
     <div class="pros-cons">
@@ -336,36 +399,114 @@
         genre: 'Action RPG',
         rating: 9.8,
         image: '/games/elden_ring.jpg',
+        imageAlt: 'Elden Ring Shadow of the Erdtree official gameplay artwork and review score',
+        metaTitle: 'Elden Ring Erdtree Review: Masterpiece or Too Hard?',
+        metaDescription: "Honest Elden Ring Erdtree review covering boss fights, weapons, and world design. Discover whether FromSoftware's dark DLC is worth playing today.",
+        seoHeadings: {
+          h1: 'Elden Ring: Shadow of the Erdtree Review & Complete Breakdown',
+          h2: 'Gameplay Impressions, Open-World Exploration & Boss Battles',
+          h3: 'Scadutree Fragment Scaling, Difficulty Curve & Final Score Verdict'
+        },
+        aeoQuestions: [
+          {
+            question: 'Is Elden Ring: Shadow of the Erdtree worth playing for returning players?',
+            answer: 'Yes, Elden Ring: Shadow of the Erdtree is widely considered a masterpiece that delivers over 40 hours of rich dark-fantasy exploration, 8 new weapon classes, and breathtaking multi-tiered level architecture that rivals the base game.'
+          },
+          {
+            question: 'How does the Scadutree Fragment difficulty system work in the DLC?',
+            answer: 'The DLC introduces Scadutree Fragments and Revered Spirit Ashes, an isolated realm-scaling mechanic that increases damage output and defense within the Land of Shadow, ensuring fair challenge regardless of your base game character level.'
+          }
+        ],
         author: 'Elena Rostova',
         platform: 'PC · PS5 · Xbox Series X',
         playtime: '52 hours logged',
         date: 'Oct 12, 2024',
-        summary: "FromSoftware has achieved what few developers in gaming history could dream of: matching, and in many respects surpassing, the monumental standard established by the 2022 Game of the Year. Shadow of the Erdtree delivers fifty hours of breathless dark fantasy exploration across the Land of Shadow, uniting peerless vertical level architecture, eight inventive weapon classes, and unforgettable boss battles into a certified masterpiece.",
+        summary: "FromSoftware has achieved what few developers in gaming history could dream of: matching, and in many respects surpassing, the monumental standard established by the 2022 Game of the Year. Shadow of the Erdtree delivers fifty hours of breathless dark fantasy exploration across the Land of Shadow, uniting peerless vertical level architecture, eight inventive weapon classes, and unforgettable boss battles into a certified 8-bit retro arcade masterpiece.",
         fullReview: "FromSoftware has achieved what few developers in gaming history could dream of: matching, and in many respects surpassing, the monumental standard established by the 2022 Game of the Year. Shadow of the Erdtree transports the Tarnished across the ethereal veil directly into the Land of Shadow—a densely layered, labyrinthine continent that elevates vertical map architecture into high art. Rather than simply expanding outward like conventional open-world sequels, director Hidetaka Miyazaki folded the geography upon itself. Vast chasms plunge thousands of feet down to forgotten cerulean coastlines, while crumbling gothic citadels like the Belurat Tower Settlement and the Shadow Keep interlock seamlessly with subterranean tombs, hidden spiritsprings, and towering golden spires.\n\nEvery winding ravine, jagged cliffside, and shadowed catacomb holds secrets that challenge even the most hardened Souls veterans. The expansion introduces eight completely new weapon categories that fundamentally revitalize buildcrafting and experimental loadouts. Players can ditch heavy broadswords to master kinetic hand-to-hand martial arts, execute lightning-fast combos with reverse-grip blades, launch devastating thrusting shields, or throw spinning throwing daggers across crowded arenas. Crucially, the addition of the Scadutree Blessing progression mechanic prevents over-leveled characters from steamrolling the campaign. By tying attack power and physical damage negation directly to collectible fragments scattered across the world, FromSoftware ingeniously incentivizes thorough environmental exploration before forcing players to step into the fog gates of monumental demigods.\n\nThe boss encounters themselves rank among the most spectacular and punishing ever designed. Battles against Messmer the Impaler, the Divine Beast Dancing Lion, and Rellana, Twin Moon Knight combine staggering visual pageantry with ruthless mechanical precision. Bosses execute intricate multi-phase dance-like attack patterns accompanied by operatic orchestral crescendos that demand total rhythmic mastery, tight dodge timings, and disciplined stamina management. Learning the telegraphs for Messmer's fiery serpentine onslaughts or navigating the blinding lunar magic of Castle Ensis transforms every duel into an unforgettable trial of patience, reflexes, and tactical adaptation.\n\nBeyond its relentless combat challenge lies an evocative, tragedy-laden narrative that finally unravels the enigmatic motivations of Kind Miquella. Watching the young demigod divest himself of his royal blood, his divine golden flesh, and his loving heart to create a gentle age of compassion carries palpable heartbreak, especially as you uncover St. Trina's mournful warnings buried deep in stone fissures. Backed by jaw-dropping art direction, exceptional musical composition, and sixty hours of peerless dark fantasy atmosphere, Shadow of the Erdtree stands as an undisputed landmark that redefines what a video game expansion can achieve. From the haunting glow of the Scadutree to the solemn beauty of the Shaman Village, this expansion represents a crowning achievement in modern action role-playing game design that will be celebrated for decades to come.",
         pros: ['Peerless vertical level architecture and hidden zones', 'Eight versatile and inventive new weapon categories', 'Memorable boss fights with unmatched cinematic scoring'],
         cons: ['Punishing late-game difficulty spike for casual builds', 'Frame pacing dips in complex particle-heavy arenas']
       };
     }
 
-    document.title = review.title + " - pixcel.gg";
-    document.getElementById('blogTitle').innerText = review.title;
+    // Set SEO title tag (max 60 chars)
+    const pageTitle = review.metaTitle || (review.title.length > 40 ? review.title.slice(0, 36) + '... Review' : review.title + ' Review: Score Breakdown');
+    document.title = pageTitle;
+    document.getElementById('docTitle').innerText = pageTitle;
+
+    // Set SEO meta description (max 160 chars)
+    const pageDesc = review.metaDescription || ("In-depth " + review.title + " review covering gameplay mechanics, graphics, and performance. Read our full score breakdown now.");
+    const metaDescEl = document.getElementById('metaDescription');
+    if (metaDescEl) metaDescEl.setAttribute('content', pageDesc);
+
+    // Set Headings closely related to keywords
+    document.getElementById('blogTitle').innerText = (review.seoHeadings && review.seoHeadings.h1) ? review.seoHeadings.h1 : review.title;
+    document.getElementById('headingTwo').innerText = (review.seoHeadings && review.seoHeadings.h2) ? review.seoHeadings.h2 : (review.title + ' Gameplay Impressions & Exploration');
+    document.getElementById('headingThree').innerText = (review.seoHeadings && review.seoHeadings.h3) ? review.seoHeadings.h3 : (review.title + ' Performance, Difficulty & Verdict');
+
     document.getElementById('genreBadge').innerText = review.genre.toUpperCase();
     document.getElementById('ratingBadge').innerText = '★ ' + Number(review.rating).toFixed(1) + ' / 10';
     document.getElementById('metaAuthor').innerText = review.author;
     document.getElementById('metaPlatform').innerText = review.platform;
-    document.getElementById('metaPlaytime').innerText = review.playtime;
+    document.getElementById('metaPlaytime').innerText = review.playtime || '40+ hours logged';
     document.getElementById('metaDate').innerText = review.date;
-    document.getElementById('heroImage').src = review.image;
+
+    const heroImg = document.getElementById('heroImage');
+    heroImg.src = review.image;
+    heroImg.alt = review.imageAlt || (review.title + ' official game review cover art and gameplay capture');
+
     document.getElementById('verdictSummary').innerText = '"' + review.summary + '"';
 
-    const paragraphs = review.fullReview.split('\n\n');
+    const paragraphs = (review.fullReview || review.summary).split('\n\n');
     const critiqueDiv = document.getElementById('critiqueContent');
     critiqueDiv.innerHTML = '';
     paragraphs.forEach(p => {
+      if (!p.trim()) return;
       const pElem = document.createElement('p');
       pElem.className = 'critique-p';
       pElem.innerText = p;
       critiqueDiv.appendChild(pElem);
+    });
+
+    // 2 Q&A Paragraphs for AEO purposes
+    const aeoDiv = document.getElementById('aeoContainer');
+    aeoDiv.innerHTML = '';
+    const qas = (review.aeoQuestions && review.aeoQuestions.length > 0) ? review.aeoQuestions : [
+      {
+        question: 'Is ' + review.title + ' worth playing in 2024?',
+        answer: 'Yes. Based on our comprehensive evaluation and score of ' + Number(review.rating).toFixed(1) + '/10, ' + review.title + ' delivers an outstanding experience with engaging mechanics and high replay value.'
+      },
+      {
+        question: 'What are the main strengths of ' + review.title + '?',
+        answer: review.summary
+      }
+    ];
+
+    qas.forEach((qa, idx) => {
+      const art = document.createElement('article');
+      art.className = 'aeo-item';
+      art.setAttribute('itemscope', '');
+      art.setAttribute('itemprop', 'mainEntity');
+      art.setAttribute('itemtype', 'https://schema.org/Question');
+
+      const q = document.createElement('div');
+      q.className = 'aeo-question';
+      q.setAttribute('itemprop', 'name');
+      q.innerHTML = '<span style="color: var(--accent-yellow); font-weight: 900;">Q' + (idx + 1) + ': </span>' + qa.question;
+
+      const aWrap = document.createElement('div');
+      aWrap.setAttribute('itemscope', '');
+      aWrap.setAttribute('itemprop', 'acceptedAnswer');
+      aWrap.setAttribute('itemtype', 'https://schema.org/Answer');
+
+      const a = document.createElement('p');
+      a.className = 'aeo-answer';
+      a.setAttribute('itemprop', 'text');
+      a.innerHTML = '<strong style="color: var(--accent-yellow);">Answer: </strong>' + qa.answer;
+
+      aWrap.appendChild(a);
+      art.appendChild(q);
+      art.appendChild(aWrap);
+      aeoDiv.appendChild(art);
     });
 
     const prosList = document.getElementById('prosList');

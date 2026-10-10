@@ -92,7 +92,7 @@ export const HeroFeatured: React.FC<HeroFeaturedProps> = ({ review, onReadReview
         <div className="lg:col-span-5 relative bg-[#000000] border-t-4 lg:border-t-0 lg:border-l-4 border-[#ffe600] min-h-[320px] lg:min-h-full overflow-hidden flex items-center justify-center">
           <img
             src={review.image}
-            alt={review.title}
+            alt={review.imageAlt || `${review.title} official game review cover artwork and rating`}
             onError={(e) => {
               const target = e.currentTarget;
               target.onerror = null;

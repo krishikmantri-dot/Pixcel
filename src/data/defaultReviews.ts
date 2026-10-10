@@ -50,6 +50,24 @@ export const INITIAL_BLOGS: GameReview[] = [
     genre: 'Action RPG',
     rating: 9.8,
     image: '/games/elden_ring.jpg',
+    imageAlt: 'Elden Ring Shadow of the Erdtree official gameplay artwork and review score',
+    metaTitle: 'Elden Ring Erdtree Review: Masterpiece or Too Hard?',
+    metaDescription: "Honest Elden Ring Erdtree review covering boss fights, weapons, and world design. Discover whether FromSoftware's dark DLC is worth playing today.",
+    seoHeadings: {
+      h1: 'Elden Ring: Shadow of the Erdtree Review & Complete Breakdown',
+      h2: 'Gameplay Impressions, Open-World Exploration & Boss Battles',
+      h3: 'Scadutree Fragment Scaling, Difficulty Curve & Final Score Verdict'
+    },
+    aeoQuestions: [
+      {
+        question: 'Is Elden Ring: Shadow of the Erdtree worth playing for returning players?',
+        answer: 'Yes, Elden Ring: Shadow of the Erdtree is widely considered a masterpiece that delivers over 40 hours of rich dark-fantasy exploration, 8 new weapon classes, and breathtaking multi-tiered level architecture that rivals the base game.'
+      },
+      {
+        question: 'How does the Scadutree Fragment difficulty system work in the DLC?',
+        answer: 'The DLC introduces Scadutree Fragments and Revered Spirit Ashes, an isolated realm-scaling mechanic that increases damage output and defense within the Land of Shadow, ensuring fair challenge regardless of your base game character level.'
+      }
+    ],
     summary: "FromSoftware has achieved what few developers in gaming history could dream of: matching, and in many respects surpassing, the monumental standard established by the 2022 Game of the Year. Shadow of the Erdtree delivers fifty hours of breathless dark fantasy exploration across the Land of Shadow, uniting peerless vertical level architecture, eight inventive weapon classes, and unforgettable boss battles into a certified 8-bit retro arcade masterpiece.",
     fullReview: `FromSoftware has achieved what few developers in gaming history could dream of: matching, and in many respects surpassing, the monumental standard established by the 2022 Game of the Year. Shadow of the Erdtree transports the Tarnished across the ethereal veil directly into the Land of Shadow—a densely layered, labyrinthine continent that elevates vertical map architecture into high art. Rather than simply expanding outward like conventional open-world sequels, director Hidetaka Miyazaki folded the geography upon itself. Vast chasms plunge thousands of feet down to forgotten cerulean coastlines, while crumbling gothic citadels like the Belurat Tower Settlement and the Shadow Keep interlock seamlessly with subterranean tombs, hidden spiritsprings, and towering golden spires.
 
@@ -102,6 +120,24 @@ Beyond its relentless combat challenge lies an evocative, tragedy-laden narrativ
     genre: 'Sci-Fi RPG',
     rating: 9.5,
     image: '/games/cyberpunk.jpg',
+    imageAlt: 'Cyberpunk 2077 Phantom Liberty Dogtown cover artwork and gameplay review',
+    metaTitle: 'Cyberpunk 2077 Phantom Liberty Review: Best RPG DLC?',
+    metaDescription: 'In-depth Cyberpunk 2077 Phantom Liberty review covering Dogtown, spy thriller story, and 2.0 combat. Read our full score breakdown and verdict now.',
+    seoHeadings: {
+      h1: 'Cyberpunk 2077: Phantom Liberty Review & Dogtown Analysis',
+      h2: 'Espionage Campaign, Idris Elba Performance & 2.0 Combat Overhaul',
+      h3: 'Visual Benchmarks, Weapon Arsenal & Final Score Verdict'
+    },
+    aeoQuestions: [
+      {
+        question: 'Is Cyberpunk 2077: Phantom Liberty worth buying in 2024?',
+        answer: 'Yes, Phantom Liberty delivers a gripping espionage narrative starring Idris Elba, transforms the skill progression system with Update 2.0, and fixes performance issues to deliver one of the finest action RPG experiences available.'
+      },
+      {
+        question: 'Do you need to finish the main Cyberpunk 2077 campaign to start Phantom Liberty?',
+        answer: "No, you do not need to finish the main story; Phantom Liberty unlocks mid-campaign after completing the Pacifica questline 'Transmission', or you can start directly from a new character pre-leveled to the DLC entry point."
+      }
+    ],
     summary: "CD Projekt Red completes one of gaming's greatest redemption stories with Phantom Liberty and the comprehensive 2.0 system overhaul. Dogtown serves as a gritty espionage pressure cooker anchored by Idris Elba's magnetic performance, rebuilt skill trees, dynamic cyberware limits, and kinetic vehicular combat.",
     fullReview: `CD Projekt Red completes one of the greatest creative and technical redemption arcs in modern entertainment history with Phantom Liberty and the comprehensive 2.0 system overhaul. Set within Dogtown—a walled-off, lawless combat zone ruled by militaristic warlord Kurt Hansen—the expansion trades the sprawl of Night City for a suffocating, claustrophobic pressure cooker inspired by John le Carré espionage novels and dark eighties techno-thrillers. Dogtown is a towering marvel of brutalist megastructures, neon-drenched black markets, ruined luxury casinos, and rain-slicked slums that feel more lived-in, dangerous, and volatile than almost any urban setting in digital gaming history.
 
@@ -146,6 +182,24 @@ From a visual standpoint, Phantom Liberty represents the bleeding edge of comput
     genre: 'Action Adventure',
     rating: 9.2,
     image: '/games/ghost_of_tsushima.jpg',
+    imageAlt: 'Ghost of Tsushima Jin Sakai samurai katana combat and atmospheric landscape artwork',
+    metaTitle: 'Ghost of Tsushima Review: Samurai Honor & Lethal Combat',
+    metaDescription: "Read our Ghost of Tsushima review detailing Jin Sakai's tale, Guiding Wind, and katana duels. See our full rating and gameplay score breakdown now.",
+    seoHeadings: {
+      h1: 'Ghost of Tsushima Review: The Way of the Ghost & Samurai Honor',
+      h2: 'Cinematic Kurosawa Aesthetic, Guiding Wind Exploration & Stances',
+      h3: 'Katana Swordplay Precision, Particle Lighting & Final Verdict'
+    },
+    aeoQuestions: [
+      {
+        question: 'How does the Guiding Wind navigation system work in Ghost of Tsushima?',
+        answer: 'Instead of cluttered on-screen minimaps or artificial waypoint markers, players summon gusts of wind that visually sweep through grasses and trees in the direction of marked objectives for seamless cinematic navigation.'
+      },
+      {
+        question: 'What makes Ghost of Tsushima combat unique among open-world games?',
+        answer: 'Combat revolves around four historical katana stances—Stone, Water, Wind, and Moon—demanding tactical stance switching in real time to break enemy defenses with surgical parries and lethal standoff strikes.'
+      }
+    ],
     summary: "A sublime visual poem in motion and a cinematic love letter to classic Akira Kurosawa cinema. Ghost of Tsushima replaces traditional minimap markers with guiding winds, framing a moving story of samurai honor, lethal stance-based swordplay, and painterly Japanese landscapes.",
     fullReview: `Sucker Punch Productions crafted a breathtaking cinematic homage to classical Akira Kurosawa cinema that stands as a modern masterclass in open-world environmental design and storytelling. Set during the thirteenth-century Mongol invasion of Japan, the island of Tsushima eschews intrusive minimaps, cluttering compasses, and artificial waypoint icons in favor of the revolutionary Guiding Wind mechanic. When players set a destination, a natural gust of wind gently sweeps across the landscape, rustling golden pampas grass, parting bamboo forests, and fluttering scarlet maple leaves to guide your path. Golden birds guide you toward hidden hot springs and haiku shrines, creating an organic, diegetic interface that keeps your eyes glued to the screen like an interactive living painting.
 
@@ -182,6 +236,24 @@ Tsushima's visual and audio presentation is nothing short of sublime. Dynamic pa
     genre: 'Metroidvania',
     rating: 9.7,
     image: '/games/hollow_knight.jpg',
+    imageAlt: 'Hollow Knight Hallownest subterranean knight artwork and gameplay review score',
+    metaTitle: 'Hollow Knight Review: The Ultimate 2D Metroidvania?',
+    metaDescription: "Complete Hollow Knight review evaluating Hallownest's subterranean world, boss fights, and charm combos. Read our definitive verdict and score breakdown.",
+    seoHeadings: {
+      h1: 'Hollow Knight Review: Hallownest Metroidvania Mastery',
+      h2: 'Atmospheric Worldbuilding, Boss Fights & Charm Buildcrafting',
+      h3: 'Nail Combat Precision, Christopher Larkin Score & Final Verdict'
+    },
+    aeoQuestions: [
+      {
+        question: 'Is Hollow Knight difficult for beginner platformer players?',
+        answer: 'Hollow Knight features a steep learning curve with challenging boss battles and precise platforming, but generous checkpoint benches and customizable charm builds allow players to gradually master its mechanics.'
+      },
+      {
+        question: 'How many hours of gameplay does Hollow Knight offer?',
+        answer: 'A standard initial playthrough of Hollow Knight lasts between 25 and 30 hours, while unlocking all four endings, Godmaster pantheons, and hidden areas provides over 60 hours of gameplay.'
+      }
+    ],
     summary: "Team Cherry's subterranean opus stands as the gold standard for the modern Metroidvania. Hallownest is a labyrinth of melancholic beauty, demanding platforming gauntlets, customizable charm builds, and Christopher Larkin's evocative orchestral score.",
     fullReview: `Team Cherry's subterranean indie masterpiece stands as the undisputed gold standard for the modern two-dimensional Metroidvania genre. Hallownest is a colossally vast, beautifully hand-drawn ruined insect kingdom steeped in haunting atmosphere, mysterious lore, and quiet tragedy. From the rainy stone spires and crying statues of the City of Tears to the lush overgrown greenery of Greenpath, the fungal caverns of the Fungal Wastes, and the terrifying, pitch-black arachnid nightmares of Deepnest, every interconnected biome tells an unspoken story of a civilization ruined by an ancient radiant infection.
 
@@ -226,6 +298,24 @@ Elevating the entire experience is Christopher Larkin's breathtaking musical sco
     genre: 'Open World',
     rating: 10.0,
     image: '/games/rdr2.jpg',
+    imageAlt: 'Red Dead Redemption 2 Arthur Morgan frontier sunset artwork and review score',
+    metaTitle: 'Red Dead Redemption 2 Review: The Greatest Western Game?',
+    metaDescription: "Comprehensive Red Dead Redemption 2 review analyzing Arthur Morgan's journey, realism, and open world. Find out if it remains a gaming milestone.",
+    seoHeadings: {
+      h1: 'Red Dead Redemption 2 Review: Story, Realism & World Design',
+      h2: 'Arthur Morgan Narrative Arc, Camp Systems & Frontier Immersion',
+      h3: 'Gunplay Mechanics, Environmental Physics & Final Review Score'
+    },
+    aeoQuestions: [
+      {
+        question: 'Why is Red Dead Redemption 2 considered one of the best games ever made?',
+        answer: "Red Dead Redemption 2 achieves unmatched realism through reactive wildlife ecosystems, emotive voice acting, Arthur Morgan's morally resonant narrative, and an intricately simulated frontier that feels alive at every moment."
+      },
+      {
+        question: 'How long does it take to beat Red Dead Redemption 2?',
+        answer: 'Completing the main story of Red Dead Redemption 2 takes approximately 50 to 60 hours, while completing side missions, hunting compendiums, and exploring the full map easily extends playtime past 100 hours.'
+      }
+    ],
     summary: "Rockstar Games crafted not merely an open-world adventure, but a living historical ecosystem operating under its own indifferent natural laws. Arthur Morgan's tragic, weary journey through the dying American frontier represents an all-time literary-grade triumph in gaming history.",
     fullReview: `Rockstar Games crafted not merely a video game, but an astonishingly detailed, living historical ecosystem operating under its own indifferent natural laws. Set across the dying American frontier of 1899, Red Dead Redemption 2 chronicles the slow, heartbreaking dissolution of the Van der Linde gang through the eyes of Arthur Morgan—arguably the finest, most fully realized protagonist in the entire history of interactive digital storytelling. Arthur is not an idealized hero; he is a violent, weary outlaw wrestling with misplaced loyalty, creeping mortality, and a yearning for personal redemption as modern industrial civilization encroaches on the wild west.
 
@@ -270,6 +360,24 @@ Complementing this colossal simulation is a stirring, emotionally resonant sound
     genre: 'Tactical Shooter',
     rating: 8.5,
     image: '/games/valorant.png',
+    imageAlt: 'Valorant tactical shooter agent artwork and competitive esports review score',
+    metaTitle: 'Valorant Review: The Best Competitive Tactical Shooter?',
+    metaDescription: "Honest Valorant review testing 128-tick servers, Agent hero abilities, gun recoil, and ranking system. Find out if Riot's free FPS is worth your time.",
+    seoHeadings: {
+      h1: 'Valorant Review: Tactical Gunplay & Hero Ability Balance',
+      h2: 'Precise Counter-Strike Gun Mechanics, Agent Meta & Map Layouts',
+      h3: '128-Tick Server Performance, Competitive Ranked Ladder & Verdict'
+    },
+    aeoQuestions: [
+      {
+        question: 'Is Valorant free to play and pay-to-win?',
+        answer: 'Valorant is 100% free to play and strictly cosmetic in monetization; all Agents can be unlocked through gameplay progression, and paid weapon skins provide zero competitive or statistical advantage.'
+      },
+      {
+        question: 'How does gunplay in Valorant compare to CS:GO and CS2?',
+        answer: 'Valorant emphasizes precise first-shot accuracy and stationary shooting mechanics similar to Counter-Strike, while supplementing tactical positioning with Agent utility abilities like flashbangs, smokes, and wall denies.'
+      }
+    ],
     summary: "Riot Games combined surgical round-based gunplay with diverse character abilities to forge a premier competitive arena. Precise weapon recoil mastery, 128-tick server fidelity, and calculated agent utility coalesce into an esports staple that continually tests teamwork and mechanical skill.",
     fullReview: `Riot Games built Valorant from the bedrock up to serve as the definitive competitive tactical shooter for the modern esports era. Merging the surgical, round-based gunplay fundamentals of Counter-Strike with the dynamic character expression and tactical utility of hero shooters, Valorant establishes a ruthlessly demanding competitive battleground where mechanical precision and strategic communication reign supreme. Every match places five attackers against five defenders across multiple bomb sites, where rounds are won and lost in fractions of a second based on crosshair placement, economy management, and clutch composure.
 
@@ -305,6 +413,24 @@ Underpinning this competitive integrity is Riot's state-of-the-art server infras
     genre: 'Adventure',
     rating: 9.9,
     image: '/games/zelda_totk.jpg',
+    imageAlt: 'The Legend of Zelda Tears of the Kingdom Link Ultrahand sky islands artwork and review score',
+    metaTitle: 'Zelda Tears of the Kingdom Review: Pure Sandbox Genius?',
+    metaDescription: 'In-depth Zelda Tears of the Kingdom review exploring Ultrahand crafting, Depths, and Sky Islands. Click to see why this sandbox sequel is a masterpiece.',
+    seoHeadings: {
+      h1: 'Zelda Tears of the Kingdom Review: Sandbox Engineering Brilliance',
+      h2: 'Ultrahand & Fuse Mechanics, Sky Islands & Depths Tri-Level Map',
+      h3: 'Physics Engine Wizardry, Dungeon Design & Final Score Breakdown'
+    },
+    aeoQuestions: [
+      {
+        question: 'How does Ultrahand change gameplay in Zelda: Tears of the Kingdom?',
+        answer: 'Ultrahand gives players complete creative freedom to engineer functional cars, flying hoverbikes, automated battle tanks, and bridge contraptions, turning environmental puzzle-solving into an interactive physics playground.'
+      },
+      {
+        question: 'How large is the map in Tears of the Kingdom compared to Breath of the Wild?',
+        answer: 'Tears of the Kingdom features more than double the explorable volume of Breath of the Wild by introducing floating Sky Islands above Hyrule and a pitch-black subterranean realm called the Depths spanning the entire continent.'
+      }
+    ],
     summary: "An astonishing engineering feat that transforms Hyrule into a physics-driven playground. Link's Ultrahand, Fuse, and Ascend mechanics empower players to construct imaginative vehicles and conquer a vast three-tiered world stretching from the Sky Islands to the abyssal Depths.",
     fullReview: `Where many sequels would have simply expanded the familiar geography of Hyrule, Nintendo pulled off an astonishing technical and game-design miracle with Tears of the Kingdom. Running on modest Nintendo Switch hardware, the development team engineered a physics sandbox so sophisticated and resilient that it puts multi-million-dollar next-gen titles to shame. By handing players the Ultrahand, Fuse, Ascend, and Recall abilities, Nintendo transformed Hyrule from a world to be explored into an boundless creative playground where player imagination is the ultimate weapon.
 
@@ -341,6 +467,24 @@ Anchoring this boundless creativity is a poignant, emotionally charged narrative
     genre: 'Racing',
     rating: 9.0,
     image: '/games/forza_horizon_5.jpg',
+    imageAlt: 'Forza Horizon 5 Mercedes-AMG ONE racing across Mexico biomes and review score',
+    metaTitle: 'Forza Horizon 5 Review: The King of Open-World Racers?',
+    metaDescription: 'Comprehensive Forza Horizon 5 review exploring Mexico biomes, 700+ cars, and EventLab creator tools. Click to read our definitive racing verdict.',
+    seoHeadings: {
+      h1: 'Forza Horizon 5 Review: Open-World Arcade Racing Perfection',
+      h2: 'Vibrant Mexican Biomes, 700+ Licensed Vehicles & Handling Physics',
+      h3: 'EventLab Community Creations, Sound Design & Final Review Score'
+    },
+    aeoQuestions: [
+      {
+        question: 'Is Forza Horizon 5 beginner friendly for casual racing players?',
+        answer: 'Yes, Forza Horizon 5 is one of the most accessible racing games ever made, featuring rewind options, dynamic difficulty assists, customizable steering aids, and a forgiving open-world festival progression model.'
+      },
+      {
+        question: 'Does Forza Horizon 5 require a steering wheel controller?',
+        answer: 'No, Forza Horizon 5 is masterfully tuned for standard gamepads with nuanced trigger haptics and analog stick responsiveness, though it also offers robust force-feedback support for steering wheels.'
+      }
+    ],
     summary: "Playground Games delivers a breathtaking celebration of automotive culture set in vibrant Mexico. Over seven hundred photorealistic cars, dynamic tropical weather systems, and sublime sim-cade driving physics make this the premier racing experience of the generation.",
     fullReview: `Playground Games delivers a breathtaking, joyful, and exhilarating celebration of automotive passion that stands tall as the premier arcade racing experience of this console generation. Set across an enormous, beautifully crafted open-world recreation of Mexico, the Horizon festival map is a diverse topographical wonderland. In a single seamless road trip, players can drift down the hairpin curves of an active snow-capped volcano, blast through the vibrant colonial cobblestone alleys of Guanajuato, carve along sunny Pacific coastal highways, and kick up red dust storms across dense tropical jungles and ancient Mayan pyramid ruins.
 
@@ -377,6 +521,24 @@ Beyond official festival race circuits, dirt scrambles, and cross-country expedi
     genre: 'Action',
     rating: 9.6,
     image: '/games/god_of_war.jpg',
+    imageAlt: 'God of War Ragnarok Kratos and Atreus in Fimbulwinter snowy landscape review artwork',
+    metaTitle: 'God of War Ragnarok Review: An Epic Norse Masterpiece?',
+    metaDescription: 'Detailed God of War Ragnarok review breaking down Kratos and Atreus climax, combat upgrades, and Nine Realms. Discover our full verdict and score now.',
+    seoHeadings: {
+      h1: 'God of War Ragnarok Review: The Climax of the Norse Saga',
+      h2: 'Father-Son Narrative Evolution, Nine Realms Exploration & Puzzles',
+      h3: 'Leviathan Axe & Draupnir Spear Combat, Boss Fights & Final Score'
+    },
+    aeoQuestions: [
+      {
+        question: 'Does God of War Ragnarok improve on the 2018 game combat?',
+        answer: 'Yes, God of War Ragnarok significantly elevates combat with the addition of the kinetic Draupnir Spear, dynamic vertical arena grapples with the Blades of Chaos, versatile shield archetypes, and expanded enemy variety.'
+      },
+      {
+        question: 'Can you play God of War Ragnarok without playing the 2018 title?',
+        answer: 'While Ragnarok provides an optional recap video, playing God of War (2018) first is strongly recommended because the emotional weight of Kratos and Atreus relationship builds directly upon earlier events.'
+      }
+    ],
     summary: "A mythic conclusion to the Norse saga uniting cinematic spectacle with profound character study. Visceral combat enhanced by the Draupnir Spear, Richard Schiff's magnetic Odin, and unbroken camera direction deliver an emotional blockbuster of the highest order.",
     fullReview: `Santa Monica Studio concludes the monumental Norse saga of Kratos and Atreus with jaw-dropping mythological spectacle, mechanical combat brilliance, and profound emotional resonance. Picking up several years after their 2018 journey, Fimbulwinter's biting blizzards have frozen Midgard as the dread prophecies of Ragnarök—the twilight of the gods—loom over all Nine Realms. Rather than settling for a safe retread, Ragnarök deepens its central character drama, delivering a masterclass in blockbuster storytelling centered on the agonizing burdens of parenthood, the cycle of generational violence, and the desperate struggle to choose your own destiny.
 
@@ -413,6 +575,24 @@ Visually and acoustically, Ragnarök is a tour de force. The studio's signature 
     genre: 'Simulation',
     rating: 9.4,
     image: '/games/stardew_valley.jpg',
+    imageAlt: 'Stardew Valley cozy farm homestead pixel art and indie game review score',
+    metaTitle: 'Stardew Valley Review: The Ultimate Cozy Farming Game?',
+    metaDescription: 'Complete Stardew Valley review highlighting Pelican Town community, farming, fishing, and 1.6 updates. Discover why this cozy indie gem is a must-play.',
+    seoHeadings: {
+      h1: 'Stardew Valley Review: The Golden Standard of Farming Sims',
+      h2: 'Pelican Town Friendship, Crop Seasons & Relaxing Gameplay Loops',
+      h3: 'Skull Cavern Mining, 1.6 Content Expansion & Definitive Score'
+    },
+    aeoQuestions: [
+      {
+        question: 'What makes Stardew Valley so relaxing and addictive to play?',
+        answer: 'Stardew Valley combines charming 16-bit pixel art, an unhurried day-and-night cycle, satisfying farm expansion, and heartwarming village relationships into an irresistibly cozy and rewarding gameplay loop.'
+      },
+      {
+        question: 'Can you play Stardew Valley with friends in multiplayer co-op?',
+        answer: 'Yes, Stardew Valley supports up to 8-player cooperative multiplayer on PC (and 4 players on console), allowing you and friends to build a shared farm, pool money, explore mines, and attend town festivals together.'
+      }
+    ],
     summary: "ConcernedApe's solo-developed pastoral masterpiece remains the pinnacle of cozy farming life. Transforming an overgrown family homestead hooks players with an intoxicating daily loop of seasonal agriculture, mining exploration, fishing, and genuine community friendships.",
     fullReview: `Created entirely by sole visionary developer Eric "ConcernedApe" Barone, Stardew Valley is a pastoral masterpiece that single-handedly revitalized the cozy life-simulation genre while establishing a standard of sincerity, charm, and mechanical depth that has never been matched. Inheriting your grandfather's overgrown, weed-choked plot of land in Pelican Town is just the humble genesis of an intoxicating, deeply therapeutic daily gameplay loop. Whether you are clearing debris with a rusty pickaxe, tilling soil for spring parsnips, calculating sprinkler coverage, caring for dairy cows, or descending into the monster-infested depths of the Skull Cavern, Stardew Valley treats player time with profound respect and generous reward.
 

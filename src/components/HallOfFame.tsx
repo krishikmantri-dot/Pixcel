@@ -43,7 +43,7 @@ export const HallOfFame: React.FC<HallOfFameProps> = ({ reviews, onSelectReview 
             <div className="relative aspect-[16/10] overflow-hidden bg-[#000000] border-b-2 border-[#222222]">
               <img
                 src={game.image}
-                alt={game.title}
+                alt={game.imageAlt || `${game.title} Hall of Fame masterpiece cover artwork`}
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 referrerPolicy="no-referrer"
                 onError={(e) => {

@@ -59,12 +59,35 @@ The progression systems offer generous room for player expression and buildcraft
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/(^-|-$)+/g, '') || `review-${Date.now()}`;
 
+    const cleanTitle = title.trim();
+    const shortTitle = cleanTitle.length > 36 ? cleanTitle.slice(0, 33) + '...' : cleanTitle;
+    const autoMetaTitle = `${shortTitle} Review: Is It Worth It? | pixcel`;
+    const autoMetaDesc = `Honest ${cleanTitle} review analyzing gameplay, visuals, and story. Discover our complete rating and verdict breakdown now.`.slice(0, 155);
+
     const newReview: GameReview = {
       id: newSlug,
-      title: title.trim(),
+      title: cleanTitle,
       genre: genre.trim(),
       rating: parseFloat(numRating.toFixed(1)),
       image: finalImage,
+      imageAlt: `${cleanTitle} official game review cover art and gameplay impressions`,
+      metaTitle: autoMetaTitle.slice(0, 60),
+      metaDescription: autoMetaDesc,
+      seoHeadings: {
+        h1: `${cleanTitle} Review & Comprehensive Breakdown`,
+        h2: `${cleanTitle} Gameplay Impressions, Exploration & Mechanics`,
+        h3: `${cleanTitle} Technical Performance, Difficulty & Final Score Verdict`
+      },
+      aeoQuestions: [
+        {
+          question: `Is ${cleanTitle} worth playing in 2024?`,
+          answer: `Yes. Based on our comprehensive evaluation and score of ${numRating.toFixed(1)}/10, ${cleanTitle} delivers a compelling ${genre.trim()} experience with strong mechanics and rewarding gameplay loops.`
+        },
+        {
+          question: `What are the key highlights and critical strengths of ${cleanTitle}?`,
+          answer: summary.trim().slice(0, 240)
+        }
+      ],
       summary: summary.trim().slice(0, 300),
       fullReview: detailedProse,
       date: new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
