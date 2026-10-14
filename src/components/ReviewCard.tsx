@@ -25,7 +25,7 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
       <div className="relative w-full aspect-[16/9] overflow-hidden bg-[#000000] border-b-2 border-[#222222] group-hover:border-[#ffe600]">
         <img
           src={review.image}
-          alt={review.title}
+          alt={review.seo?.imageAlt || `${review.title} video game cover art and review screenshot`}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           referrerPolicy="no-referrer"
           onError={(e) => {

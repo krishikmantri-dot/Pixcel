@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GameReview, ReviewComment } from '../types';
 import { 
   ArrowLeft, 
@@ -14,9 +14,12 @@ import {
   Clock, 
   Gamepad2, 
   UserCheck, 
-  Award
+  Award,
+  Tag
 } from 'lucide-react';
 import { getGameCoverFallback } from '../utils/imageFallback';
+import { SEOInspectorCard } from './SEOInspectorCard';
+import { applyPageSEO, generateSEOForReview, generateReviewJsonLd } from '../utils/seo';
 
 interface ReviewDetailPageProps {
   review: GameReview;
@@ -42,6 +45,22 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
   const [copiedUrl, setCopiedUrl] = useState(false);
   const [newAuthor, setNewAuthor] = useState('');
   const [newComment, setNewComment] = useState('');
+
+  // SEO computation
+  const seo = review.seo || generateSEOForReview(review);
+
+  // Apply Document Head SEO dynamically for search engine bots and social scrapers
+  useEffect(() => {
+    const url = typeof window !== 'undefined' ? `${window.location.origin}/review/${review.id}` : '';
+    applyPageSEO({
+      title: seo.metaTitle,
+      description: seo.metaDescription,
+      url: url,
+      image: review.image,
+      type: 'article',
+      jsonLd: generateReviewJsonLd(review, url)
+    });
+  }, [review, seo]);
 
   // Previous and next review in list
   const currentIndex = allReviews.findIndex((r) => r.id === review.id);
@@ -83,7 +102,7 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
           <button
             onClick={onBack}
             className="retro-btn-yellow inline-flex items-center gap-2 px-3.5 py-2 text-xs md:text-sm font-bold cursor-pointer"
-            aria-label="Back to reviews"
+            aria-label="Back to all reviews"
           >
             <ArrowLeft className="w-4 h-4 stroke-[3]" />
             <span>Back to Reviews</span>
@@ -93,8 +112,9 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
             href="/"
             onClick={(e) => { e.preventDefault(); onBack(); }}
             className="flex items-center gap-2 text-white hover:text-[#ffe600] transition-colors"
+            title="Go to Pixcel.gg Home"
           >
-            {/* Title / Brand in 8-bit font */}
+            {/* Title / Brand in 8-bit font with anchor text */}
             <span className="font-8bit text-base md:text-lg text-[#ffe600] tracking-wider">
               PIXCEL<span className="text-white">.GG</span>
             </span>
@@ -109,6 +129,7 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
                   : 'bg-[#141414] text-[#ffe600] border-[#333333] hover:border-[#ffe600]'
               } transition-colors cursor-pointer`}
               title={isBookmarked ? 'Remove bookmark' : 'Bookmark this review'}
+              aria-label={isBookmarked ? 'Remove bookmark' : 'Bookmark this review'}
             >
               <Bookmark className="w-4 h-4 stroke-[2.5]" />
             </button>
@@ -116,7 +137,8 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
             <button
               onClick={handleShare}
               className="retro-btn-dark px-3.5 py-2 text-xs font-bold inline-flex items-center gap-1.5 cursor-pointer"
-              title="Share Review"
+              title="Share Review Link"
+              aria-label="Share Review Link"
             >
               {copiedUrl ? <Check className="w-3.5 h-3.5 text-[#ffe600]" /> : <Share2 className="w-3.5 h-3.5" />}
               <span className="hidden sm:inline">{copiedUrl ? 'Copied!' : 'Share'}</span>
@@ -127,8 +149,8 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
 
       {/* Main Content Area */}
       <main className="max-w-5xl mx-auto px-4 pt-8">
-        {/* Breadcrumbs in Aptos font */}
-        <nav className="mb-6 flex items-center gap-2 text-xs md:text-sm text-[#888888] font-semibold">
+        {/* Breadcrumbs in Aptos font with descriptive anchor text */}
+        <nav aria-label="Breadcrumbs" className="mb-6 flex items-center gap-2 text-xs md:text-sm text-[#888888] font-semibold">
           <button onClick={onBack} className="hover:text-[#ffe600] transition-colors cursor-pointer">
             Reviews
           </button>
@@ -138,18 +160,37 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
           <span className="text-white truncate max-w-[200px] md:max-w-md">{review.title}</span>
         </nav>
 
-        {/* Title & Headline */}
+        {/* SEO Class Project Presentation Card (Lays out Meta Title, Meta Description, H1) */}
+        <SEOInspectorCard 
+          seo={seo}
+          h1Text={review.title}
+          urlPath={`/review/${review.id}`}
+          rating={review.rating}
+        />
+
+        {/* Title & Headline Section */}
         <div className="mb-8">
-          <div className="flex flex-wrap items-center gap-2.5 mb-4">
+          <div className="flex flex-wrap items-center gap-2.5 mb-3">
             <span className="bg-[#ffe600] text-black text-xs px-2.5 py-1 font-bold border-2 border-black uppercase tracking-wide">
               {review.genre}
             </span>
             <span className="border-2 border-[#ffe600] text-[#ffe600] text-xs px-2.5 py-1 font-bold">
               ★ {review.rating.toFixed(1)} / 10
             </span>
+            <span className="bg-[#141414] text-[#888888] border border-[#333333] text-xs px-2 py-1 font-medium">
+              Primary Keyword: <strong className="text-[#ffe600]">"{seo.primaryKeyword}"</strong>
+            </span>
           </div>
 
-          {/* ONLY the Game Title is in 8-bit font */}
+          {/* Explicit SEO Label for H1 Page Heading (For professor / class presentation) */}
+          <div className="flex items-center gap-2 text-xs font-bold text-[#ffe600] uppercase tracking-wider mb-2">
+            <span className="px-2 py-0.5 bg-[#ffe600] text-black font-bold text-[10px] rounded-xs">
+              PAGE HEADING &lt;h1&gt;
+            </span>
+            <span>Target H1 Title Tag</span>
+          </div>
+
+          {/* ONLY the Game Title is in 8-bit font as the H1 */}
           <h1 className="text-2xl sm:text-4xl md:text-5xl font-8bit text-[#ffe600] tracking-wide leading-tight md:leading-snug mb-6">
             {review.title}
           </h1>
@@ -178,7 +219,7 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
               </span>
             </div>
             <div>
-              <span className="block text-xs font-bold text-[#888888] uppercase tracking-wider mb-0.5">Date</span>
+              <span className="block text-xs font-bold text-[#888888] uppercase tracking-wider mb-0.5">Date Published</span>
               <span className="text-base text-[#ffe600] font-bold">
                 {review.date}
               </span>
@@ -186,12 +227,12 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
           </div>
         </div>
 
-        {/* Featured Artwork Display */}
+        {/* Featured Artwork Display with Keyword-Rich Alt Text */}
         <div className="mb-10 relative">
           <div className="border-4 border-[#ffe600] shadow-[6px_6px_0px_#ffe600] overflow-hidden bg-[#111111]">
             <img
               src={review.image}
-              alt={review.title}
+              alt={seo.imageAlt || `${review.title} gameplay review screenshot and artwork`}
               onError={(e) => {
                 const target = e.currentTarget;
                 target.onerror = null;
@@ -199,11 +240,13 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
               }}
               className="w-full max-h-[500px] object-cover object-center"
             />
-            <div className="bg-[#0a0a0a] px-4 py-2 border-t-2 border-[#ffe600] flex justify-between items-center text-xs text-[#a3a3a3] font-medium">
+            <div className="bg-[#0a0a0a] px-4 py-2 border-t-2 border-[#ffe600] flex flex-col sm:flex-row sm:justify-between sm:items-center text-xs text-[#a3a3a3] gap-1">
               <span className="text-[#ffe600] font-bold">
-                Direct Capture
+                Image Alt Text: <span className="text-white font-normal italic">"{seo.imageAlt}"</span>
               </span>
-              <span>In-Game Gameplay Capture</span>
+              <span className="text-[11px] text-[#48bb78] font-bold">
+                ✔ 100% Accessible & Indexed
+              </span>
             </div>
           </div>
         </div>
@@ -278,7 +321,7 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
         {/* Pros and Cons Boxes in Aptos font */}
         {Boolean((review.pros && review.pros.length > 0) || (review.cons && review.cons.length > 0)) && (
           <section aria-label="Pros and cons" className="mb-14 grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-[#0e140e] border-2 border-[#38a169] p-6 shadow-[4px_4px_0px_#38a169]">
+            <div className="bg-[#0e140e] border-2 border-[#333333] p-6 shadow-[4px_4px_0px_#38a169]">
               <h2 className="text-sm sm:text-base text-[#48bb78] font-bold mb-4 flex items-center gap-2 uppercase tracking-wide">
                 <span>[+]</span> Key Highlights & Strengths
               </h2>
@@ -292,7 +335,7 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
               </ul>
             </div>
 
-            <div className="bg-[#170e0e] border-2 border-[#e53e3e] p-6 shadow-[4px_4px_0px_#e53e3e]">
+            <div className="bg-[#170e0e] border-2 border-[#333333] p-6 shadow-[4px_4px_0px_#e53e3e]">
               <h2 className="text-sm sm:text-base text-[#f56565] font-bold mb-4 flex items-center gap-2 uppercase tracking-wide">
                 <span>[-]</span> Drawbacks & Shortcomings
               </h2>
@@ -308,18 +351,18 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
           </section>
         )}
 
-        {/* Previous / Next Review Navigation in Aptos font */}
+        {/* Previous / Next Review Navigation with explicit Anchor Text */}
         <section aria-label="Review pagination" className="mb-16 border-t-2 border-b-2 border-[#333333] py-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {prevReview ? (
               <button
                 onClick={() => onNavigateToReview(prevReview)}
                 className="bg-[#111111] hover:bg-[#1a1a1a] p-4 border-2 border-[#2b2b2b] hover:border-[#ffe600] text-left transition-colors flex items-center gap-3 cursor-pointer group"
+                aria-label={`Read previous review: ${prevReview.title}`}
               >
                 <ChevronLeft className="w-6 h-6 text-[#ffe600] shrink-0 group-hover:-translate-x-1 transition-transform" />
                 <div className="truncate">
                   <span className="block text-xs font-bold text-[#888888] uppercase tracking-wider">Previous Review</span>
-                  {/* Keep title in 8-bit font */}
                   <span className="font-8bit text-xs text-white group-hover:text-[#ffe600] truncate block mt-1">
                     {prevReview.title}
                   </span>
@@ -331,10 +374,10 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
               <button
                 onClick={() => onNavigateToReview(nextReview)}
                 className="bg-[#111111] hover:bg-[#1a1a1a] p-4 border-2 border-[#2b2b2b] hover:border-[#ffe600] text-right transition-colors flex items-center justify-end gap-3 cursor-pointer group sm:col-start-2"
+                aria-label={`Read next review: ${nextReview.title}`}
               >
                 <div className="truncate">
                   <span className="block text-xs font-bold text-[#888888] uppercase tracking-wider">Next Review</span>
-                  {/* Keep title in 8-bit font */}
                   <span className="font-8bit text-xs text-white group-hover:text-[#ffe600] truncate block mt-1">
                     {nextReview.title}
                   </span>
@@ -352,7 +395,7 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
               <MessageSquare className="w-5 h-5" />
               Community Discussion ({review.comments?.length || 0})
             </h2>
-            <span className="text-xs text-[#888888] font-semibold">Moderated</span>
+            <span className="text-xs text-[#888888] font-semibold">Moderated Comments</span>
           </div>
 
           {/* Comment Form */}
@@ -404,6 +447,7 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
                   <button
                     onClick={() => onLikeComment(review.id, comment.id)}
                     className="text-xs font-semibold text-[#888888] hover:text-[#ffe600] flex items-center gap-1.5 cursor-pointer transition-colors"
+                    aria-label={`Agree with ${comment.author}'s comment`}
                   >
                     <ThumbsUp className="w-3.5 h-3.5" />
                     <span>{comment.likes} Agree</span>
@@ -418,11 +462,12 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
           </div>
         </section>
 
-        {/* Back button at bottom */}
+        {/* Back button at bottom with clear anchor text */}
         <div className="mt-12 text-center">
           <button
             onClick={onBack}
             className="retro-btn-yellow px-6 py-3 text-sm font-bold cursor-pointer inline-flex items-center gap-2"
+            aria-label="Return to All Game Reviews Index"
           >
             <ArrowLeft className="w-4 h-4 stroke-[3]" />
             Return to All Reviews

@@ -13,6 +13,14 @@ export interface ReviewComment {
   likes: number;
 }
 
+export interface GameReviewSEO {
+  metaTitle: string; // strictly <= 60 characters
+  metaDescription: string; // strictly <= 160 characters
+  primaryKeyword: string;
+  secondaryKeywords: string[];
+  imageAlt: string;
+}
+
 export interface GameReview {
   id: string;
   title: string;
@@ -30,6 +38,7 @@ export interface GameReview {
   breakdown?: ScoreBreakdown;
   comments?: ReviewComment[];
   isFeatured?: boolean;
+  seo?: GameReviewSEO;
 }
 
 export type SortOption = 'highest_rated' | 'newest' | 'oldest' | 'alphabetical';

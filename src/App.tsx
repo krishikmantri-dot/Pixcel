@@ -6,6 +6,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { GameReview, SortOption, RatingFilterOption, ReviewComment } from './types';
 import { INITIAL_BLOGS } from './data/defaultReviews';
+import { SEO_PRESETS } from './data/seoPresets';
 import { Navbar } from './components/Navbar';
 import { HeroFeatured } from './components/HeroFeatured';
 import { HallOfFame } from './components/HallOfFame';
@@ -14,20 +15,22 @@ import { FilterBar } from './components/FilterBar';
 import { ReviewCard } from './components/ReviewCard';
 import { ReviewListCard } from './components/ReviewListCard';
 import { ReviewDetailPage } from './components/ReviewDetailPage';
+import { SEOInspectorCard } from './components/SEOInspectorCard';
 import { Footer } from './components/Footer';
+import { applyPageSEO, DEFAULT_SITE_TITLE, DEFAULT_SITE_DESCRIPTION } from './utils/seo';
 import { Sparkles, Gamepad2, BookmarkX, RotateCcw } from 'lucide-react';
 
-const STORAGE_KEY_REVIEWS = 'pixcel_gg_reviews_v5';
-const STORAGE_KEY_BOOKMARKS = 'pixcel_gg_bookmarks_v5';
+const STORAGE_KEY_REVIEWS = 'pixcel_gg_reviews_v6';
+const STORAGE_KEY_BOOKMARKS = 'pixcel_gg_bookmarks_v6';
 
 export default function App() {
-  // Initialize reviews from localStorage or defaults
+  // Initialize reviews from localStorage or defaults with verified SEO metadata
   const [reviews, setReviews] = useState<GameReview[]>(() => {
     try {
       const stored =
         localStorage.getItem(STORAGE_KEY_REVIEWS) ||
-        localStorage.getItem('pixcel_gg_reviews_v4') ||
-        localStorage.getItem('pixelpulse_reviews_v3');
+        localStorage.getItem('pixcel_gg_reviews_v5') ||
+        localStorage.getItem('pixcel_gg_reviews_v4');
       if (stored) {
         const parsed = JSON.parse(stored);
         if (Array.isArray(parsed) && parsed.length > 0) {
@@ -37,6 +40,7 @@ export default function App() {
             if (initialItem) {
               return {
                 ...item,
+                seo: initialItem.seo || SEO_PRESETS[item.id],
                 image: initialItem.image,
                 summary: initialItem.summary,
                 fullReview: initialItem.fullReview,
@@ -76,11 +80,23 @@ export default function App() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
+  // Apply Home Page SEO when no review is selected
+  useEffect(() => {
+    if (!selectedReview) {
+      applyPageSEO({
+        title: DEFAULT_SITE_TITLE,
+        description: DEFAULT_SITE_DESCRIPTION,
+        url: typeof window !== 'undefined' ? window.location.origin : 'https://pixcel.gg',
+        type: 'website'
+      });
+    }
+  }, [selectedReview]);
+
   // Helper to extract review ID from the current browser URL
   const extractReviewIdFromUrl = (): string | null => {
     if (typeof window === 'undefined') return null;
 
-    // Check pathname: e.g. /review/elden-ring-shadow-erdtree or /blog/elden-ring-shadow-erdtree
+    // Check pathname: e.g. /review/elden-ring-shadow-erdtree
     const pathMatch = window.location.pathname.match(/^\/(?:review|blog)\/([^/?#]+)/i);
     if (pathMatch && pathMatch[1]) {
       return decodeURIComponent(pathMatch[1]);
@@ -91,7 +107,7 @@ export default function App() {
     const queryReview = searchParams.get('review') || searchParams.get('id') || searchParams.get('blog');
     if (queryReview) return queryReview;
 
-    // Check hash: #/review/elden-ring-shadow-erdtree or #review-elden-ring-shadow-erdtree
+    // Check hash: #/review/elden-ring-shadow-erdtree
     const hashMatch = window.location.hash.match(/^#\/?(?:review|blog)[/-]([^/?#]+)/i);
     if (hashMatch && hashMatch[1]) {
       return decodeURIComponent(hashMatch[1]);
@@ -103,7 +119,6 @@ export default function App() {
   // Open a review
   const handleOpenReview = (review: GameReview, updateHistory = true) => {
     setSelectedReview(review);
-    document.title = `${review.title} - pixcel.gg`;
     window.scrollTo({ top: 0, behavior: 'instant' });
 
     if (updateHistory && typeof window !== 'undefined') {
@@ -117,7 +132,6 @@ export default function App() {
   // Close review and return to home
   const handleCloseReview = (updateHistory = true) => {
     setSelectedReview(null);
-    document.title = 'pixcel.gg - Gaming Blog & Reviews';
     window.scrollTo({ top: 0, behavior: 'instant' });
 
     if (updateHistory && typeof window !== 'undefined') {
@@ -137,11 +151,9 @@ export default function App() {
           handleOpenReview(found, false);
         } else {
           setSelectedReview(null);
-          document.title = 'pixcel.gg - Gaming Blog & Reviews';
         }
       } else {
         setSelectedReview(null);
-        document.title = 'pixcel.gg - Gaming Blog & Reviews';
       }
     };
 
@@ -337,6 +349,15 @@ export default function App() {
     selectedSort,
   ]);
 
+  // Home Page SEO Specification Object for Class Presentation
+  const homeSeo = {
+    metaTitle: DEFAULT_SITE_TITLE,
+    metaDescription: DEFAULT_SITE_DESCRIPTION,
+    primaryKeyword: 'Honest Game Reviews',
+    secondaryKeywords: ['Video Game Ratings', 'Video Game Reviews', 'Pixcel.gg Reviews'],
+    imageAlt: 'Pixcel.gg Gaming Chronicle honest video game review catalogue'
+  };
+
   // If a review is selected, redirect to the Review Detail Page!
   if (selectedReview) {
     return (
@@ -400,10 +421,25 @@ export default function App() {
 
       {/* Main Container */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16">
+        {/* SEO Class Project Specification Card for Home Page */}
+        <SEOInspectorCard
+          seo={homeSeo}
+          h1Text="PIXCEL.GG GAMING CHRONICLE"
+          urlPath="/"
+        />
+
         {/* Editorial Sub-header / Brand Kicker */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-8 border-b-4 border-[#ffe600] gap-4">
           <div>
-            {/* Main title in 8-bit font */}
+            {/* Explicit SEO Tag Label for H1 */}
+            <div className="flex items-center gap-2 text-xs font-bold text-[#ffe600] uppercase tracking-wider mb-1">
+              <span className="px-2 py-0.5 bg-[#ffe600] text-black font-bold text-[10px] rounded-xs">
+                PAGE HEADING &lt;h1&gt;
+              </span>
+              <span>Home Page Primary H1 Tag</span>
+            </div>
+
+            {/* Main title in 8-bit font as the H1 */}
             <h1 className="text-xl sm:text-3xl font-8bit text-[#ffe600] tracking-wide uppercase">
               PIXCEL<span className="text-white">.GG</span> GAMING CHRONICLE
             </h1>
@@ -421,6 +457,7 @@ export default function App() {
               onClick={handleResetToDefaults}
               className="text-[#a3a3a3] hover:text-[#ffe600] flex items-center gap-1 transition-colors cursor-pointer font-bold"
               title="Reset to 10 curated reviews"
+              aria-label="Reset catalogue to original 10 curated reviews"
             >
               <RotateCcw className="w-3.5 h-3.5" />
               <span>Reset Data</span>
@@ -470,6 +507,7 @@ export default function App() {
               <button
                 onClick={() => setIsFilteringBookmarked(false)}
                 className="text-xs font-bold text-[#ffe600] hover:underline cursor-pointer"
+                aria-label="Return to all reviews list"
               >
                 ← Back to All Reviews
               </button>
@@ -557,12 +595,14 @@ export default function App() {
                     setIsFilteringBookmarked(false);
                   }}
                   className="px-4 py-2 border-2 border-[#333333] text-xs font-bold text-white hover:border-[#ffe600] cursor-pointer"
+                  aria-label="Reset all filters"
                 >
                   Reset Filters
                 </button>
                 <button
                   onClick={() => setIsPublishOpen(true)}
                   className="retro-btn-yellow px-4 py-2 text-xs font-bold cursor-pointer"
+                  aria-label="Open post review form"
                 >
                   Post Review Now
                 </button>

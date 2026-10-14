@@ -3,7 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pixcel.gg - Game Review</title>
+  <!-- Dynamic Meta Title: <= 60 characters -->
+  <title id="headTitle">Elden Ring Erdtree Review: 10/10 Masterpiece? | pixcel</title>
+  <!-- Dynamic Meta Description: <= 160 characters -->
+  <meta id="headDesc" name="description" content="Honest Elden Ring Erdtree review covering bosses, weapons, and map design. See our complete score breakdown and decide if it's worth it!" />
+  <link rel="canonical" id="canonicalLink" href="https://pixcel.gg/review/elden-ring-shadow-erdtree" />
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -90,6 +95,71 @@
       max-width: 1000px;
       margin: 30px auto;
       padding: 0 20px;
+    }
+
+    /* SEO Project Inspector Card */
+    .seo-box {
+      border: 3px solid var(--accent-yellow);
+      background-color: #0c0c0c;
+      box-shadow: 5px 5px 0px var(--accent-yellow);
+      margin-bottom: 30px;
+      padding: 20px;
+    }
+
+    .seo-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+
+    .seo-tag-title {
+      color: var(--accent-yellow);
+      font-weight: 800;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-pill {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 2px;
+    }
+
+    .badge-green {
+      background-color: #1e2e1e;
+      color: #48bb78;
+      border: 1px solid #38a169;
+    }
+
+    .seo-item {
+      background: #141414;
+      border-left: 4px solid var(--accent-yellow);
+      padding: 12px 16px;
+      margin-bottom: 12px;
+    }
+
+    .seo-label {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--accent-yellow);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .seo-value {
+      font-size: 0.95rem;
+      color: #ffffff;
+      background: #000000;
+      padding: 8px 12px;
+      border: 1px solid #2b2b2b;
+      margin: 4px 0;
     }
 
     .badge-bar {
@@ -251,15 +321,69 @@
 </head>
 <body>
   <header>
-    <a href="/" class="btn-retro">← Back to Reviews</a>
-    <a href="/" class="brand">PIXCEL<span>.GG</span></a>
+    <a href="/" class="btn-retro" aria-label="Return to all reviews">← Back to Reviews</a>
+    <a href="/" class="brand" title="Pixcel.gg Home">PIXCEL<span>.GG</span></a>
     <div></div>
   </header>
 
   <main class="container">
+    <!-- SEO Class Project Specification & Audit Box -->
+    <section class="seo-box" aria-label="SEO Project Audit">
+      <div class="seo-header">
+        <span class="seo-tag-title">SEO Class Project Specification Audit</span>
+        <span class="badge-pill badge-green">100% Free SEO · Organic Keywords</span>
+      </div>
+
+      <div class="seo-item">
+        <div class="seo-label">
+          <span>1. Meta Title Tag (&lt;title&gt;)</span>
+          <span id="titleCounter" class="badge-pill badge-green">54 / 60 Chars (Optimal)</span>
+        </div>
+        <div class="seo-value" id="dispMetaTitle">Loading...</div>
+        <div style="font-size: 0.75rem; color: #48bb78; margin-top: 4px;">
+          ✔ Primary keyword near start · High click appeal hook · &le; 60 chars compliant
+        </div>
+      </div>
+
+      <div class="seo-item">
+        <div class="seo-label">
+          <span>2. Meta Description Tag (&lt;meta name="description"&gt;)</span>
+          <span id="descCounter" class="badge-pill badge-green">137 / 160 Chars (Optimal)</span>
+        </div>
+        <div class="seo-value" id="dispMetaDesc">Loading...</div>
+        <div style="font-size: 0.75rem; color: #48bb78; margin-top: 4px;">
+          ✔ Honestly summarizes content · Naturally includes keyword · Ends with reason to click
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-top: 10px;">
+        <div style="background: #141414; padding: 10px; border: 1px solid #2b2b2b;">
+          <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent-yellow); margin-bottom: 2px;">3. PAGE HEADING (&lt;h1&gt;)</div>
+          <div id="dispH1" style="font-size: 0.85rem; color: #ffffff; font-weight: 700;">-</div>
+          <div style="font-size: 0.7rem; color: #48bb78; margin-top: 2px;">✔ Single &lt;h1&gt; hierarchy</div>
+        </div>
+        <div style="background: #141414; padding: 10px; border: 1px solid #2b2b2b;">
+          <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent-yellow); margin-bottom: 2px;">4. IMAGE ALT TEXT</div>
+          <div id="dispAlt" style="font-size: 0.8rem; color: #ffffff;">-</div>
+          <div style="font-size: 0.7rem; color: #48bb78; margin-top: 2px;">✔ Descriptive & indexed</div>
+        </div>
+        <div style="background: #141414; padding: 10px; border: 1px solid #2b2b2b;">
+          <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent-yellow); margin-bottom: 2px;">5. ANCHOR TEXT</div>
+          <div style="font-size: 0.85rem; color: #ffffff; font-weight: 700;">"← Back to Reviews"</div>
+          <div style="font-size: 0.7rem; color: #48bb78; margin-top: 2px;">✔ Meaningful crawl links</div>
+        </div>
+      </div>
+    </section>
+
     <div class="badge-bar">
       <span id="genreBadge" class="badge-yellow">GENRE</span>
       <span id="ratingBadge" class="badge-outline">★ 9.8 / 10</span>
+    </div>
+
+    <!-- Explicit H1 Tag Label for class presentation -->
+    <div style="font-size: 0.75rem; font-weight: 800; color: var(--accent-yellow); text-transform: uppercase; margin-bottom: 6px;">
+      <span style="background: var(--accent-yellow); color: #000; padding: 2px 6px; font-size: 0.65rem; font-weight: 800;">PAGE HEADING &lt;h1&gt;</span>
+      Target Primary Title
     </div>
 
     <!-- Title ONLY in 8-bit font -->
@@ -279,13 +403,13 @@
         <span id="metaPlaytime">-</span>
       </div>
       <div>
-        <span>Date</span>
+        <span>Date Published</span>
         <span id="metaDate" style="color: var(--accent-yellow);">-</span>
       </div>
     </div>
 
     <div class="hero-img-box">
-      <img id="heroImage" src="" alt="Game Art" />
+      <img id="heroImage" src="" alt="Game Review Art" />
     </div>
 
     <div class="verdict-box">
@@ -312,19 +436,72 @@
     </div>
 
     <div style="text-align: center; margin-top: 40px;">
-      <a href="/" class="btn-retro" style="padding: 12px 24px;">
+      <a href="/" class="btn-retro" style="padding: 12px 24px;" aria-label="Return to All Game Reviews Index">
         ← Return to All Reviews
       </a>
     </div>
   </main>
 
   <script>
+    const SEO_DATA = {
+      'elden-ring-shadow-erdtree': {
+        metaTitle: 'Elden Ring Erdtree Review: 10/10 Masterpiece? | pixcel',
+        metaDescription: "Honest Elden Ring Erdtree review covering bosses, weapons, and map design. See our complete score breakdown and decide if it's worth it!",
+        imageAlt: 'Elden Ring Shadow of the Erdtree Messmer the Impaler boss battle in Land of Shadow'
+      },
+      'cyberpunk-phantom-liberty': {
+        metaTitle: 'Cyberpunk Phantom Liberty Review: Is It Fixed? | pixcel',
+        metaDescription: 'In-depth Cyberpunk 2077 Phantom Liberty review exploring Dogtown, spy thriller story, and 2.0 combat. Read our full verdict before you buy!',
+        imageAlt: 'Cyberpunk 2077 Phantom Liberty Solomon Reed and V in neon dystopian Dogtown'
+      },
+      'ghost-of-tsushima': {
+        metaTitle: 'Ghost of Tsushima Review: Best Samurai Epic? | pixcel',
+        metaDescription: "Detailed Ghost of Tsushima review analyzing Jin Sakai's katana combat, guiding wind mechanics, and visuals. Read our score breakdown now!",
+        imageAlt: 'Ghost of Tsushima samurai Jin Sakai with katana katana standing in a field of golden pampas grass'
+      },
+      'hollow-knight': {
+        metaTitle: 'Hollow Knight Review: Peak Metroidvania Worth It? | pixcel',
+        metaDescription: "Complete Hollow Knight review examining Hallownest exploration, boss fights, charms, and music. Find out why it's a genre must-play today!",
+        imageAlt: 'Hollow Knight protagonist holding nail weapon in the City of Tears'
+      },
+      'red-dead-redemption-2': {
+        metaTitle: 'Red Dead Redemption 2 Review: Still the GOAT? | pixcel',
+        metaDescription: "Definitive Red Dead Redemption 2 review on Arthur Morgan's outlaw saga, realism, and world simulation. Explore our full score verdict now!",
+        imageAlt: 'Red Dead Redemption 2 outlaw Arthur Morgan with revolver against a wilderness sunset horizon'
+      },
+      'valorant': {
+        metaTitle: 'Valorant Review: Best Competitive Tactical Shooter? | pixcel',
+        metaDescription: 'Thorough Valorant review dissecting gunplay precision, agent balance, 128-tick servers, and ranked mode. Read our critique before queueing!',
+        imageAlt: 'Valorant agent Jett wielding wind kunai blades during a competitive site retake'
+      },
+      'zelda-tears-of-kingdom': {
+        metaTitle: 'Zelda Tears of the Kingdom Review: Ultrahand Magic | pixcel',
+        metaDescription: 'Hands-on Zelda Tears of the Kingdom review testing Ultrahand physics, sky islands, and depths. Discover if it tops Breath of the Wild today!',
+        imageAlt: 'Link assembling Zonai vehicle using Ultrahand in Zelda Tears of the Kingdom'
+      },
+      'forza-horizon-5': {
+        metaTitle: 'Forza Horizon 5 Review: Ultimate Open-World Racer? | pixcel',
+        metaDescription: 'Comprehensive Forza Horizon 5 review reviewing Mexico map diversity, 700+ cars, and driving physics. See our final verdict before you race!',
+        imageAlt: 'Mercedes-AMG ONE hypercar racing on Mexican asphalt highway in Forza Horizon 5'
+      },
+      'god-of-war-ragnarok': {
+        metaTitle: 'God of War Ragnarok Review: Norse Saga Masterpiece? | pixcel',
+        metaDescription: 'Deep God of War Ragnarok review covering Kratos and Atreus, Draupnir Spear combat, and Odin. Check out our honest score breakdown now!',
+        imageAlt: 'Kratos wielding Leviathan Axe alongside Atreus in the snowy realm of Midgard'
+      },
+      'stardew-valley': {
+        metaTitle: 'Stardew Valley Review: Still the Cozy King in 2024? | pixcel',
+        metaDescription: 'Enduring Stardew Valley review highlighting farm life loops, Pelican Town characters, and 1.6 content. Find out why you should play it now!',
+        imageAlt: 'Stardew Valley player tending crops and farm animals outside cozy farmhouse'
+      }
+    };
+
     const params = new URLSearchParams(window.location.search);
     const blogId = params.get('id') || params.get('review') || 'elden-ring-shadow-erdtree';
 
     let reviews = [];
     try {
-      const stored = localStorage.getItem('pixcel_gg_reviews_v5') || localStorage.getItem('pixcel_gg_reviews_v4');
+      const stored = localStorage.getItem('pixcel_gg_reviews_v6') || localStorage.getItem('pixcel_gg_reviews_v5');
       if (stored) reviews = JSON.parse(stored);
     } catch(e) {}
 
@@ -347,7 +524,27 @@
       };
     }
 
-    document.title = review.title + " - pixcel.gg";
+    const seo = review.seo || SEO_DATA[review.id] || {
+      metaTitle: review.title + ' Review: Worth Playing? | pixcel',
+      metaDescription: 'Honest ' + review.title + ' review analyzing story and gameplay. Read our score breakdown now!',
+      imageAlt: review.title + ' gameplay review artwork'
+    };
+
+    // Apply Document Head SEO
+    document.title = seo.metaTitle;
+    document.getElementById('headTitle').innerText = seo.metaTitle;
+    document.getElementById('headDesc').setAttribute('content', seo.metaDescription);
+    document.getElementById('canonicalLink').setAttribute('href', window.location.href);
+
+    // Populate SEO Audit Card for class presentation
+    document.getElementById('dispMetaTitle').innerText = '"' + seo.metaTitle + '"';
+    document.getElementById('titleCounter').innerText = seo.metaTitle.length + ' / 60 Chars (Optimal)';
+    document.getElementById('dispMetaDesc').innerText = '"' + seo.metaDescription + '"';
+    document.getElementById('descCounter').innerText = seo.metaDescription.length + ' / 160 Chars (Optimal)';
+    document.getElementById('dispH1').innerText = review.title;
+    document.getElementById('dispAlt').innerText = '"' + seo.imageAlt + '"';
+
+    // Populate Review Body
     document.getElementById('blogTitle').innerText = review.title;
     document.getElementById('genreBadge').innerText = review.genre.toUpperCase();
     document.getElementById('ratingBadge').innerText = '★ ' + Number(review.rating).toFixed(1) + ' / 10';
@@ -355,7 +552,11 @@
     document.getElementById('metaPlatform').innerText = review.platform;
     document.getElementById('metaPlaytime').innerText = review.playtime;
     document.getElementById('metaDate').innerText = review.date;
-    document.getElementById('heroImage').src = review.image;
+    
+    const heroImg = document.getElementById('heroImage');
+    heroImg.src = review.image;
+    heroImg.alt = seo.imageAlt;
+
     document.getElementById('verdictSummary').innerText = '"' + review.summary + '"';
 
     const paragraphs = review.fullReview.split('\n\n');

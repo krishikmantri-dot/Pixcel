@@ -1,4 +1,5 @@
 import { GameReview } from '../types';
+import { SEO_PRESETS } from './seoPresets';
 
 export const DEFAULT_PRESET_IMAGES = [
   {
@@ -43,7 +44,7 @@ export const DEFAULT_PRESET_IMAGES = [
   }
 ];
 
-export const INITIAL_BLOGS: GameReview[] = [
+const RAW_BLOGS: GameReview[] = [
   {
     id: 'elden-ring-shadow-erdtree',
     title: 'Elden Ring: Shadow of the Erdtree',
@@ -444,3 +445,9 @@ The game's enduring legacy has only grown stronger through a decade of monumenta
     comments: []
   }
 ];
+
+export const INITIAL_BLOGS: GameReview[] = RAW_BLOGS.map((blog) => ({
+  ...blog,
+  seo: SEO_PRESETS[blog.id]
+}));
+

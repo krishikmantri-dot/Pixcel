@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { GameReview } from '../types';
 import { DEFAULT_PRESET_IMAGES } from '../data/defaultReviews';
 import { PlusCircle, ChevronDown, ChevronUp } from 'lucide-react';
+import { generateSEOForReview } from '../utils/seo';
 
 interface CreateReviewSectionProps {
   onAddReview: (review: GameReview) => void;
@@ -80,6 +81,12 @@ The progression systems offer generous room for player expression and buildcraft
         story: Math.min(10, parseFloat((numRating).toFixed(1))),
       },
       comments: [],
+      seo: generateSEOForReview({
+        title: title.trim(),
+        genre: genre.trim(),
+        rating: numRating,
+        summary: summary.trim()
+      }),
     };
 
     onAddReview(newReview);
