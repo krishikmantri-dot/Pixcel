@@ -5,9 +5,11 @@ export const DEFAULT_SITE_TITLE = 'Pixcel.gg: Honest Game Reviews & Video Game R
 export const DEFAULT_SITE_DESCRIPTION = 'Read honest, unsponsored video game reviews, 10-point score breakdowns, and critique essays across all platforms. Explore top-rated titles now!';
 
 /**
- * Generates optimal, compliant SEO metadata for any review
+ * Generates optimal, compliant SEO & AEO metadata for any review
  * - Meta Title: strictly <= 60 chars with main keyword near start & compelling hook
  * - Meta Description: strictly <= 160 chars with keyword and reason to click
+ * - 3 Headings (H1, H2, H3) closely related to keywords
+ * - 2 Q&A sections for Answer Engine Optimization (AEO)
  */
 export function generateSEOForReview(review: {
   title: string;
@@ -42,43 +44,76 @@ export function generateSEOForReview(review: {
     secondaryKeywords: [`${review.title} gameplay`, `${review.title} score`, `${review.genre} games`],
     metaTitle,
     metaDescription,
-    imageAlt: `${review.title} gameplay screenshot and official game art`
+    imageAlt: `${review.title} gameplay screenshot and official game art`,
+    headings: {
+      h1: `${review.title} Review: Complete Campaign & Performance Verdict`,
+      h2: `How Does ${review.title} Compare in the ${review.genre} Genre?`,
+      h3: `Core Mechanics, Progression Depth & Final Score Breakdown`
+    },
+    aeoQuestions: [
+      {
+        question: `Is ${review.title} worth playing for ${review.genre} fans?`,
+        answer: `Yes, ${review.title} delivers a high-quality ${review.genre} experience featuring responsive controls, tactical mechanics, and a polished audio-visual presentation that rewards dedicated playthroughs.`
+      },
+      {
+        question: `What makes ${review.title} stand out in modern gaming?`,
+        answer: `The title stands out through its cohesive gameplay loop, expressive player buildcrafting, and deep environmental storytelling that avoids intrusive hand-holding.`
+      }
+    ]
   };
 }
 
 /**
- * Injects Schema.org JSON-LD Structured Data
+ * Injects Schema.org JSON-LD Structured Data with Review and FAQPage graphs for AEO
  */
 export function generateReviewJsonLd(review: GameReview, url: string) {
+  const seo = review.seo;
+  const aeoEntities = (seo?.aeoQuestions || []).map((qa) => ({
+    '@type': 'Question',
+    'name': qa.question,
+    'acceptedAnswer': {
+      '@type': 'Answer',
+      'text': qa.answer
+    }
+  }));
+
   return {
     '@context': 'https://schema.org',
-    '@type': 'Review',
-    'itemReviewed': {
-      '@type': 'VideoGame',
-      'name': review.title,
-      'genre': review.genre,
-      'gamePlatform': review.platform,
-      'image': review.image
-    },
-    'reviewRating': {
-      '@type': 'Rating',
-      'ratingValue': review.rating,
-      'bestRating': '10',
-      'worstRating': '1'
-    },
-    'author': {
-      '@type': 'Person',
-      'name': review.author
-    },
-    'publisher': {
-      '@type': 'Organization',
-      'name': 'pixcel.gg',
-      'url': typeof window !== 'undefined' ? window.location.origin : 'https://pixcel.gg'
-    },
-    'datePublished': review.date,
-    'headline': review.seo?.metaTitle || review.title,
-    'description': review.seo?.metaDescription || review.summary,
-    'url': url
+    '@graph': [
+      {
+        '@type': 'Review',
+        'itemReviewed': {
+          '@type': 'VideoGame',
+          'name': review.title,
+          'genre': review.genre,
+          'gamePlatform': review.platform,
+          'image': review.image
+        },
+        'reviewRating': {
+          '@type': 'Rating',
+          'ratingValue': review.rating,
+          'bestRating': '10',
+          'worstRating': '1'
+        },
+        'author': {
+          '@type': 'Person',
+          'name': review.author
+        },
+        'publisher': {
+          '@type': 'Organization',
+          'name': 'pixcel.gg',
+          'url': typeof window !== 'undefined' ? window.location.origin : 'https://pixcel.gg'
+        },
+        'datePublished': review.date,
+        'headline': review.seo?.metaTitle || review.title,
+        'description': review.seo?.metaDescription || review.summary,
+        'url': url
+      },
+      {
+        '@type': 'FAQPage',
+        'mainEntity': aeoEntities
+      }
+    ]
   };
 }
 

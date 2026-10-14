@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { GameReview, SortOption, RatingFilterOption, ReviewComment } from './types';
+import { GameReview, GameReviewSEO, SortOption, RatingFilterOption, ReviewComment } from './types';
 import { INITIAL_BLOGS } from './data/defaultReviews';
 import { SEO_PRESETS } from './data/seoPresets';
 import { Navbar } from './components/Navbar';
@@ -350,12 +350,27 @@ export default function App() {
   ]);
 
   // Home Page SEO Specification Object for Class Presentation
-  const homeSeo = {
+  const homeSeo: GameReviewSEO = {
     metaTitle: DEFAULT_SITE_TITLE,
     metaDescription: DEFAULT_SITE_DESCRIPTION,
     primaryKeyword: 'Honest Game Reviews',
     secondaryKeywords: ['Video Game Ratings', 'Video Game Reviews', 'Pixcel.gg Reviews'],
-    imageAlt: 'Pixcel.gg Gaming Chronicle honest video game review catalogue'
+    imageAlt: 'Pixcel.gg Gaming Chronicle honest video game review catalogue',
+    headings: {
+      h1: 'Pixcel.gg Gaming Chronicle: Honest Video Game Reviews & Ratings',
+      h2: 'Latest In-Depth Video Game Reviews & Hall of Fame Masterpieces',
+      h3: 'Game Scoring Methodology, Performance Breakdowns & Player FAQs'
+    },
+    aeoQuestions: [
+      {
+        question: 'What is pixcel.gg and how are video game reviews scored?',
+        answer: 'pixcel.gg is an independent video game review publication that rates PC and console titles on a standardized 10-point scale evaluating gameplay mechanics, graphics, audio, and storytelling without corporate sponsor influence.'
+      },
+      {
+        question: 'Are all game reviews on pixcel.gg free to read and unsponsored?',
+        answer: 'Yes, 100% of game reviews, component metrics, and editorial critiques on pixcel.gg are completely free to read, unsponsored, and grounded in extensive campaign playthroughs.'
+      }
+    ]
   };
 
   // If a review is selected, redirect to the Review Detail Page!
@@ -610,6 +625,66 @@ export default function App() {
             </div>
           )}
         </div>
+
+        {/* Home Page AEO (Answer Engine Optimization) Section */}
+        <section aria-label="AEO Frequently Asked Questions" className="mt-16 pt-10 border-t-4 border-[#ffe600]">
+          <div className="border-b-2 border-[#48bb78] pb-3 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <div className="flex items-center gap-2 text-xs font-bold text-[#48bb78] uppercase tracking-wider mb-1">
+                <span className="px-2 py-0.5 bg-[#48bb78] text-black font-bold text-[10px] rounded-xs">
+                  SECTION HEADING &lt;h2&gt;
+                </span>
+                <span>AEO Article: Answer Engine Optimization &middot; User Search Queries</span>
+              </div>
+              <h2 className="text-xl sm:text-2xl font-bold text-white">
+                Frequently Asked Questions &amp; Direct Answers for Players
+              </h2>
+            </div>
+            <span className="text-xs text-[#a3a3a3] font-medium bg-[#141414] px-2.5 py-1 border border-[#2b2b2b]">
+              Schema.org FAQPage Graph
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {/* AEO Article 1 */}
+            <article className="bg-[#0e1611] border-2 border-[#2b593f] p-6 shadow-[4px_4px_0px_#2b593f]">
+              <div className="flex items-center gap-2 text-xs font-bold text-[#48bb78] uppercase tracking-wider mb-1">
+                <span className="px-2 py-0.5 bg-[#1b3024] text-[#48bb78] font-bold text-[10px] rounded-xs">
+                  SUBSECTION HEADING &lt;h3&gt;
+                </span>
+                <span>AEO Query 1</span>
+              </div>
+              <h3 className="text-base sm:text-lg font-bold text-white mb-3">
+                Q: {homeSeo.aeoQuestions[0].question}
+              </h3>
+              <div className="bg-[#080d0a] p-4 border-l-4 border-[#48bb78] text-sm text-[#d1fae5] leading-relaxed">
+                <strong className="text-[#48bb78] font-bold block mb-1 uppercase text-xs tracking-wider">
+                  Direct Answer for AI Overviews:
+                </strong>
+                <p>{homeSeo.aeoQuestions[0].answer}</p>
+              </div>
+            </article>
+
+            {/* AEO Article 2 */}
+            <article className="bg-[#0e1611] border-2 border-[#2b593f] p-6 shadow-[4px_4px_0px_#2b593f]">
+              <div className="flex items-center gap-2 text-xs font-bold text-[#48bb78] uppercase tracking-wider mb-1">
+                <span className="px-2 py-0.5 bg-[#1b3024] text-[#48bb78] font-bold text-[10px] rounded-xs">
+                  SUBSECTION HEADING &lt;h3&gt;
+                </span>
+                <span>AEO Query 2</span>
+              </div>
+              <h3 className="text-base sm:text-lg font-bold text-white mb-3">
+                Q: {homeSeo.aeoQuestions[1].question}
+              </h3>
+              <div className="bg-[#080d0a] p-4 border-l-4 border-[#48bb78] text-sm text-[#d1fae5] leading-relaxed">
+                <strong className="text-[#48bb78] font-bold block mb-1 uppercase text-xs tracking-wider">
+                  Direct Answer for AI Overviews:
+                </strong>
+                <p>{homeSeo.aeoQuestions[1].answer}</p>
+              </div>
+            </article>
+          </div>
+        </section>
       </main>
 
       {/* Editorial Footer */}

@@ -13,12 +13,25 @@ export interface ReviewComment {
   likes: number;
 }
 
+export interface AEOQuestionAnswer {
+  question: string;
+  answer: string;
+}
+
+export interface GameReviewHeadings {
+  h1: string; // closely related to primary keyword
+  h2: string; // section heading closely related to keywords
+  h3: string; // subsection heading closely related to keywords
+}
+
 export interface GameReviewSEO {
   metaTitle: string; // strictly <= 60 characters
   metaDescription: string; // strictly <= 160 characters
   primaryKeyword: string;
   secondaryKeywords: string[];
   imageAlt: string;
+  headings: GameReviewHeadings;
+  aeoQuestions: [AEOQuestionAnswer, AEOQuestionAnswer];
 }
 
 export interface GameReview {

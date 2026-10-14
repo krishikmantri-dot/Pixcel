@@ -250,15 +250,46 @@
       margin-bottom: 40px;
     }
 
-    .critique-title {
+    .heading-tag-label {
+      font-size: 0.75rem;
+      font-weight: 800;
       color: var(--accent-yellow);
-      font-size: 1.1rem;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tag-badge {
+      background: var(--accent-yellow);
+      color: #000;
+      padding: 2px 6px;
+      font-size: 0.65rem;
+      font-weight: 800;
+      border-radius: 2px;
+    }
+
+    .critique-h2 {
+      color: var(--accent-yellow);
+      font-size: 1.4rem;
       font-weight: 800;
       border-bottom: 2px solid var(--accent-yellow);
-      padding-bottom: 10px;
-      margin-bottom: 24px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+    }
+
+    .critique-h3-box {
+      border-left: 4px solid var(--accent-yellow);
+      padding: 12px 16px;
+      background: #121212;
+      margin: 24px 0 16px 0;
+    }
+
+    .critique-h3 {
+      color: #ffffff;
+      font-size: 1.15rem;
+      font-weight: 800;
     }
 
     .critique-p {
@@ -269,6 +300,37 @@
       font-size: 1.05rem;
       line-height: 1.7;
       color: #e5e5e5;
+    }
+
+    /* AEO Article Boxes */
+    .aeo-section {
+      margin: 40px 0;
+      border-top: 2px solid #38a169;
+      padding-top: 24px;
+    }
+
+    .aeo-card {
+      background: #0d1611;
+      border: 2px solid #2b593f;
+      box-shadow: 4px 4px 0px #2b593f;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .aeo-q {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin: 8px 0 12px 0;
+    }
+
+    .aeo-a {
+      background: #080d0a;
+      border-left: 4px solid #48bb78;
+      padding: 14px;
+      color: #d1fae5;
+      font-size: 0.95rem;
+      line-height: 1.6;
     }
 
     .pros-cons {
@@ -330,7 +392,7 @@
     <!-- SEO Class Project Specification & Audit Box -->
     <section class="seo-box" aria-label="SEO Project Audit">
       <div class="seo-header">
-        <span class="seo-tag-title">SEO Class Project Specification Audit</span>
+        <span class="seo-tag-title">SEO &amp; AEO Class Project Specification Audit</span>
         <span class="badge-pill badge-green">100% Free SEO · Organic Keywords</span>
       </div>
 
@@ -358,19 +420,19 @@
 
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-top: 10px;">
         <div style="background: #141414; padding: 10px; border: 1px solid #2b2b2b;">
-          <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent-yellow); margin-bottom: 2px;">3. PAGE HEADING (&lt;h1&gt;)</div>
-          <div id="dispH1" style="font-size: 0.85rem; color: #ffffff; font-weight: 700;">-</div>
-          <div style="font-size: 0.7rem; color: #48bb78; margin-top: 2px;">✔ Single &lt;h1&gt; hierarchy</div>
+          <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent-yellow); margin-bottom: 2px;">3 HEADINGS (H1 &middot; H2 &middot; H3)</div>
+          <div id="dispHierarchy" style="font-size: 0.8rem; color: #ffffff;">Keyword-targeted H1, H2, H3</div>
+          <div style="font-size: 0.7rem; color: #48bb78; margin-top: 2px;">✔ Complete semantic hierarchy</div>
         </div>
         <div style="background: #141414; padding: 10px; border: 1px solid #2b2b2b;">
-          <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent-yellow); margin-bottom: 2px;">4. IMAGE ALT TEXT</div>
-          <div id="dispAlt" style="font-size: 0.8rem; color: #ffffff;">-</div>
-          <div style="font-size: 0.7rem; color: #48bb78; margin-top: 2px;">✔ Descriptive & indexed</div>
+          <div style="font-size: 0.75rem; font-weight: 700; color: #48bb78; margin-bottom: 2px;">AEO (ANSWER ENGINE OPTIMIZATION)</div>
+          <div style="font-size: 0.8rem; color: #ffffff;">2 Q&amp;A Articles for AI Overviews</div>
+          <div style="font-size: 0.7rem; color: #48bb78; margin-top: 2px;">✔ Schema.org FAQPage Graph</div>
         </div>
         <div style="background: #141414; padding: 10px; border: 1px solid #2b2b2b;">
-          <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent-yellow); margin-bottom: 2px;">5. ANCHOR TEXT</div>
-          <div style="font-size: 0.85rem; color: #ffffff; font-weight: 700;">"← Back to Reviews"</div>
-          <div style="font-size: 0.7rem; color: #48bb78; margin-top: 2px;">✔ Meaningful crawl links</div>
+          <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent-yellow); margin-bottom: 2px;">ALT &amp; ANCHOR TEXT</div>
+          <div style="font-size: 0.8rem; color: #ffffff;">100% accessible links &amp; images</div>
+          <div style="font-size: 0.7rem; color: #48bb78; margin-top: 2px;">✔ Descriptive &amp; indexed</div>
         </div>
       </div>
     </section>
@@ -381,12 +443,12 @@
     </div>
 
     <!-- Explicit H1 Tag Label for class presentation -->
-    <div style="font-size: 0.75rem; font-weight: 800; color: var(--accent-yellow); text-transform: uppercase; margin-bottom: 6px;">
-      <span style="background: var(--accent-yellow); color: #000; padding: 2px 6px; font-size: 0.65rem; font-weight: 800;">PAGE HEADING &lt;h1&gt;</span>
-      Target Primary Title
+    <div class="heading-tag-label">
+      <span class="tag-badge">PAGE HEADING &lt;h1&gt;</span>
+      Target Primary Title Tag &middot; Main Keyword
     </div>
 
-    <!-- Title ONLY in 8-bit font -->
+    <!-- Title ONLY in 8-bit font as H1 -->
     <h1 id="blogTitle" class="blog-title">Loading Review...</h1>
 
     <div class="meta-box">
@@ -417,11 +479,55 @@
       <p id="verdictSummary">"..."</p>
     </div>
 
+    <!-- Editorial Critique with H2 and H3 Headings -->
     <section class="critique-section">
-      <div class="critique-title">
-        <span>In-Depth Editorial Critique</span>
+      <!-- Section Heading H2 -->
+      <div class="heading-tag-label">
+        <span class="tag-badge">SECTION HEADING &lt;h2&gt;</span>
+        Semantic Section Heading &middot; Closely Related to Keywords
       </div>
-      <div id="critiqueContent"></div>
+      <h2 id="critiqueH2" class="critique-h2">In-Depth Editorial Critique</h2>
+
+      <!-- Lead paragraphs -->
+      <div id="critiqueContentPart1"></div>
+
+      <!-- Subsection Heading H3 -->
+      <div class="critique-h3-box">
+        <div class="heading-tag-label" style="margin-bottom: 4px;">
+          <span class="tag-badge">SUBSECTION HEADING &lt;h3&gt;</span>
+          Semantic Subsection Heading &middot; Closely Related to Keywords
+        </div>
+        <h3 id="critiqueH3" class="critique-h3">Mechanics, Combat Depth &amp; Progression Breakdown</h3>
+      </div>
+
+      <!-- Remaining paragraphs -->
+      <div id="critiqueContentPart2"></div>
+    </section>
+
+    <!-- 2 AEO Articles in Question-Answer Format -->
+    <section class="aeo-section" aria-label="AEO Q&A Articles">
+      <div class="heading-tag-label" style="color: #48bb78; margin-bottom: 12px;">
+        <span class="tag-badge" style="background: #48bb78;">AEO ARTICLES</span>
+        Answer Engine Optimization &middot; 2 Articles in Question-Answer Format for AI Engines
+      </div>
+
+      <article class="aeo-card">
+        <div style="font-size: 0.75rem; color: #48bb78; font-weight: 700;">AEO QUERY 1 (Conversational User Search)</div>
+        <h4 id="aeoQ1" class="aeo-q">Q: Loading question...</h4>
+        <div class="aeo-a">
+          <strong style="color: #48bb78; display: block; margin-bottom: 4px; text-transform: uppercase; font-size: 0.75rem;">Direct Answer for AI Overviews:</strong>
+          <p id="aeoA1">Loading answer...</p>
+        </div>
+      </article>
+
+      <article class="aeo-card">
+        <div style="font-size: 0.75rem; color: #48bb78; font-weight: 700;">AEO QUERY 2 (Conversational User Search)</div>
+        <h4 id="aeoQ2" class="aeo-q">Q: Loading question...</h4>
+        <div class="aeo-a">
+          <strong style="color: #48bb78; display: block; margin-bottom: 4px; text-transform: uppercase; font-size: 0.75rem;">Direct Answer for AI Overviews:</strong>
+          <p id="aeoA2">Loading answer...</p>
+        </div>
+      </article>
     </section>
 
     <div class="pros-cons">
@@ -447,52 +553,42 @@
       'elden-ring-shadow-erdtree': {
         metaTitle: 'Elden Ring Erdtree Review: 10/10 Masterpiece? | pixcel',
         metaDescription: "Honest Elden Ring Erdtree review covering bosses, weapons, and map design. See our complete score breakdown and decide if it's worth it!",
-        imageAlt: 'Elden Ring Shadow of the Erdtree Messmer the Impaler boss battle in Land of Shadow'
+        imageAlt: 'Elden Ring Shadow of the Erdtree Messmer the Impaler boss battle in Land of Shadow',
+        headings: {
+          h1: 'Elden Ring: Shadow of the Erdtree Review & Complete Campaign Verdict',
+          h2: 'How Does Elden Ring Shadow of the Erdtree Compare to the Base Game?',
+          h3: 'Key Boss Fights, Scadutree Blessings & New Weapon Mechanics'
+        },
+        aeoQuestions: [
+          {
+            question: 'Is Elden Ring: Shadow of the Erdtree harder than the base game?',
+            answer: 'Yes, Shadow of the Erdtree features significantly higher enemy damage scaling and aggressive multi-phase demigod bosses compared to the base game. However, FromSoftware balances this challenge through the Scadutree Blessing progression system, which increases character attack power and damage negation as you explore.'
+          },
+          {
+            question: 'How long does it take to beat Elden Ring: Shadow of the Erdtree?',
+            answer: 'Completing the main story path takes approximately 30 to 40 hours. Full exploration across all 8 new weapon classes, hidden subterranean maps, and optional bosses extends playtime to 50 to 60 hours.'
+          }
+        ]
       },
       'cyberpunk-phantom-liberty': {
         metaTitle: 'Cyberpunk Phantom Liberty Review: Is It Fixed? | pixcel',
         metaDescription: 'In-depth Cyberpunk 2077 Phantom Liberty review exploring Dogtown, spy thriller story, and 2.0 combat. Read our full verdict before you buy!',
-        imageAlt: 'Cyberpunk 2077 Phantom Liberty Solomon Reed and V in neon dystopian Dogtown'
-      },
-      'ghost-of-tsushima': {
-        metaTitle: 'Ghost of Tsushima Review: Best Samurai Epic? | pixcel',
-        metaDescription: "Detailed Ghost of Tsushima review analyzing Jin Sakai's katana combat, guiding wind mechanics, and visuals. Read our score breakdown now!",
-        imageAlt: 'Ghost of Tsushima samurai Jin Sakai with katana katana standing in a field of golden pampas grass'
-      },
-      'hollow-knight': {
-        metaTitle: 'Hollow Knight Review: Peak Metroidvania Worth It? | pixcel',
-        metaDescription: "Complete Hollow Knight review examining Hallownest exploration, boss fights, charms, and music. Find out why it's a genre must-play today!",
-        imageAlt: 'Hollow Knight protagonist holding nail weapon in the City of Tears'
-      },
-      'red-dead-redemption-2': {
-        metaTitle: 'Red Dead Redemption 2 Review: Still the GOAT? | pixcel',
-        metaDescription: "Definitive Red Dead Redemption 2 review on Arthur Morgan's outlaw saga, realism, and world simulation. Explore our full score verdict now!",
-        imageAlt: 'Red Dead Redemption 2 outlaw Arthur Morgan with revolver against a wilderness sunset horizon'
-      },
-      'valorant': {
-        metaTitle: 'Valorant Review: Best Competitive Tactical Shooter? | pixcel',
-        metaDescription: 'Thorough Valorant review dissecting gunplay precision, agent balance, 128-tick servers, and ranked mode. Read our critique before queueing!',
-        imageAlt: 'Valorant agent Jett wielding wind kunai blades during a competitive site retake'
-      },
-      'zelda-tears-of-kingdom': {
-        metaTitle: 'Zelda Tears of the Kingdom Review: Ultrahand Magic | pixcel',
-        metaDescription: 'Hands-on Zelda Tears of the Kingdom review testing Ultrahand physics, sky islands, and depths. Discover if it tops Breath of the Wild today!',
-        imageAlt: 'Link assembling Zonai vehicle using Ultrahand in Zelda Tears of the Kingdom'
-      },
-      'forza-horizon-5': {
-        metaTitle: 'Forza Horizon 5 Review: Ultimate Open-World Racer? | pixcel',
-        metaDescription: 'Comprehensive Forza Horizon 5 review reviewing Mexico map diversity, 700+ cars, and driving physics. See our final verdict before you race!',
-        imageAlt: 'Mercedes-AMG ONE hypercar racing on Mexican asphalt highway in Forza Horizon 5'
-      },
-      'god-of-war-ragnarok': {
-        metaTitle: 'God of War Ragnarok Review: Norse Saga Masterpiece? | pixcel',
-        metaDescription: 'Deep God of War Ragnarok review covering Kratos and Atreus, Draupnir Spear combat, and Odin. Check out our honest score breakdown now!',
-        imageAlt: 'Kratos wielding Leviathan Axe alongside Atreus in the snowy realm of Midgard'
-      },
-      'stardew-valley': {
-        metaTitle: 'Stardew Valley Review: Still the Cozy King in 2024? | pixcel',
-        metaDescription: 'Enduring Stardew Valley review highlighting farm life loops, Pelican Town characters, and 1.6 content. Find out why you should play it now!',
-        imageAlt: 'Stardew Valley player tending crops and farm animals outside cozy farmhouse'
+        imageAlt: 'Cyberpunk 2077 Phantom Liberty Solomon Reed and V in neon dystopian Dogtown',
+        headings: {
+          h1: 'Cyberpunk 2077: Phantom Liberty Review & Dogtown Expansion Verdict',
+          h2: 'Is Cyberpunk 2077 Finally Worth Playing with Phantom Liberty & Update 2.0?',
+          h3: 'Dogtown Storyline, Idris Elba Performance & Combat Overhaul Analysis'
+        },
+        aeoQuestions: [
+          {
+            question: 'Can you play Cyberpunk 2077: Phantom Liberty without beating the main game?',
+            answer: 'Yes, Phantom Liberty unlocks naturally after completing the Transmission questline in Act 2. Players can start fresh, jump directly to the expansion from the main menu, or load an existing save.'
+          },
+          {
+            question: 'What gameplay improvements does the 2.0 overhaul bring to Phantom Liberty?',
+            answer: 'The 2.0 update redesigns perk trees with active abilities like air dashing and bullet deflection, introduces cyberware capacity meters, adds vehicular combat, and implements dynamic MaxTac police AI.'
+          }
+        ]
       }
     };
 
@@ -527,7 +623,22 @@
     const seo = review.seo || SEO_DATA[review.id] || {
       metaTitle: review.title + ' Review: Worth Playing? | pixcel',
       metaDescription: 'Honest ' + review.title + ' review analyzing story and gameplay. Read our score breakdown now!',
-      imageAlt: review.title + ' gameplay review artwork'
+      imageAlt: review.title + ' gameplay review artwork',
+      headings: {
+        h1: review.title + ' Review & Complete Campaign Verdict',
+        h2: 'How Does ' + review.title + ' Compare in ' + review.genre + '?',
+        h3: 'Core Mechanics, Boss Fights & Performance Breakdown'
+      },
+      aeoQuestions: [
+        {
+          question: 'Is ' + review.title + ' worth playing for ' + review.genre + ' fans?',
+          answer: 'Yes, ' + review.title + ' provides a standout ' + review.genre + ' experience featuring responsive mechanics, rewarding player progression, and strong world design.'
+        },
+        {
+          question: 'What are the main gameplay highlights of ' + review.title + '?',
+          answer: 'The title excels with intuitive controls, rich audio-visual atmosphere, and tactical combat encounters that respect player agency.'
+        }
+      ]
     };
 
     // Apply Document Head SEO
@@ -541,8 +652,18 @@
     document.getElementById('titleCounter').innerText = seo.metaTitle.length + ' / 60 Chars (Optimal)';
     document.getElementById('dispMetaDesc').innerText = '"' + seo.metaDescription + '"';
     document.getElementById('descCounter').innerText = seo.metaDescription.length + ' / 160 Chars (Optimal)';
-    document.getElementById('dispH1').innerText = review.title;
-    document.getElementById('dispAlt').innerText = '"' + seo.imageAlt + '"';
+
+    // Headings
+    document.getElementById('critiqueH2').innerText = seo.headings ? seo.headings.h2 : ('In-Depth ' + review.title + ' Critique');
+    document.getElementById('critiqueH3').innerText = seo.headings ? seo.headings.h3 : 'Core Gameplay & Mechanics Breakdown';
+
+    // AEO Questions & Answers
+    if (seo.aeoQuestions && seo.aeoQuestions.length >= 2) {
+      document.getElementById('aeoQ1').innerText = 'Q: ' + seo.aeoQuestions[0].question;
+      document.getElementById('aeoA1').innerText = seo.aeoQuestions[0].answer;
+      document.getElementById('aeoQ2').innerText = 'Q: ' + seo.aeoQuestions[1].question;
+      document.getElementById('aeoA2').innerText = seo.aeoQuestions[1].answer;
+    }
 
     // Populate Review Body
     document.getElementById('blogTitle').innerText = review.title;
@@ -560,13 +681,20 @@
     document.getElementById('verdictSummary').innerText = '"' + review.summary + '"';
 
     const paragraphs = review.fullReview.split('\n\n');
-    const critiqueDiv = document.getElementById('critiqueContent');
-    critiqueDiv.innerHTML = '';
-    paragraphs.forEach(p => {
+    const p1 = document.getElementById('critiqueContentPart1');
+    const p2 = document.getElementById('critiqueContentPart2');
+    p1.innerHTML = '';
+    p2.innerHTML = '';
+
+    paragraphs.forEach((p, idx) => {
       const pElem = document.createElement('p');
       pElem.className = 'critique-p';
       pElem.innerText = p;
-      critiqueDiv.appendChild(pElem);
+      if (idx < 2) {
+        p1.appendChild(pElem);
+      } else {
+        p2.appendChild(pElem);
+      }
     });
 
     const prosList = document.getElementById('prosList');

@@ -11,7 +11,11 @@ import {
   Image as ImageIcon, 
   Link as LinkIcon, 
   Heading1,
-  Sparkles
+  Heading2,
+  Heading3,
+  HelpCircle,
+  Sparkles,
+  Bot
 } from 'lucide-react';
 
 interface SEOInspectorCardProps {
@@ -55,14 +59,14 @@ export const SEOInspectorCard: React.FC<SEOInspectorCardProps> = ({
           <div>
             <div className="flex flex-wrap items-center gap-2">
               <span className="text-sm sm:text-base font-bold text-[#ffe600] uppercase tracking-wide">
-                SEO Class Project Specification Card
+                SEO & AEO Class Project Specification Card
               </span>
               <span className="text-[10px] sm:text-xs font-bold px-2 py-0.5 bg-[#1b261b] text-[#48bb78] border border-[#38a169]">
-                100% Free SEO · Organic Keywords
+                100% Free SEO · Organic Keywords · H1/H2/H3 · AEO Q&amp;A
               </span>
             </div>
             <p className="text-xs text-[#a3a3a3]">
-              Organized for class review: Meta Title, Meta Description, H1 Page Heading & Alt/Anchor compliance
+              Organized for class review: Meta Title, Meta Description, H1/H2/H3 Headings &amp; 2 AEO Q&amp;A Articles
             </p>
           </div>
         </div>
@@ -102,7 +106,7 @@ export const SEOInspectorCard: React.FC<SEOInspectorCardProps> = ({
             </div>
           </div>
 
-          {/* Explicit Breakdown: Title, Meta Description, H1 */}
+          {/* Explicit Breakdown: Title, Meta Description */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* 1. Meta Title */}
             <div className="bg-[#121212] p-4 border-l-4 border-[#ffe600] space-y-2">
@@ -165,31 +169,119 @@ export const SEOInspectorCard: React.FC<SEOInspectorCardProps> = ({
             </div>
           </div>
 
-          {/* Row 2: H1, Image Alt & Anchor Text */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-1">
-            {/* 3. Primary Page Heading H1 */}
-            <div className="bg-[#121212] p-3.5 border border-[#2b2b2b] space-y-1.5">
-              <span className="text-xs font-bold text-[#ffe600] flex items-center gap-1.5 uppercase tracking-wide">
-                <Heading1 className="w-3.5 h-3.5" />
-                3. Page Heading (&lt;h1&gt;)
+          {/* 3 Headings: H1, H2, H3 Closely Related to Keywords */}
+          <div className="bg-[#101010] p-4 border border-[#2b2b2b] space-y-3">
+            <div className="flex items-center justify-between border-b border-[#222222] pb-2">
+              <span className="text-xs font-bold text-[#ffe600] uppercase tracking-wider flex items-center gap-2">
+                <Heading1 className="w-4 h-4" />
+                3 Semantic Headings (H1 &middot; H2 &middot; H3 Closely Related to Keywords)
               </span>
-              <div className="text-xs text-[#888888] font-bold">Targeted H1 Header</div>
-              <div className="text-sm font-bold text-white bg-[#080808] p-2 border border-[#2b2b2b] truncate">
-                {h1Text}
-              </div>
-              <p className="text-[11px] text-[#48bb78] flex items-center gap-1 font-medium">
-                <CheckCircle2 className="w-3 h-3" />
-                Single primary &lt;h1&gt; hierarchy
-              </p>
+              <span className="text-[11px] text-[#48bb78] font-bold">
+                ✔ Complete Hierarchy
+              </span>
             </div>
 
-            {/* 4. Image Alt Attribute */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-1">
+              {/* H1 Heading */}
+              <div className="bg-[#161616] p-3 border-l-3 border-[#ffe600]">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-[#ffe600] uppercase mb-1">
+                  <Heading1 className="w-3.5 h-3.5" />
+                  <span>Primary H1 Heading</span>
+                </div>
+                <div className="text-xs text-white font-semibold leading-snug">
+                  "{seo.headings?.h1 || h1Text}"
+                </div>
+                <p className="text-[10px] text-[#a3a3a3] mt-1">
+                  Target: Main keyword &amp; campaign verdict
+                </p>
+              </div>
+
+              {/* H2 Heading */}
+              <div className="bg-[#161616] p-3 border-l-3 border-[#ffe600]">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-[#ffe600] uppercase mb-1">
+                  <Heading2 className="w-3.5 h-3.5" />
+                  <span>Section H2 Heading</span>
+                </div>
+                <div className="text-xs text-white font-semibold leading-snug">
+                  "{seo.headings?.h2 || `In-Depth Analysis: ${seo.primaryKeyword}`}"
+                </div>
+                <p className="text-[10px] text-[#a3a3a3] mt-1">
+                  Target: Genre comparison &amp; core gameplay
+                </p>
+              </div>
+
+              {/* H3 Heading */}
+              <div className="bg-[#161616] p-3 border-l-3 border-[#ffe600]">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-[#ffe600] uppercase mb-1">
+                  <Heading3 className="w-3.5 h-3.5" />
+                  <span>Subsection H3 Heading</span>
+                </div>
+                <div className="text-xs text-white font-semibold leading-snug">
+                  "{seo.headings?.h3 || `Mechanics Breakdown: ${seo.primaryKeyword}`}"
+                </div>
+                <p className="text-[10px] text-[#a3a3a3] mt-1">
+                  Target: Combat, mechanics &amp; score evaluation
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* 2 Paragraphs/Articles in Question-Answer Format for AEO (Answer Engine Optimization) */}
+          {seo.aeoQuestions && seo.aeoQuestions.length >= 2 && (
+            <div className="bg-[#0f1412] p-4 border border-[#1e3a2b] space-y-3">
+              <div className="flex items-center justify-between border-b border-[#1b3024] pb-2">
+                <span className="text-xs font-bold text-[#48bb78] uppercase tracking-wider flex items-center gap-2">
+                  <Bot className="w-4 h-4 text-[#48bb78]" />
+                  AEO (Answer Engine Optimization) &middot; 2 Q&amp;A Articles for AI Overviews
+                </span>
+                <span className="text-[11px] bg-[#1a2e22] text-[#48bb78] px-2 py-0.5 font-bold border border-[#2d5a3f]">
+                  Schema.org FAQPage Graph Indexed
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
+                {/* AEO Item 1 */}
+                <div className="bg-[#121c17] p-3 border border-[#234232]">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-[#48bb78] mb-1">
+                    <HelpCircle className="w-3.5 h-3.5" />
+                    <span>Q1 (Conversational User Query):</span>
+                  </div>
+                  <div className="text-xs font-bold text-white mb-2">
+                    "{seo.aeoQuestions[0].question}"
+                  </div>
+                  <div className="text-xs text-[#c5ded0] leading-relaxed bg-[#0b120f] p-2.5 border border-[#1b3024]">
+                    <strong className="text-[#48bb78] block mb-1">Direct Answer:</strong>
+                    {seo.aeoQuestions[0].answer}
+                  </div>
+                </div>
+
+                {/* AEO Item 2 */}
+                <div className="bg-[#121c17] p-3 border border-[#234232]">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-[#48bb78] mb-1">
+                    <HelpCircle className="w-3.5 h-3.5" />
+                    <span>Q2 (Conversational User Query):</span>
+                  </div>
+                  <div className="text-xs font-bold text-white mb-2">
+                    "{seo.aeoQuestions[1].question}"
+                  </div>
+                  <div className="text-xs text-[#c5ded0] leading-relaxed bg-[#0b120f] p-2.5 border border-[#1b3024]">
+                    <strong className="text-[#48bb78] block mb-1">Direct Answer:</strong>
+                    {seo.aeoQuestions[1].answer}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Row: Image Alt & Anchor Text */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+            {/* Image Alt Attribute */}
             <div className="bg-[#121212] p-3.5 border border-[#2b2b2b] space-y-1.5">
               <span className="text-xs font-bold text-[#ffe600] flex items-center gap-1.5 uppercase tracking-wide">
                 <ImageIcon className="w-3.5 h-3.5" />
-                4. Image Alt Text
+                Image Alt Text
               </span>
-              <div className="text-xs text-[#888888] font-bold">Accessible & Keyword-Rich</div>
+              <div className="text-xs text-[#888888] font-bold">Accessible &amp; Keyword-Rich</div>
               <div className="text-xs text-white bg-[#080808] p-2 border border-[#2b2b2b] truncate" title={seo.imageAlt}>
                 "{seo.imageAlt}"
               </div>
@@ -199,11 +291,11 @@ export const SEOInspectorCard: React.FC<SEOInspectorCardProps> = ({
               </p>
             </div>
 
-            {/* 5. Anchor Text */}
+            {/* Anchor Text */}
             <div className="bg-[#121212] p-3.5 border border-[#2b2b2b] space-y-1.5">
               <span className="text-xs font-bold text-[#ffe600] flex items-center gap-1.5 uppercase tracking-wide">
                 <LinkIcon className="w-3.5 h-3.5" />
-                5. Link Anchor Text
+                Link Anchor Text
               </span>
               <div className="text-xs text-[#888888] font-bold">Semantic Navigation</div>
               <div className="text-xs text-white bg-[#080808] p-2 border border-[#2b2b2b] truncate">
@@ -221,7 +313,7 @@ export const SEOInspectorCard: React.FC<SEOInspectorCardProps> = ({
             <div className="flex items-center gap-2 text-[#93c5fd]">
               <Sparkles className="w-4 h-4 text-[#ffe600] shrink-0" />
               <span>
-                <strong>Inspect Properties & Unique URL Rewrite:</strong> Handled via <code>/vercel.json</code> & <code>public/_redirects</code>
+                <strong>Inspect Properties &amp; Unique URL Rewrite:</strong> Handled via <code>/vercel.json</code> &amp; <code>public/_redirects</code>
               </span>
             </div>
             <code className="text-[#ffe600] text-[11px] bg-[#000000] px-2 py-1 border border-[#333333]">

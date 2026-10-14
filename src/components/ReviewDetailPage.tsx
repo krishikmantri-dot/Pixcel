@@ -15,7 +15,12 @@ import {
   Gamepad2, 
   UserCheck, 
   Award,
-  Tag
+  Tag,
+  Heading1,
+  Heading2,
+  Heading3,
+  HelpCircle,
+  Bot
 } from 'lucide-react';
 import { getGameCoverFallback } from '../utils/imageFallback';
 import { SEOInspectorCard } from './SEOInspectorCard';
@@ -49,7 +54,7 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
   // SEO computation
   const seo = review.seo || generateSEOForReview(review);
 
-  // Apply Document Head SEO dynamically for search engine bots and social scrapers
+  // Apply Document Head SEO dynamically for search engine bots, scrapers & AI overviews
   useEffect(() => {
     const url = typeof window !== 'undefined' ? `${window.location.origin}/review/${review.id}` : '';
     applyPageSEO({
@@ -160,10 +165,10 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
           <span className="text-white truncate max-w-[200px] md:max-w-md">{review.title}</span>
         </nav>
 
-        {/* SEO Class Project Presentation Card (Lays out Meta Title, Meta Description, H1) */}
+        {/* SEO Class Project Presentation Card (Lays out Meta Title, Meta Description, H1, H2, H3, AEO) */}
         <SEOInspectorCard 
           seo={seo}
-          h1Text={review.title}
+          h1Text={seo.headings?.h1 || review.title}
           urlPath={`/review/${review.id}`}
           rating={review.rating}
         />
@@ -184,10 +189,11 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
 
           {/* Explicit SEO Label for H1 Page Heading (For professor / class presentation) */}
           <div className="flex items-center gap-2 text-xs font-bold text-[#ffe600] uppercase tracking-wider mb-2">
-            <span className="px-2 py-0.5 bg-[#ffe600] text-black font-bold text-[10px] rounded-xs">
+            <span className="px-2 py-0.5 bg-[#ffe600] text-black font-bold text-[10px] rounded-xs flex items-center gap-1">
+              <Heading1 className="w-3 h-3" />
               PAGE HEADING &lt;h1&gt;
             </span>
-            <span>Target H1 Title Tag</span>
+            <span>Target H1 Title Tag &middot; Keyword: "{seo.primaryKeyword}"</span>
           </div>
 
           {/* ONLY the Game Title is in 8-bit font as the H1 */}
@@ -245,7 +251,7 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
                 Image Alt Text: <span className="text-white font-normal italic">"{seo.imageAlt}"</span>
               </span>
               <span className="text-[11px] text-[#48bb78] font-bold">
-                ✔ 100% Accessible & Indexed
+                ✔ 100% Accessible &amp; Indexed
               </span>
             </div>
           </div>
@@ -267,10 +273,12 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
         {/* Score Breakdown in Aptos font */}
         {review.breakdown && (
           <section aria-label="Performance scores" className="mb-12 bg-[#0c0c0c] border-2 border-[#2b2b2b] p-6">
-            <h2 className="text-sm sm:text-base text-[#ffe600] font-bold mb-6 flex items-center gap-2 uppercase tracking-wide">
+            <div className="flex items-center gap-2 mb-6">
               <Star className="w-4 h-4 fill-[#ffe600]" />
-              Performance & Component Breakdown
-            </h2>
+              <h2 className="text-sm sm:text-base text-[#ffe600] font-bold uppercase tracking-wide">
+                Performance &amp; Component Breakdown
+              </h2>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {[
                 { label: 'Gameplay Mechanics', value: review.breakdown.gameplay },
@@ -295,17 +303,26 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
           </section>
         )}
 
-        {/* Full Editorial Essay in Aptos font */}
+        {/* Full Editorial Essay with explicit H2 and H3 Headings */}
         <section aria-label="Editorial critique" className="mb-14">
-          <div className="flex items-center justify-between border-b-2 border-[#ffe600] pb-3 mb-8">
-            <h2 className="text-lg sm:text-xl text-[#ffe600] font-bold flex items-center gap-2 uppercase tracking-wide">
-              <Gamepad2 className="w-5 h-5" />
-              In-Depth Editorial Critique
+          {/* Section Heading H2 closely related to keywords */}
+          <div className="border-b-2 border-[#ffe600] pb-3 mb-6">
+            <div className="flex items-center gap-2 text-xs font-bold text-[#ffe600] uppercase tracking-wider mb-1.5">
+              <span className="px-2 py-0.5 bg-[#ffe600] text-black font-bold text-[10px] rounded-xs flex items-center gap-1">
+                <Heading2 className="w-3 h-3" />
+                SECTION HEADING &lt;h2&gt;
+              </span>
+              <span>Semantic H2 Heading (Closely Related to Keywords)</span>
+            </div>
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#ffe600] flex items-center gap-2.5">
+              <Gamepad2 className="w-6 h-6 shrink-0" />
+              <span>{seo.headings?.h2 || `How Does ${review.title} Compare in the ${review.genre} Genre?`}</span>
             </h2>
           </div>
 
-          <div className="space-y-6 text-base sm:text-lg leading-relaxed text-[#e5e5e5]">
-            {paragraphs.map((paragraph, idx) => (
+          {/* Lead Paragraph */}
+          <div className="space-y-6 text-base sm:text-lg leading-relaxed text-[#e5e5e5] mb-8">
+            {paragraphs.slice(0, 2).map((paragraph, idx) => (
               <p 
                 key={idx} 
                 className={`bg-[#0d0d0d] p-6 border-l-4 border-[#ffe600] shadow-sm ${
@@ -316,14 +333,96 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
               </p>
             ))}
           </div>
+
+          {/* Subsection Heading H3 closely related to keywords */}
+          <div className="border-l-4 border-[#ffe600] pl-4 py-2 mb-6 bg-[#0f0f0f]">
+            <div className="flex items-center gap-2 text-xs font-bold text-[#ffe600] uppercase tracking-wider mb-1">
+              <span className="px-2 py-0.5 bg-[#ffe600] text-black font-bold text-[10px] rounded-xs flex items-center gap-1">
+                <Heading3 className="w-3 h-3" />
+                SUBSECTION HEADING &lt;h3&gt;
+              </span>
+              <span>Semantic H3 Heading (Closely Related to Keywords)</span>
+            </div>
+            <h3 className="text-lg sm:text-xl font-bold text-white tracking-wide">
+              {seo.headings?.h3 || `Key Boss Fights, Progression Depth & Score Breakdown`}
+            </h3>
+          </div>
+
+          {/* Remaining Paragraphs */}
+          <div className="space-y-6 text-base sm:text-lg leading-relaxed text-[#e5e5e5]">
+            {paragraphs.slice(2).map((paragraph, idx) => (
+              <p key={idx} className="bg-[#0d0d0d] p-6 border-l-4 border-[#ffe600] shadow-sm">
+                {paragraph}
+              </p>
+            ))}
+          </div>
         </section>
+
+        {/* 2 Dedicated Paragraphs / Articles in Question-Answer Format for AEO (Answer Engine Optimization) */}
+        {seo.aeoQuestions && seo.aeoQuestions.length >= 2 && (
+          <section aria-label="AEO Question and Answer Articles" className="mb-14">
+            <div className="border-b-2 border-[#48bb78] pb-3 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <div className="flex items-center gap-2 text-xs font-bold text-[#48bb78] uppercase tracking-wider mb-1">
+                  <span className="px-2 py-0.5 bg-[#48bb78] text-black font-bold text-[10px] rounded-xs flex items-center gap-1">
+                    <Bot className="w-3 h-3" />
+                    AEO ARTICLES
+                  </span>
+                  <span>Answer Engine Optimization &middot; 2 Articles in Question-Answer Format for AI Engines</span>
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+                  <span>Frequently Asked Questions &amp; Direct Answers</span>
+                </h3>
+              </div>
+              <span className="text-xs text-[#a3a3a3] font-medium bg-[#141414] px-2.5 py-1 border border-[#2b2b2b]">
+                Schema.org FAQPage Graph
+              </span>
+            </div>
+
+            <div className="space-y-6">
+              {/* AEO Article 1 */}
+              <article className="bg-[#0e1611] border-2 border-[#2b593f] p-6 shadow-[4px_4px_0px_#2b593f]">
+                <div className="flex items-center gap-2 text-xs font-bold text-[#48bb78] uppercase tracking-wider mb-2">
+                  <HelpCircle className="w-4 h-4 text-[#48bb78]" />
+                  <span>AEO Question 1 (Conversational User Query)</span>
+                </div>
+                <h4 className="text-base sm:text-lg font-bold text-white mb-3">
+                  Q: {seo.aeoQuestions[0].question}
+                </h4>
+                <div className="bg-[#080d0a] p-4 border-l-4 border-[#48bb78] text-sm sm:text-base text-[#d1fae5] leading-relaxed">
+                  <strong className="text-[#48bb78] font-bold block mb-1 uppercase text-xs tracking-wider">
+                    Direct Authoritative Answer for AI Overviews:
+                  </strong>
+                  <p>{seo.aeoQuestions[0].answer}</p>
+                </div>
+              </article>
+
+              {/* AEO Article 2 */}
+              <article className="bg-[#0e1611] border-2 border-[#2b593f] p-6 shadow-[4px_4px_0px_#2b593f]">
+                <div className="flex items-center gap-2 text-xs font-bold text-[#48bb78] uppercase tracking-wider mb-2">
+                  <HelpCircle className="w-4 h-4 text-[#48bb78]" />
+                  <span>AEO Question 2 (Conversational User Query)</span>
+                </div>
+                <h4 className="text-base sm:text-lg font-bold text-white mb-3">
+                  Q: {seo.aeoQuestions[1].question}
+                </h4>
+                <div className="bg-[#080d0a] p-4 border-l-4 border-[#48bb78] text-sm sm:text-base text-[#d1fae5] leading-relaxed">
+                  <strong className="text-[#48bb78] font-bold block mb-1 uppercase text-xs tracking-wider">
+                    Direct Authoritative Answer for AI Overviews:
+                  </strong>
+                  <p>{seo.aeoQuestions[1].answer}</p>
+                </div>
+              </article>
+            </div>
+          </section>
+        )}
 
         {/* Pros and Cons Boxes in Aptos font */}
         {Boolean((review.pros && review.pros.length > 0) || (review.cons && review.cons.length > 0)) && (
           <section aria-label="Pros and cons" className="mb-14 grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-[#0e140e] border-2 border-[#333333] p-6 shadow-[4px_4px_0px_#38a169]">
+            <div className="bg-[#0e140e] border-2 border-[#38a169] p-6 shadow-[4px_4px_0px_#38a169]">
               <h2 className="text-sm sm:text-base text-[#48bb78] font-bold mb-4 flex items-center gap-2 uppercase tracking-wide">
-                <span>[+]</span> Key Highlights & Strengths
+                <span>[+]</span> Key Highlights &amp; Strengths
               </h2>
               <ul className="space-y-2.5">
                 {(review.pros || []).map((pro, index) => (
@@ -337,7 +436,7 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
 
             <div className="bg-[#170e0e] border-2 border-[#333333] p-6 shadow-[4px_4px_0px_#e53e3e]">
               <h2 className="text-sm sm:text-base text-[#f56565] font-bold mb-4 flex items-center gap-2 uppercase tracking-wide">
-                <span>[-]</span> Drawbacks & Shortcomings
+                <span>[-]</span> Drawbacks &amp; Shortcomings
               </h2>
               <ul className="space-y-2.5">
                 {(review.cons || []).map((con, index) => (
