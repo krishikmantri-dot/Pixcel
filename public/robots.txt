@@ -1,15 +1,20 @@
-# robots.txt for pixcel.gg
-# Crawlable for all standard search engine crawlers and AI answer engines
-
+# robots.txt for https://pixcel.gg/
 User-agent: *
 Allow: /
 
-# Google Search Console & AI Answer Engine Optimization (AEO) Crawlers
+# Prevent crawling of internal APIs and admin utilities
+Disallow: /api/
+Disallow: /admin/
+Disallow: /preview/
+Disallow: /draft/
+
+# Explicitly allow Google Search Console & AI Answer Engine (AEO) bots
 User-agent: Googlebot
 Allow: /
 
 User-agent: Googlebot-Image
-Allow: /
+Allow: /games/
+Allow: /assets/
 
 User-agent: Google-Extended
 Allow: /
@@ -26,6 +31,5 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 
-# XML Sitemap index for Google Search Console
-Sitemap: /sitemap.xml
+# Canonical XML Sitemap Directive
 Sitemap: https://pixcel.gg/sitemap.xml

@@ -1,8 +1,9 @@
-# Direct access for crawlers and static assets (no SPA interception)
-/robots.txt     /robots.txt     200!
-/sitemap.xml    /sitemap.xml    200!
-/games/*        /games/:splat   200!
-/assets/*       /assets/:splat  200!
+# Direct access for crawlers, verification, and static assets (no SPA interception)
+/robots.txt                 /robots.txt                 200!
+/sitemap.xml                /sitemap.xml                200!
+/google0ecb177c8b5f9ca2.html /google0ecb177c8b5f9ca2.html 200!
+/games/*                    /games/:splat               200!
+/assets/*                   /assets/:splat              200!
 
 # SPA rewrite fallback for remaining client routes
-/*              /index.html     200
+/*                          /index.html                 200

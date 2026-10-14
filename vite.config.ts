@@ -27,7 +27,7 @@ function transformReviewHtml(html: string, reviewId: string, seo: GameReviewSEO)
     `<link rel="canonical" href="https://pixcel.gg/review/${reviewId}" />`
   );
 
-  // Replace og:title & og:description
+  // Replace og:title, og:description, og:url, og:image
   updated = updated.replace(
     /<meta\s+property="og:title"\s+content=".*?"\s*\/?>/i,
     `<meta property="og:title" content="${seo.metaTitle}" />`
@@ -35,6 +35,28 @@ function transformReviewHtml(html: string, reviewId: string, seo: GameReviewSEO)
   updated = updated.replace(
     /<meta\s+property="og:description"\s+content=".*?"\s*\/?>/i,
     `<meta property="og:description" content="${seo.metaDescription}" />`
+  );
+  updated = updated.replace(
+    /<meta\s+property="og:url"\s+content=".*?"\s*\/?>/i,
+    `<meta property="og:url" content="https://pixcel.gg/review/${reviewId}" />`
+  );
+  updated = updated.replace(
+    /<meta\s+property="og:image"\s+content=".*?"\s*\/?>/i,
+    `<meta property="og:image" content="https://pixcel.gg/games/${reviewId.replace(/-/g, '_')}.jpg" />`
+  );
+
+  // Replace twitter tags
+  updated = updated.replace(
+    /<meta\s+name="twitter:title"\s+content=".*?"\s*\/?>/i,
+    `<meta name="twitter:title" content="${seo.metaTitle}" />`
+  );
+  updated = updated.replace(
+    /<meta\s+name="twitter:description"\s+content=".*?"\s*\/?>/i,
+    `<meta name="twitter:description" content="${seo.metaDescription}" />`
+  );
+  updated = updated.replace(
+    /<meta\s+name="twitter:image"\s+content=".*?"\s*\/?>/i,
+    `<meta name="twitter:image" content="https://pixcel.gg/games/${reviewId.replace(/-/g, '_')}.jpg" />`
   );
 
   // Replace JSON-LD schema

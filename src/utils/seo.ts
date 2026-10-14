@@ -144,11 +144,12 @@ export function applyPageSEO(options: {
     tag.setAttribute('content', content);
   };
 
-  // Standard Meta Description
+  // Standard Meta Description & Robots Directives
   setMetaTag('name', 'description', options.description);
+  setMetaTag('name', 'robots', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
 
   // Canonical Link
-  const canonicalUrl = options.url || (typeof window !== 'undefined' ? window.location.href : '');
+  const canonicalUrl = options.url || (typeof window !== 'undefined' ? window.location.href : 'https://pixcel.gg/');
   let canonicalLink = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
   if (!canonicalLink) {
     canonicalLink = document.createElement('link');
@@ -164,15 +165,27 @@ export function applyPageSEO(options: {
   setMetaTag('property', 'og:url', canonicalUrl);
   setMetaTag('property', 'og:site_name', SITE_NAME);
   if (options.image) {
-    setMetaTag('property', 'og:image', options.image);
+    const fullImageUrl = options.image.startsWith('http') 
+      ? options.image 
+      : `${typeof window !== 'undefined' ? window.location.origin : 'https://pixcel.gg'}${options.image}`;
+    setMetaTag('property', 'og:image', fullImageUrl);
+    setMetaTag('property', 'og:image:width', '1200');
+    setMetaTag('property', 'og:image:height', '630');
+    setMetaTag('property', 'og:image:alt', options.title);
   }
 
   // Twitter Cards
   setMetaTag('name', 'twitter:card', 'summary_large_image');
+  setMetaTag('name', 'twitter:site', '@pixcelgg');
+  setMetaTag('name', 'twitter:creator', '@pixcelgg');
   setMetaTag('name', 'twitter:title', options.title);
   setMetaTag('name', 'twitter:description', options.description);
   if (options.image) {
-    setMetaTag('name', 'twitter:image', options.image);
+    const fullImageUrl = options.image.startsWith('http') 
+      ? options.image 
+      : `${typeof window !== 'undefined' ? window.location.origin : 'https://pixcel.gg'}${options.image}`;
+    setMetaTag('name', 'twitter:image', fullImageUrl);
+    setMetaTag('name', 'twitter:image:alt', options.title);
   }
 
   // JSON-LD Structured Data

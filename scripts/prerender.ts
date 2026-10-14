@@ -27,9 +27,16 @@ for (const [reviewId, seo] of Object.entries(SEO_PRESETS)) {
   updated = updated.replace(/<meta\s+name="description"\s+content=".*?"\s*\/?>/i, `<meta name="description" content="${seo.metaDescription}" />`);
   // Replace canonical link
   updated = updated.replace(/<link\s+rel="canonical"\s+href=".*?"\s*\/?>/i, `<link rel="canonical" href="https://pixcel.gg/review/${reviewId}" />`);
-  // Replace og:title & og:description
+  // Replace og:title & og:description & og:image
   updated = updated.replace(/<meta\s+property="og:title"\s+content=".*?"\s*\/?>/i, `<meta property="og:title" content="${seo.metaTitle}" />`);
   updated = updated.replace(/<meta\s+property="og:description"\s+content=".*?"\s*\/?>/i, `<meta property="og:description" content="${seo.metaDescription}" />`);
+  updated = updated.replace(/<meta\s+property="og:url"\s+content=".*?"\s*\/?>/i, `<meta property="og:url" content="https://pixcel.gg/review/${reviewId}" />`);
+  updated = updated.replace(/<meta\s+property="og:image"\s+content=".*?"\s*\/?>/i, `<meta property="og:image" content="https://pixcel.gg/games/${reviewId.replace(/-/g, '_')}.jpg" />`);
+
+  // Replace twitter:title, twitter:description, twitter:image
+  updated = updated.replace(/<meta\s+name="twitter:title"\s+content=".*?"\s*\/?>/i, `<meta name="twitter:title" content="${seo.metaTitle}" />`);
+  updated = updated.replace(/<meta\s+name="twitter:description"\s+content=".*?"\s*\/?>/i, `<meta name="twitter:description" content="${seo.metaDescription}" />`);
+  updated = updated.replace(/<meta\s+name="twitter:image"\s+content=".*?"\s*\/?>/i, `<meta name="twitter:image" content="https://pixcel.gg/games/${reviewId.replace(/-/g, '_')}.jpg" />`);
 
   // Replace JSON-LD schema
   const jsonLd = {
@@ -151,16 +158,22 @@ for (const [reviewId, seo] of Object.entries(SEO_PRESETS)) {
   updated = updated.replace(/<main\s+id="seo-aeo-raw-source"[\s\S]*?<\/main>/i, gameSourceHtml);
 
   fs.writeFileSync(path.join(reviewDir, 'index.html'), updated, 'utf-8');
+  // Also write [id].html directly inside dist/review for Vercel cleanUrls: true
+  fs.writeFileSync(path.join(distDir, 'review', `${reviewId}.html`), updated, 'utf-8');
 }
 
-// Ensure robots.txt and sitemap.xml are in dist
+// Ensure robots.txt, sitemap.xml, and google verification are in dist
 const publicRobots = path.resolve(__dirname, '../public/robots.txt');
 const publicSitemap = path.resolve(__dirname, '../public/sitemap.xml');
+const publicGoogle = path.resolve(__dirname, '../public/google0ecb177c8b5f9ca2.html');
 if (fs.existsSync(publicRobots)) {
   fs.copyFileSync(publicRobots, path.join(distDir, 'robots.txt'));
 }
 if (fs.existsSync(publicSitemap)) {
   fs.copyFileSync(publicSitemap, path.join(distDir, 'sitemap.xml'));
 }
+if (fs.existsSync(publicGoogle)) {
+  fs.copyFileSync(publicGoogle, path.join(distDir, 'google0ecb177c8b5f9ca2.html'));
+}
 
-console.log('Successfully generated pre-rendered static HTML, robots.txt, and sitemap.xml for all reviews!');
+console.log('Successfully generated pre-rendered static HTML (.html & /index.html), robots.txt, and sitemap.xml for all reviews!');
