@@ -366,11 +366,11 @@ export const SEOInspectorCard: React.FC<SEOInspectorCardProps> = ({
             <div className="flex items-center gap-2 text-[#93c5fd]">
               <Sparkles className="w-4 h-4 text-[#ffe600] shrink-0" />
               <span>
-                <strong>Inspect Properties &amp; Unique URL Rewrite:</strong> Handled via <code>/vercel.json</code> &amp; <code>public/_redirects</code>
+                <strong>Crawler-Safe SPA Routing:</strong> Handled via <code>/vercel.json</code> (Excludes robots.txt, sitemap.xml &amp; assets)
               </span>
             </div>
-            <code className="text-[#ffe600] text-[11px] bg-[#000000] px-2 py-1 border border-[#333333]">
-              rewrites: [ &#123; "source": "/(.*)", "destination": "/index.html" &#125; ]
+            <code className="text-[#ffe600] text-[11px] bg-[#000000] px-2 py-1 border border-[#333333] truncate max-w-full sm:max-w-md">
+              source: "/((?!robots\.txt|sitemap\.xml|.*\..*).*)" &rarr; /index.html
             </code>
           </div>
         </div>
