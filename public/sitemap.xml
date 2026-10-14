@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <!-- Home Page -->
+  <url>
+    <loc>https://pixcel.gg/</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://pixcel.gg/games/elden_ring.jpg</image:loc>
+      <image:title>Pixcel.gg Gaming Chronicle - Honest Video Game Reviews</image:title>
+    </image:image>
+  </url>
+
+  <!-- 1. Elden Ring: Shadow of the Erdtree -->
+  <url>
+    <loc>https://pixcel.gg/review/elden-ring-shadow-erdtree</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://pixcel.gg/games/elden_ring.jpg</image:loc>
+      <image:title>Elden Ring Shadow of the Erdtree Messmer the Impaler boss battle</image:title>
+      <image:caption>Elden Ring Shadow of the Erdtree expansion key art and gameplay review screenshot</image:caption>
+    </image:image>
+  </url>
+
+  <!-- 2. Cyberpunk 2077: Phantom Liberty -->
+  <url>
+    <loc>https://pixcel.gg/review/cyberpunk-phantom-liberty</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://pixcel.gg/games/cyberpunk.jpg</image:loc>
+      <image:title>Cyberpunk 2077 Phantom Liberty Solomon Reed and V in Dogtown</image:title>
+      <image:caption>Cyberpunk 2077 Phantom Liberty spy thriller expansion review</image:caption>
+    </image:image>
+  </url>
+
+  <!-- 3. Ghost of Tsushima -->
+  <url>
+    <loc>https://pixcel.gg/review/ghost-of-tsushima</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://pixcel.gg/games/ghost_of_tsushima.jpg</image:loc>
+      <image:title>Ghost of Tsushima samurai Jin Sakai with katana sword in pampas grass</image:title>
+      <image:caption>Ghost of Tsushima open-world samurai action RPG review</image:caption>
+    </image:image>
+  </url>
+
+  <!-- 4. Hollow Knight -->
+  <url>
+    <loc>https://pixcel.gg/review/hollow-knight</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://pixcel.gg/games/hollow_knight.jpg</image:loc>
+      <image:title>Hollow Knight protagonist holding nail weapon in City of Tears</image:title>
+      <image:caption>Hollow Knight Metroidvania masterpiece review</image:caption>
+    </image:image>
+  </url>
+
+  <!-- 5. Red Dead Redemption 2 -->
+  <url>
+    <loc>https://pixcel.gg/review/red-dead-redemption-2</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://pixcel.gg/games/rdr2.jpg</image:loc>
+      <image:title>Red Dead Redemption 2 Arthur Morgan on horseback across the frontier</image:title>
+      <image:caption>Red Dead Redemption 2 Rockstar western open-world review</image:caption>
+    </image:image>
+  </url>
+
+  <!-- 6. Valorant -->
+  <url>
+    <loc>https://pixcel.gg/review/valorant</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://pixcel.gg/games/valorant.png</image:loc>
+      <image:title>Valorant agent Jett wielding wind kunai blades during site retake</image:title>
+      <image:caption>Valorant Riot Games competitive tactical shooter FPS review</image:caption>
+    </image:image>
+  </url>
+
+  <!-- 7. The Legend of Zelda: Tears of the Kingdom -->
+  <url>
+    <loc>https://pixcel.gg/review/zelda-tears-of-kingdom</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://pixcel.gg/games/zelda_totk.jpg</image:loc>
+      <image:title>Link assembling Zonai vehicle using Ultrahand in Zelda Tears of the Kingdom</image:title>
+      <image:caption>The Legend of Zelda Tears of the Kingdom Nintendo Switch review</image:caption>
+    </image:image>
+  </url>
+
+  <!-- 8. Forza Horizon 5 -->
+  <url>
+    <loc>https://pixcel.gg/review/forza-horizon-5</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://pixcel.gg/games/forza_horizon_5.jpg</image:loc>
+      <image:title>Mercedes-AMG ONE hypercar racing on Mexican highway in Forza Horizon 5</image:title>
+      <image:caption>Forza Horizon 5 open-world racing simulation-arcade review</image:caption>
+    </image:image>
+  </url>
+
+  <!-- 9. God of War Ragnarök -->
+  <url>
+    <loc>https://pixcel.gg/review/god-of-war-ragnarok</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://pixcel.gg/games/god_of_war.jpg</image:loc>
+      <image:title>Kratos wielding Leviathan Axe alongside Atreus in Midgard</image:title>
+      <image:caption>God of War Ragnarok Norse saga action RPG review</image:caption>
+    </image:image>
+  </url>
+
+  <!-- 10. Stardew Valley -->
+  <url>
+    <loc>https://pixcel.gg/review/stardew-valley</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://pixcel.gg/games/stardew_valley.jpg</image:loc>
+      <image:title>Stardew Valley farmstead with crops and farm animals</image:title>
+      <image:caption>Stardew Valley ConcernedApe cozy farming life simulation review</image:caption>
+    </image:image>
+  </url>
+</urlset>

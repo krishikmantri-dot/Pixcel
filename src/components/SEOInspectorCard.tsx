@@ -308,6 +308,59 @@ export const SEOInspectorCard: React.FC<SEOInspectorCardProps> = ({
             </div>
           </div>
 
+          {/* Crawlability: robots.txt & sitemap.xml for Google Search Console */}
+          <div className="bg-[#101510] p-4 border border-[#2b593f] space-y-3">
+            <div className="flex items-center justify-between border-b border-[#1b3024] pb-2">
+              <span className="text-xs font-bold text-[#48bb78] uppercase tracking-wider flex items-center gap-2">
+                <Globe2 className="w-4 h-4 text-[#48bb78]" />
+                Crawlability &amp; Google Search Console Submission
+              </span>
+              <span className="text-[11px] bg-[#1a2e22] text-[#48bb78] px-2 py-0.5 font-bold border border-[#2d5a3f]">
+                ✔ Ready for GSC Indexing
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              {/* robots.txt Link */}
+              <div className="bg-[#0b120f] p-3 border border-[#1b3024] flex items-center justify-between">
+                <div>
+                  <div className="font-bold text-[#48bb78] flex items-center gap-1.5 mb-0.5">
+                    <FileCode2 className="w-3.5 h-3.5" />
+                    <span>robots.txt (Crawler Directives)</span>
+                  </div>
+                  <p className="text-[#a3a3a3] text-[11px]">Allows Googlebot, Bingbot &amp; AI Answer Engines</p>
+                </div>
+                <a 
+                  href="/robots.txt" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="px-2.5 py-1 bg-[#1b3024] hover:bg-[#2b593f] text-[#48bb78] hover:text-white font-bold border border-[#38a169] transition-colors"
+                >
+                  View robots.txt ↗
+                </a>
+              </div>
+
+              {/* sitemap.xml Link */}
+              <div className="bg-[#0b120f] p-3 border border-[#1b3024] flex items-center justify-between">
+                <div>
+                  <div className="font-bold text-[#48bb78] flex items-center gap-1.5 mb-0.5">
+                    <Globe2 className="w-3.5 h-3.5" />
+                    <span>sitemap.xml (XML Sitemap)</span>
+                  </div>
+                  <p className="text-[#a3a3a3] text-[11px]">10 unique URLs + Google Image tags for GSC</p>
+                </div>
+                <a 
+                  href="/sitemap.xml" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="px-2.5 py-1 bg-[#1b3024] hover:bg-[#2b593f] text-[#48bb78] hover:text-white font-bold border border-[#38a169] transition-colors"
+                >
+                  View sitemap.xml ↗
+                </a>
+              </div>
+            </div>
+          </div>
+
           {/* SPA Rewrite Notification Box */}
           <div className="bg-[#101318] p-3 border border-[#26354a] flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
             <div className="flex items-center gap-2 text-[#93c5fd]">

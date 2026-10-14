@@ -1,4 +1,4 @@
-import { GameReviewSEO } from '../types';
+import type { GameReviewSEO } from '../types';
 
 export const SEO_PRESETS: Record<string, GameReviewSEO> = {
   'elden-ring-shadow-erdtree': {

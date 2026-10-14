@@ -1,0 +1,31 @@
+# robots.txt for pixcel.gg
+# Crawlable for all standard search engine crawlers and AI answer engines
+
+User-agent: *
+Allow: /
+
+# Google Search Console & AI Answer Engine Optimization (AEO) Crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+# XML Sitemap index for Google Search Console
+Sitemap: /sitemap.xml
+Sitemap: https://pixcel.gg/sitemap.xml

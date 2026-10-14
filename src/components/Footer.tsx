@@ -82,8 +82,30 @@ export const Footer: React.FC = () => {
           <p className="text-[#666666]">
             © {new Date().getFullYear()} PIXCEL.GG · ALL RIGHTS RESERVED
           </p>
-          <div className="flex items-center gap-6 text-[#888888] font-bold">
-            <a href="#reviews-section" className="hover:text-[#ffe600]">Top of Page</a>
+          <div className="flex flex-wrap items-center gap-4 text-[#888888] font-bold">
+            <a 
+              href="/robots.txt" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="hover:text-[#ffe600] transition-colors"
+              aria-label="View site robots.txt directives"
+            >
+              Robots.txt
+            </a>
+            <span>·</span>
+            <a 
+              href="/sitemap.xml" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="hover:text-[#ffe600] transition-colors"
+              aria-label="View XML Sitemap for Google Search Console"
+            >
+              XML Sitemap
+            </a>
+            <span>·</span>
+            <a href="#reviews-section" className="hover:text-[#ffe600]" aria-label="Return to top of page reviews">
+              Top of Page
+            </a>
           </div>
         </div>
       </div>

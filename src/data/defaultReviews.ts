@@ -1,4 +1,4 @@
-import { GameReview } from '../types';
+import type { GameReview } from '../types';
 import { SEO_PRESETS } from './seoPresets';
 
 export const DEFAULT_PRESET_IMAGES = [
