@@ -24,6 +24,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Brand title wordmark with 8-bit font ONLY */}
         <a
           href="/"
+          aria-label="PIXCEL.GG Homepage - Honest Video Game Reviews and Score Breakdowns"
           className="flex items-center gap-2.5 text-white hover:text-[#ffe600] transition-colors shrink-0 group"
         >
           <span className="w-9 h-9 bg-[#ffe600] border-2 border-black flex items-center justify-center text-black shadow-[2px_2px_0px_#ffffff] group-hover:scale-105 transition-transform">
@@ -34,31 +35,35 @@ export const Navbar: React.FC<NavbarProps> = ({
           </span>
         </a>
 
-        {/* Nav Links in Aptos with bold weights */}
+        {/* Nav Links in Aptos with bold weights and descriptive anchor text */}
         <nav className="hidden md:flex items-center gap-7 text-sm font-semibold text-[#a3a3a3]">
           <a
             href="#reviews-section"
+            aria-label="Browse Latest Video Game Reviews Catalogue"
             className="hover:text-[#ffe600] transition-colors hover:underline underline-offset-8 decoration-[#ffe600]"
           >
-            Reviews
+            Latest Reviews
           </a>
           <a
             href="#featured-spotlight"
+            aria-label="View Spotlight Editor's Choice Review"
             className="hover:text-[#ffe600] transition-colors hover:underline underline-offset-8 decoration-[#ffe600]"
           >
             Spotlight
           </a>
           <a
             href="#hall-of-fame"
+            aria-label="Browse Hall of Fame 9.5+ Rated Masterpiece Reviews"
             className="hover:text-[#ffe600] transition-colors hover:underline underline-offset-8 decoration-[#ffe600]"
           >
             Hall of Fame
           </a>
           <a
             href="#editorial-ethics"
+            aria-label="Read Independent Editorial Ethics and 10-Point Scoring Standard"
             className="hover:text-[#ffe600] transition-colors hover:underline underline-offset-8 decoration-[#ffe600]"
           >
-            Ethics
+            Scoring Ethics
           </a>
         </nav>
 

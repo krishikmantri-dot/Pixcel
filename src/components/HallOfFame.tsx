@@ -36,14 +36,21 @@ export const HallOfFame: React.FC<HallOfFameProps> = ({ reviews, onSelectReview 
         {masterpieces.map((game, index) => (
           <div
             key={game.id}
-            onClick={() => onSelectReview(game)}
-            className="group relative bg-[#0d0d0d] border-2 border-[#333333] hover:border-[#ffe600] overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-[4px_4px_0px_#ffe600] cursor-pointer flex flex-col justify-between"
+            className="group relative bg-[#0d0d0d] border-2 border-[#333333] hover:border-[#ffe600] overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-[4px_4px_0px_#ffe600] flex flex-col justify-between"
           >
-            {/* Image banner with overlay */}
-            <div className="relative aspect-[16/10] overflow-hidden bg-[#000000] border-b-2 border-[#222222]">
+            {/* Image banner with link */}
+            <a
+              href={`/review/${game.id}`}
+              onClick={(e) => {
+                e.preventDefault();
+                onSelectReview(game);
+              }}
+              aria-label={`Read Hall of Fame review for ${game.title}`}
+              className="relative aspect-[16/10] overflow-hidden bg-[#000000] border-b-2 border-[#222222] block"
+            >
               <img
                 src={game.image}
-                alt={game.seo?.imageAlt || `${game.title} Hall of Fame masterpiece review artwork`}
+                alt={game.seo?.imageAlt || `${game.title} Hall of Fame masterpiece 9.5+ rating review cover art`}
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 referrerPolicy="no-referrer"
                 onError={(e) => {
@@ -63,7 +70,7 @@ export const HallOfFame: React.FC<HallOfFameProps> = ({ reviews, onSelectReview 
                 <Star className="w-3 h-3 fill-current" />
                 <span>{game.rating.toFixed(1)}</span>
               </div>
-            </div>
+            </a>
 
             {/* Information */}
             <div className="p-3.5 flex-1 flex flex-col justify-between">
@@ -71,16 +78,33 @@ export const HallOfFame: React.FC<HallOfFameProps> = ({ reviews, onSelectReview 
                 <span className="block text-xs font-bold text-[#888888] uppercase tracking-wider mb-1">
                   {game.genre}
                 </span>
-                {/* Game Title in 8-bit font */}
+                {/* Game Title in 8-bit font with unique URL link */}
                 <h3 className="font-8bit text-xs text-white group-hover:text-[#ffe600] transition-colors line-clamp-2 leading-snug mb-2">
-                  {game.title}
+                  <a
+                    href={`/review/${game.id}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onSelectReview(game);
+                    }}
+                    className="hover:underline focus:outline-none"
+                  >
+                    {game.title}
+                  </a>
                 </h3>
               </div>
 
-              <div className="pt-2 border-t border-[#222222] flex items-center justify-between text-xs font-bold text-[#ffe600]">
-                <span>Read Review</span>
+              <a
+                href={`/review/${game.id}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onSelectReview(game);
+                }}
+                className="pt-2 border-t border-[#222222] flex items-center justify-between text-xs font-bold text-[#ffe600] hover:underline"
+                aria-label={`Read ${game.title} Hall of Fame review`}
+              >
+                <span>Read Full {game.title} Review</span>
                 <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-              </div>
+              </a>
             </div>
           </div>
         ))}

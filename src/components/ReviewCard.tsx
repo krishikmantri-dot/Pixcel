@@ -21,11 +21,19 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
       onClick={() => onSelect(review)}
       className="group flex flex-col bg-[#0c0c0c] border-3 border-[#333333] hover:border-[#ffe600] transition-all duration-200 hover:-translate-y-1 hover:shadow-[5px_5px_0px_#ffe600] cursor-pointer text-left font-aptos"
     >
-      {/* Image Container */}
-      <div className="relative w-full aspect-[16/9] overflow-hidden bg-[#000000] border-b-2 border-[#222222] group-hover:border-[#ffe600]">
+      {/* Image Container with Link */}
+      <a
+        href={`/review/${review.id}`}
+        onClick={(e) => {
+          e.preventDefault();
+          onSelect(review);
+        }}
+        aria-label={`Read full review for ${review.title} (${review.genre} on ${review.platform})`}
+        className="relative w-full aspect-[16/9] overflow-hidden bg-[#000000] border-b-2 border-[#222222] group-hover:border-[#ffe600] block"
+      >
         <img
           src={review.image}
-          alt={review.seo?.imageAlt || `${review.title} video game cover art and review screenshot`}
+          alt={review.seo?.imageAlt || `${review.title} official video game cover art and gameplay critique screenshot`}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           referrerPolicy="no-referrer"
           onError={(e) => {
@@ -46,7 +54,10 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
 
           {/* Bookmark Button */}
           <button
-            onClick={(e) => onToggleBookmark(review.id, e)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleBookmark(review.id, e);
+            }}
             className={`pointer-events-auto p-1.5 border-2 transition-colors cursor-pointer ${
               isBookmarked
                 ? 'bg-[#ffe600] text-black border-[#ffe600]'
@@ -57,7 +68,7 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
             <Bookmark className="w-3.5 h-3.5 fill-current" />
           </button>
         </div>
-      </div>
+      </a>
 
       {/* Content Body in Aptos font */}
       <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
@@ -72,9 +83,18 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
             </span>
           </div>
 
-          {/* ONLY Title is in 8-bit font */}
+          {/* ONLY Title is in 8-bit font with anchor text link to unique review URL */}
           <h2 className="text-base sm:text-lg font-8bit text-white group-hover:text-[#ffe600] transition-colors leading-snug mb-3">
-            {review.title}
+            <a
+              href={`/review/${review.id}`}
+              onClick={(e) => {
+                e.preventDefault();
+                onSelect(review);
+              }}
+              className="hover:underline focus:outline-none"
+            >
+              {review.title}
+            </a>
           </h2>
 
           {/* Summary snippet */}
@@ -83,14 +103,23 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
           </p>
         </div>
 
-        {/* Card Footer in Aptos font */}
+        {/* Card Footer in Aptos font with unique URL anchor text */}
         <div className="pt-3 border-t-2 border-[#1c1c1c] flex items-center justify-between text-xs">
           <span className="text-[#777777] font-medium">
             {review.author} · {review.date}
           </span>
-          <span className="font-bold text-xs text-[#ffe600] flex items-center gap-1 group-hover:underline">
-            Read Review <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-          </span>
+          <a
+            href={`/review/${review.id}`}
+            onClick={(e) => {
+              e.preventDefault();
+              onSelect(review);
+            }}
+            className="font-bold text-xs text-[#ffe600] flex items-center gap-1 group-hover:underline"
+            aria-label={`Read full review for ${review.title}`}
+          >
+            <span>Read Full Review for {review.title}</span>
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+          </a>
         </div>
       </div>
     </article>

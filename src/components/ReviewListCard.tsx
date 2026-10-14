@@ -21,11 +21,19 @@ export const ReviewListCard: React.FC<ReviewListCardProps> = ({
       onClick={() => onSelect(review)}
       className="group bg-[#0c0c0c] border-3 border-[#333333] hover:border-[#ffe600] transition-all duration-200 hover:shadow-[5px_5px_0px_#ffe600] cursor-pointer flex flex-col sm:flex-row items-stretch font-aptos"
     >
-      {/* Image Container */}
-      <div className="relative sm:w-64 md:w-80 shrink-0 aspect-[16/9] sm:aspect-auto overflow-hidden bg-[#000000] border-b-2 sm:border-b-0 sm:border-r-3 border-[#333333] group-hover:border-[#ffe600]">
+      {/* Image Container with Link */}
+      <a
+        href={`/review/${review.id}`}
+        onClick={(e) => {
+          e.preventDefault();
+          onSelect(review);
+        }}
+        aria-label={`Read in-depth critique of ${review.title}`}
+        className="relative sm:w-64 md:w-80 shrink-0 aspect-[16/9] sm:aspect-auto overflow-hidden bg-[#000000] border-b-2 sm:border-b-0 sm:border-r-3 border-[#333333] group-hover:border-[#ffe600] block"
+      >
         <img
           src={review.image}
-          alt={review.seo?.imageAlt || `${review.title} video game review gameplay capture`}
+          alt={review.seo?.imageAlt || `${review.title} video game review gameplay capture and score breakdown`}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           referrerPolicy="no-referrer"
           onError={(e) => {
@@ -34,7 +42,7 @@ export const ReviewListCard: React.FC<ReviewListCardProps> = ({
             target.src = getGameCoverFallback(review.title, review.genre);
           }}
         />
-      </div>
+      </a>
 
       {/* Content in Aptos font */}
       <div className="p-5 flex-1 flex flex-col justify-between">
@@ -60,7 +68,10 @@ export const ReviewListCard: React.FC<ReviewListCardProps> = ({
               </div>
 
               <button
-                onClick={(e) => onToggleBookmark(review.id, e)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onToggleBookmark(review.id, e);
+                }}
                 className={`p-1.5 border-2 transition-colors cursor-pointer ${
                   isBookmarked
                     ? 'bg-[#ffe600] text-black border-[#ffe600]'
@@ -73,9 +84,18 @@ export const ReviewListCard: React.FC<ReviewListCardProps> = ({
             </div>
           </div>
 
-          {/* ONLY Title is in 8-bit font */}
+          {/* ONLY Title is in 8-bit font with unique URL anchor link */}
           <h2 className="text-lg sm:text-xl font-8bit text-white group-hover:text-[#ffe600] transition-colors leading-snug mb-3">
-            {review.title}
+            <a
+              href={`/review/${review.id}`}
+              onClick={(e) => {
+                e.preventDefault();
+                onSelect(review);
+              }}
+              className="hover:underline focus:outline-none"
+            >
+              {review.title}
+            </a>
           </h2>
 
           {/* Summary */}
@@ -84,15 +104,24 @@ export const ReviewListCard: React.FC<ReviewListCardProps> = ({
           </p>
         </div>
 
-        {/* Footer */}
+        {/* Footer with unique URL anchor text */}
         <div className="pt-3 border-t-2 border-[#1f1f1f] flex items-center justify-between text-xs">
           <span className="text-[#777777] font-medium">
             By <strong className="text-white font-bold">{review.author}</strong> · {review.date}
           </span>
 
-          <span className="font-bold text-xs text-[#ffe600] flex items-center gap-1 group-hover:underline">
-            Read Review <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-          </span>
+          <a
+            href={`/review/${review.id}`}
+            onClick={(e) => {
+              e.preventDefault();
+              onSelect(review);
+            }}
+            className="font-bold text-xs text-[#ffe600] flex items-center gap-1 group-hover:underline"
+            aria-label={`Read comprehensive review for ${review.title}`}
+          >
+            <span>Read In-Depth Review for {review.title}</span>
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+          </a>
         </div>
       </div>
     </article>

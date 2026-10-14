@@ -72,15 +72,39 @@ for (const [reviewId, seo] of Object.entries(SEO_PRESETS)) {
     `<script type="application/ld+json" id="seo-jsonld">\n${JSON.stringify(jsonLd, null, 2)}\n</script>`
   );
 
+  // Other reviews for contextual internal links with descriptive anchor text
+  const otherReviewsList = Object.entries(SEO_PRESETS)
+    .filter(([id]) => id !== reviewId)
+    .slice(0, 4)
+    .map(
+      ([otherId, otherSeo]) =>
+        `<li><a href="https://pixcel.gg/review/${otherId}" style="color: #ffe600; text-decoration: underline;">Read Full Review: ${otherSeo.headings.h1}</a></li>`
+    )
+    .join('\n            ');
+
   const gameSourceHtml = `
       <main id="seo-aeo-raw-source" style="max-width: 900px; margin: 0 auto; padding: 24px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #f5f5f5;">
+        <nav aria-label="Review Breadcrumbs" style="margin-bottom: 20px; font-size: 14px; font-weight: 600;">
+          <a href="https://pixcel.gg/" style="color: #ffe600; text-decoration: underline;">Return to All Video Game Reviews Catalogue</a>
+          <span style="color: #666; margin: 0 8px;">/</span>
+          <span style="color: #fff;">${seo.headings.h1}</span>
+        </nav>
+
         <header style="border-bottom: 4px solid #ffe600; padding-bottom: 16px; margin-bottom: 24px;">
           <h1 style="font-size: 28px; line-height: 1.3; color: #ffe600; margin: 0 0 8px 0; font-family: 'Press Start 2P', monospace;">
             ${seo.headings.h1}
           </h1>
-          <p style="font-size: 14px; color: #a3a3a3; margin: 0;">
+          <p style="font-size: 14px; color: #a3a3a3; margin: 0 0 16px 0;">
             ${seo.metaDescription}
           </p>
+
+          <div style="border: 4px solid #ffe600; background: #000; overflow: hidden; margin-top: 16px;">
+            <img 
+              src="https://pixcel.gg/games/${reviewId.replace(/-/g, '_')}.jpg" 
+              alt="${seo.imageAlt}" 
+              style="width: 100%; max-height: 440px; object-fit: cover; display: block;" 
+            />
+          </div>
         </header>
 
         <section style="margin-bottom: 28px;">
@@ -121,6 +145,20 @@ for (const [reviewId, seo] of Object.entries(SEO_PRESETS)) {
               </p>
             </div>
           </article>
+        </section>
+
+        <section aria-label="Related Game Reviews" style="border-top: 2px solid #2b2b2b; padding-top: 20px; margin-top: 24px;">
+          <h3 style="font-size: 16px; color: #ffe600; margin: 0 0 12px 0;">
+            Related Video Game Critiques &amp; Ratings
+          </h3>
+          <ul style="list-style: none; padding: 0; margin: 0 0 20px 0; display: grid; gap: 8px; font-size: 14px;">
+            ${otherReviewsList}
+          </ul>
+          <div style="font-size: 13px; color: #888;">
+            <a href="https://pixcel.gg/sitemap.xml" style="color: #a3a3a3; text-decoration: underline;">Google Search Console XML Sitemap</a>
+            <span style="margin: 0 8px;">·</span>
+            <a href="https://pixcel.gg/robots.txt" style="color: #a3a3a3; text-decoration: underline;">Robots.txt Crawler Directives</a>
+          </div>
         </section>
       </main>
   `.trim();

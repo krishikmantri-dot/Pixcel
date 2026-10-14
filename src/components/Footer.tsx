@@ -8,7 +8,11 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
           {/* Col 1: Wordmark & Mission */}
           <div className="md:col-span-2 space-y-3">
-            <div className="flex items-center gap-2.5 text-lg font-bold text-white">
+            <a
+              href="/"
+              aria-label="PIXCEL.GG Home - Independent Video Game Reviews & Score Breakdowns"
+              className="flex items-center gap-2.5 text-lg font-bold text-white hover:text-[#ffe600] transition-colors inline-flex"
+            >
               <span className="w-8 h-8 bg-[#ffe600] border-2 border-black flex items-center justify-center text-black">
                 <Gamepad2 className="w-5 h-5 stroke-[2.5]" />
               </span>
@@ -16,7 +20,7 @@ export const Footer: React.FC = () => {
               <span className="font-8bit text-base text-[#ffe600] tracking-wider">
                 PIXCEL<span className="text-white">.GG</span>
               </span>
-            </div>
+            </a>
             <p className="text-[#a3a3a3] max-w-md leading-relaxed text-sm">
               Honest game reviews, technical score breakdowns, and independent gaming journalism.
               Critiques written by passionate players, for players.
@@ -41,23 +45,39 @@ export const Footer: React.FC = () => {
             </h4>
             <ul className="space-y-2 text-sm font-medium">
               <li>
-                <a href="#reviews-section" className="hover:text-[#ffe600] transition-colors">
-                  Action & RPGs
+                <a
+                  href="/#reviews-section"
+                  aria-label="Browse Action and RPG Video Game Reviews"
+                  className="hover:text-[#ffe600] transition-colors hover:underline"
+                >
+                  Action &amp; RPG Reviews
                 </a>
               </li>
               <li>
-                <a href="#reviews-section" className="hover:text-[#ffe600] transition-colors">
-                  Open World Epics
+                <a
+                  href="/#reviews-section"
+                  aria-label="Browse Open World Video Game Reviews"
+                  className="hover:text-[#ffe600] transition-colors hover:underline"
+                >
+                  Open World Game Reviews
                 </a>
               </li>
               <li>
-                <a href="#reviews-section" className="hover:text-[#ffe600] transition-colors">
-                  Tactical Shooters & Esports
+                <a
+                  href="/#reviews-section"
+                  aria-label="Browse Tactical Shooter and Esports Video Game Reviews"
+                  className="hover:text-[#ffe600] transition-colors hover:underline"
+                >
+                  Tactical Shooters &amp; Esports Reviews
                 </a>
               </li>
               <li>
-                <a href="#reviews-section" className="hover:text-[#ffe600] transition-colors">
-                  Indie & Metroidvanias
+                <a
+                  href="/#reviews-section"
+                  aria-label="Browse Indie and Metroidvania Video Game Reviews"
+                  className="hover:text-[#ffe600] transition-colors hover:underline"
+                >
+                  Indie &amp; Metroidvania Reviews
                 </a>
               </li>
             </ul>
@@ -87,23 +107,27 @@ export const Footer: React.FC = () => {
               href="/robots.txt" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="hover:text-[#ffe600] transition-colors"
-              aria-label="View site robots.txt directives"
+              className="hover:text-[#ffe600] transition-colors hover:underline"
+              aria-label="Search Engine Crawler Directives (robots.txt)"
             >
-              Robots.txt
+              Robots.txt Directives
             </a>
             <span>·</span>
             <a 
               href="/sitemap.xml" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="hover:text-[#ffe600] transition-colors"
-              aria-label="View XML Sitemap for Google Search Console"
+              className="hover:text-[#ffe600] transition-colors hover:underline"
+              aria-label="Google Search Console XML Sitemap (sitemap.xml)"
             >
-              XML Sitemap
+              Google Search Console XML Sitemap
             </a>
             <span>·</span>
-            <a href="#reviews-section" className="hover:text-[#ffe600]" aria-label="Return to top of page reviews">
+            <a
+              href="#reviews-section"
+              className="hover:text-[#ffe600] transition-colors hover:underline"
+              aria-label="Return to top of Video Game Reviews Catalogue"
+            >
               Top of Page
             </a>
           </div>

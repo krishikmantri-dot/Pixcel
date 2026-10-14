@@ -44,7 +44,7 @@ export function generateSEOForReview(review: {
     secondaryKeywords: [`${review.title} gameplay`, `${review.title} score`, `${review.genre} games`],
     metaTitle,
     metaDescription,
-    imageAlt: `${review.title} gameplay screenshot and official game art`,
+    imageAlt: `${review.title} official video game gameplay screenshot, cover artwork, and ${review.genre} review illustration`,
     headings: {
       h1: `${review.title} Review: Complete Campaign & Performance Verdict`,
       h2: `How Does ${review.title} Compare in the ${review.genre} Genre?`,

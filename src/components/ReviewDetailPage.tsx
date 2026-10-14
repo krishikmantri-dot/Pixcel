@@ -148,13 +148,27 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
 
       {/* Main Content Area */}
       <main className="max-w-5xl mx-auto px-4 pt-8">
-        {/* Breadcrumbs in Aptos font with descriptive anchor text */}
+        {/* Breadcrumbs in Aptos font with descriptive anchor text linking to unique URLs */}
         <nav aria-label="Breadcrumbs" className="mb-6 flex items-center gap-2 text-xs md:text-sm text-[#888888] font-semibold">
-          <button onClick={onBack} className="hover:text-[#ffe600] transition-colors cursor-pointer">
-            Reviews
-          </button>
+          <a
+            href="/"
+            onClick={(e) => {
+              e.preventDefault();
+              onBack();
+            }}
+            className="hover:text-[#ffe600] transition-colors cursor-pointer hover:underline"
+            aria-label="Return to All Game Reviews Catalogue"
+          >
+            All Reviews
+          </a>
           <span>/</span>
-          <span className="text-[#ffe600]">{review.genre}</span>
+          <a
+            href="/#reviews-section"
+            className="text-[#ffe600] hover:underline"
+            aria-label={`Browse all ${review.genre} video game reviews`}
+          >
+            {review.genre}
+          </a>
           <span>/</span>
           <span className="text-white truncate max-w-[200px] md:max-w-md">{review.title}</span>
         </nav>
@@ -212,7 +226,7 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
           <div className="border-4 border-[#ffe600] shadow-[6px_6px_0px_#ffe600] overflow-hidden bg-[#111111]">
             <img
               src={review.image}
-              alt={seo.imageAlt || `${review.title} gameplay review screenshot and artwork`}
+              alt={seo.imageAlt || `${review.title} official video game gameplay screenshot, cover artwork, and ${review.genre} critique illustration`}
               onError={(e) => {
                 const target = e.currentTarget;
                 target.onerror = null;
@@ -368,14 +382,18 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
           </section>
         )}
 
-        {/* Previous / Next Review Navigation with explicit Anchor Text */}
+        {/* Previous / Next Review Navigation with explicit Anchor Text to Unique Review URLs */}
         <section aria-label="Review pagination" className="mb-16 border-t-2 border-b-2 border-[#333333] py-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {prevReview ? (
-              <button
-                onClick={() => onNavigateToReview(prevReview)}
+              <a
+                href={`/review/${prevReview.id}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigateToReview(prevReview);
+                }}
                 className="bg-[#111111] hover:bg-[#1a1a1a] p-4 border-2 border-[#2b2b2b] hover:border-[#ffe600] text-left transition-colors flex items-center gap-3 cursor-pointer group"
-                aria-label={`Read previous review: ${prevReview.title}`}
+                aria-label={`Read previous review: ${prevReview.title} (${prevReview.genre})`}
               >
                 <ChevronLeft className="w-6 h-6 text-[#ffe600] shrink-0 group-hover:-translate-x-1 transition-transform" />
                 <div className="truncate">
@@ -384,14 +402,18 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
                     {prevReview.title}
                   </span>
                 </div>
-              </button>
+              </a>
             ) : <div />}
 
             {nextReview ? (
-              <button
-                onClick={() => onNavigateToReview(nextReview)}
+              <a
+                href={`/review/${nextReview.id}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigateToReview(nextReview);
+                }}
                 className="bg-[#111111] hover:bg-[#1a1a1a] p-4 border-2 border-[#2b2b2b] hover:border-[#ffe600] text-right transition-colors flex items-center justify-end gap-3 cursor-pointer group sm:col-start-2"
-                aria-label={`Read next review: ${nextReview.title}`}
+                aria-label={`Read next review: ${nextReview.title} (${nextReview.genre})`}
               >
                 <div className="truncate">
                   <span className="block text-xs font-bold text-[#888888] uppercase tracking-wider">Next Review</span>
@@ -400,7 +422,7 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
                   </span>
                 </div>
                 <ChevronRight className="w-6 h-6 text-[#ffe600] shrink-0 group-hover:translate-x-1 transition-transform" />
-              </button>
+              </a>
             ) : <div />}
           </div>
         </section>
@@ -479,16 +501,20 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
           </div>
         </section>
 
-        {/* Back button at bottom with clear anchor text */}
+        {/* Back button at bottom with clear anchor text to unique home URL */}
         <div className="mt-12 text-center">
-          <button
-            onClick={onBack}
+          <a
+            href="/"
+            onClick={(e) => {
+              e.preventDefault();
+              onBack();
+            }}
             className="retro-btn-yellow px-6 py-3 text-sm font-bold cursor-pointer inline-flex items-center gap-2"
-            aria-label="Return to All Game Reviews Index"
+            aria-label="Return to All Video Game Reviews Catalogue"
           >
             <ArrowLeft className="w-4 h-4 stroke-[3]" />
-            Return to All Reviews
-          </button>
+            Return to All Video Game Reviews Catalogue
+          </a>
         </div>
       </main>
     </article>

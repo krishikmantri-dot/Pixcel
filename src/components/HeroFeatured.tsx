@@ -26,7 +26,16 @@ export const HeroFeatured: React.FC<HeroFeaturedProps> = ({ review, onReadReview
 
             {/* ONLY the Title is in 8-bit font */}
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-8bit text-white tracking-wide leading-tight mb-4 text-balance">
-              {review.title}
+              <a
+                href={`/review/${review.id}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onReadReview(review);
+                }}
+                className="hover:text-[#ffe600] transition-colors hover:underline focus:outline-none"
+              >
+                {review.title}
+              </a>
             </h1>
 
             {/* Metadata Bar in Aptos font */}
@@ -71,15 +80,20 @@ export const HeroFeatured: React.FC<HeroFeaturedProps> = ({ review, onReadReview
             )}
           </div>
 
-          {/* Action Button & Author Byline in Aptos font */}
+          {/* Action Button & Author Byline with unique URL anchor text */}
           <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t-2 border-[#222222]">
-            <button
-              onClick={() => onReadReview(review)}
+            <a
+              href={`/review/${review.id}`}
+              onClick={(e) => {
+                e.preventDefault();
+                onReadReview(review);
+              }}
               className="retro-btn-yellow inline-flex items-center gap-2 px-5 py-3 text-sm font-bold cursor-pointer"
+              aria-label={`Read complete review for ${review.title} - Editor's Choice`}
             >
-              <span>Read Full Review</span>
+              <span>Read Full Review for {review.title}</span>
               <ArrowRight className="w-4 h-4 stroke-[3]" />
-            </button>
+            </a>
 
             <div className="text-xs text-[#888888] flex items-center gap-2 font-medium">
               <UserCheck className="w-4 h-4 text-[#ffe600]" />
@@ -88,18 +102,28 @@ export const HeroFeatured: React.FC<HeroFeaturedProps> = ({ review, onReadReview
           </div>
         </div>
 
-        {/* Right Column: Hero Cover Artwork */}
+        {/* Right Column: Hero Cover Artwork with Link */}
         <div className="lg:col-span-5 relative bg-[#000000] border-t-4 lg:border-t-0 lg:border-l-4 border-[#ffe600] min-h-[320px] lg:min-h-full overflow-hidden flex items-center justify-center">
-          <img
-            src={review.image}
-            alt={review.seo?.imageAlt || `${review.title} featured game review screenshot and cover art`}
-            onError={(e) => {
-              const target = e.currentTarget;
-              target.onerror = null;
-              target.src = getGameCoverFallback(review.title, review.genre);
+          <a
+            href={`/review/${review.id}`}
+            onClick={(e) => {
+              e.preventDefault();
+              onReadReview(review);
             }}
-            className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-500"
-          />
+            aria-label={`View full review page for ${review.title}`}
+            className="w-full h-full block"
+          >
+            <img
+              src={review.image}
+              alt={review.seo?.imageAlt || `${review.title} - ${review.genre} featured spotlight game review screenshot and cover art`}
+              onError={(e) => {
+                const target = e.currentTarget;
+                target.onerror = null;
+                target.src = getGameCoverFallback(review.title, review.genre);
+              }}
+              className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-500"
+            />
+          </a>
 
           {/* Overall Rating Score Box in Aptos font */}
           <div className="absolute bottom-4 right-4 bg-[#000000] border-3 border-[#ffe600] p-3 text-right shadow-[3px_3px_0px_#ffe600]">
