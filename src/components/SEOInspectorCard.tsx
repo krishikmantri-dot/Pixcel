@@ -169,6 +169,70 @@ export const SEOInspectorCard: React.FC<SEOInspectorCardProps> = ({
             </div>
           </div>
 
+          {/* Keyword Architecture: Short-Tail Head Keywords vs. Long-Tail Search Queries */}
+          <div className="bg-[#121212] p-4 border border-[#2b2b2b] space-y-3">
+            <div className="flex items-center justify-between border-b border-[#222222] pb-2">
+              <span className="text-xs font-bold text-[#ffe600] uppercase tracking-wider flex items-center gap-2">
+                <Tag className="w-4 h-4 text-[#ffe600]" />
+                Keyword Strategy (Short-Tail Head Terms &amp; Long-Tail Queries)
+              </span>
+              <span className="text-[11px] bg-[#1e293b] text-[#38bdf8] px-2 py-0.5 font-bold border border-[#0ea5e9]">
+                ✔ Balanced Volume &amp; Intent
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+              {/* Short-Tail Keywords */}
+              <div className="bg-[#0f172a] p-3 border-l-4 border-[#38bdf8] space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-[#38bdf8] uppercase tracking-wide">
+                    Short-Tail (Head) Keywords
+                  </span>
+                  <span className="text-[10px] text-[#94a3b8]">Broad &amp; High Search Volume</span>
+                </div>
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {(seo.shortTailKeywords || ['Video Games', 'Game Reviews', 'Action RPG', 'PC Games']).map((keyword) => (
+                    <span 
+                      key={keyword}
+                      className="inline-flex items-center px-2 py-1 bg-[#1e293b] text-[#e0f2fe] text-xs font-semibold rounded border border-[#0284c7]"
+                    >
+                      # {keyword}
+                    </span>
+                  ))}
+                </div>
+                <p className="text-[11px] text-[#94a3b8] pt-1">
+                  Targeting high-volume discovery searches across major engines and app directories.
+                </p>
+              </div>
+
+              {/* Long-Tail Keywords */}
+              <div className="bg-[#1f190e] p-3 border-l-4 border-[#ffe600] space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-[#ffe600] uppercase tracking-wide">
+                    Long-Tail Search Queries
+                  </span>
+                  <span className="text-[10px] text-[#d4af37]">High Intent &amp; Conversion</span>
+                </div>
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  <span className="inline-flex items-center px-2 py-1 bg-[#2e2609] text-[#ffe600] text-xs font-bold rounded border border-[#ffe600]">
+                    ★ {seo.primaryKeyword}
+                  </span>
+                  {(seo.secondaryKeywords || []).map((keyword) => (
+                    <span 
+                      key={keyword}
+                      className="inline-flex items-center px-2 py-1 bg-[#26200e] text-[#fef08a] text-xs font-semibold rounded border border-[#854d0e]"
+                    >
+                      {keyword}
+                    </span>
+                  ))}
+                </div>
+                <p className="text-[11px] text-[#d4af37] pt-1">
+                  Targeting qualified readers searching for specific game impressions, DLC verdicts, and ratings.
+                </p>
+              </div>
+            </div>
+          </div>
+
           {/* 3 Headings: H1, H2, H3 Closely Related to Keywords */}
           <div className="bg-[#101010] p-4 border border-[#2b2b2b] space-y-3">
             <div className="flex items-center justify-between border-b border-[#222222] pb-2">

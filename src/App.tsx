@@ -19,8 +19,8 @@ import { Footer } from './components/Footer';
 import { applyPageSEO, DEFAULT_SITE_TITLE, DEFAULT_SITE_DESCRIPTION } from './utils/seo';
 import { Sparkles, Gamepad2, BookmarkX, RotateCcw } from 'lucide-react';
 
-const STORAGE_KEY_REVIEWS = 'pixcel_gg_reviews_v6';
-const STORAGE_KEY_BOOKMARKS = 'pixcel_gg_bookmarks_v6';
+const STORAGE_KEY_REVIEWS = 'pixcel_gg_reviews_v7';
+const STORAGE_KEY_BOOKMARKS = 'pixcel_gg_bookmarks_v7';
 
 export default function App() {
   // Initialize reviews from localStorage or defaults with verified SEO metadata
@@ -28,8 +28,8 @@ export default function App() {
     try {
       const stored =
         localStorage.getItem(STORAGE_KEY_REVIEWS) ||
-        localStorage.getItem('pixcel_gg_reviews_v5') ||
-        localStorage.getItem('pixcel_gg_reviews_v4');
+        localStorage.getItem('pixcel_gg_reviews_v6') ||
+        localStorage.getItem('pixcel_gg_reviews_v5');
       if (stored) {
         const parsed = JSON.parse(stored);
         if (Array.isArray(parsed) && parsed.length > 0) {
@@ -39,7 +39,7 @@ export default function App() {
             if (initialItem) {
               return {
                 ...item,
-                seo: initialItem.seo || SEO_PRESETS[item.id],
+                seo: SEO_PRESETS[item.id] || initialItem.seo,
                 image: initialItem.image,
                 summary: initialItem.summary,
                 fullReview: initialItem.fullReview,
@@ -86,7 +86,21 @@ export default function App() {
         title: DEFAULT_SITE_TITLE,
         description: DEFAULT_SITE_DESCRIPTION,
         url: typeof window !== 'undefined' ? window.location.origin : 'https://pixcel.gg',
-        type: 'website'
+        type: 'website',
+        keywords: [
+          'Game reviews',
+          'Video games',
+          'Gaming',
+          'Game ratings',
+          'PC games',
+          'PS5 games',
+          'Xbox games',
+          'Nintendo Switch',
+          'Action games',
+          'RPG',
+          'Indie games',
+          'pixcel.gg'
+        ]
       });
     }
   }, [selectedReview]);

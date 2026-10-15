@@ -27,8 +27,9 @@ export interface GameReviewHeadings {
 export interface GameReviewSEO {
   metaTitle: string; // strictly <= 60 characters
   metaDescription: string; // strictly <= 160 characters
-  primaryKeyword: string;
-  secondaryKeywords: string[];
+  primaryKeyword: string; // long-tail primary target query
+  shortTailKeywords: string[]; // broad 1-2 word head keywords (e.g. 'Elden Ring', 'Action RPG', 'Game reviews')
+  secondaryKeywords: string[]; // long-tail secondary search phrases
   imageAlt: string;
   headings: GameReviewHeadings;
   aeoQuestions: [AEOQuestionAnswer, AEOQuestionAnswer];

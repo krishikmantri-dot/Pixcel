@@ -51,12 +51,19 @@ export const ReviewDetailPage: React.FC<ReviewDetailPageProps> = ({
   // Apply Document Head SEO dynamically for search engine bots, scrapers & AI overviews
   useEffect(() => {
     const url = typeof window !== 'undefined' ? `${window.location.origin}/review/${review.id}` : '';
+    const allKeywords = [
+      ...(seo.shortTailKeywords || []),
+      ...(seo.secondaryKeywords || []),
+      seo.primaryKeyword
+    ];
+
     applyPageSEO({
       title: seo.metaTitle,
       description: seo.metaDescription,
       url: url,
       image: review.image,
       type: 'article',
+      keywords: allKeywords,
       jsonLd: generateReviewJsonLd(review, url)
     });
   }, [review, seo]);

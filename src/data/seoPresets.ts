@@ -3,6 +3,7 @@ import type { GameReviewSEO } from '../types';
 export const SEO_PRESETS: Record<string, GameReviewSEO> = {
   'elden-ring-shadow-erdtree': {
     primaryKeyword: 'Elden Ring Erdtree Review',
+    shortTailKeywords: ['Elden Ring', 'Action RPG', 'FromSoftware', 'Game reviews', 'Video games'],
     secondaryKeywords: ['Elden Ring DLC review', 'Shadow of the Erdtree score', 'FromSoftware action RPG'],
     metaTitle: 'Elden Ring Erdtree Review: 10/10 Masterpiece? | pixcel',
     metaDescription: "Honest Elden Ring Erdtree review covering bosses, weapons, and map design. See our complete score breakdown and decide if it's worth it!",
@@ -25,6 +26,7 @@ export const SEO_PRESETS: Record<string, GameReviewSEO> = {
   },
   'cyberpunk-phantom-liberty': {
     primaryKeyword: 'Cyberpunk Phantom Liberty Review',
+    shortTailKeywords: ['Cyberpunk 2077', 'Cyberpunk', 'RPG', 'Open World', 'Video games'],
     secondaryKeywords: ['Cyberpunk 2077 2.0 review', 'Dogtown DLC impressions', 'Idris Elba Solomon Reed'],
     metaTitle: 'Cyberpunk Phantom Liberty Review: Is It Fixed? | pixcel',
     metaDescription: 'In-depth Cyberpunk 2077 Phantom Liberty review exploring Dogtown, spy thriller story, and 2.0 combat. Read our full verdict before you buy!',
@@ -47,6 +49,7 @@ export const SEO_PRESETS: Record<string, GameReviewSEO> = {
   },
   'ghost-of-tsushima': {
     primaryKeyword: 'Ghost of Tsushima Review',
+    shortTailKeywords: ['Ghost of Tsushima', 'Samurai games', 'Action adventure', 'PlayStation', 'PC games'],
     secondaryKeywords: ['Ghost of Tsushima PC review', 'Jin Sakai samurai combat', 'Guiding wind mechanics'],
     metaTitle: 'Ghost of Tsushima Review: Best Samurai Epic? | pixcel',
     metaDescription: "Detailed Ghost of Tsushima review analyzing Jin Sakai's katana combat, guiding wind mechanics, and visuals. Read our score breakdown now!",
@@ -69,6 +72,7 @@ export const SEO_PRESETS: Record<string, GameReviewSEO> = {
   },
   'hollow-knight': {
     primaryKeyword: 'Hollow Knight Review',
+    shortTailKeywords: ['Hollow Knight', 'Metroidvania', 'Indie games', 'Platformer', 'Action games'],
     secondaryKeywords: ['Hollow Knight Metroidvania review', 'Hallownest bosses', 'Team Cherry score'],
     metaTitle: 'Hollow Knight Review: Peak Metroidvania Worth It? | pixcel',
     metaDescription: "Complete Hollow Knight review examining Hallownest exploration, boss fights, charms, and music. Find out why it's a genre must-play today!",
@@ -91,6 +95,7 @@ export const SEO_PRESETS: Record<string, GameReviewSEO> = {
   },
   'red-dead-redemption-2': {
     primaryKeyword: 'Red Dead Redemption 2 Review',
+    shortTailKeywords: ['Red Dead Redemption 2', 'RDR2', 'Rockstar Games', 'Open World', 'Western games'],
     secondaryKeywords: ['RDR2 review 2024', 'Arthur Morgan storyline', 'Rockstar open world simulation'],
     metaTitle: 'Red Dead Redemption 2 Review: Still the GOAT? | pixcel',
     metaDescription: "Definitive Red Dead Redemption 2 review on Arthur Morgan's outlaw saga, realism, and world simulation. Explore our full score verdict now!",
@@ -113,6 +118,7 @@ export const SEO_PRESETS: Record<string, GameReviewSEO> = {
   },
   'valorant': {
     primaryKeyword: 'Valorant Review',
+    shortTailKeywords: ['Valorant', 'FPS', 'Tactical shooter', 'Esports', 'Shooter games'],
     secondaryKeywords: ['Valorant tactical shooter review', 'Riot Games competitive FPS', 'Valorant gunplay'],
     metaTitle: 'Valorant Review: Best Competitive Tactical Shooter? | pixcel',
     metaDescription: 'Thorough Valorant review dissecting gunplay precision, agent balance, 128-tick servers, and ranked mode. Read our critique before queueing!',
@@ -135,6 +141,7 @@ export const SEO_PRESETS: Record<string, GameReviewSEO> = {
   },
   'zelda-tears-of-kingdom': {
     primaryKeyword: 'Zelda Tears of the Kingdom Review',
+    shortTailKeywords: ['Zelda', 'Tears of the Kingdom', 'Nintendo Switch', 'Action adventure', 'Open World'],
     secondaryKeywords: ['Tears of the Kingdom review', 'TOTK Ultrahand building', 'Nintendo Switch Zelda score'],
     metaTitle: 'Zelda Tears of the Kingdom Review: Ultrahand Magic | pixcel',
     metaDescription: 'Hands-on Zelda Tears of the Kingdom review testing Ultrahand physics, sky islands, and depths. Discover if it tops Breath of the Wild today!',
@@ -157,6 +164,7 @@ export const SEO_PRESETS: Record<string, GameReviewSEO> = {
   },
   'forza-horizon-5': {
     primaryKeyword: 'Forza Horizon 5 Review',
+    shortTailKeywords: ['Forza Horizon 5', 'Forza', 'Racing games', 'Xbox games', 'Car games'],
     secondaryKeywords: ['Forza Horizon 5 racing review', 'Mexico map driving', 'Playground Games racing'],
     metaTitle: 'Forza Horizon 5 Review: Ultimate Open-World Racer? | pixcel',
     metaDescription: 'Comprehensive Forza Horizon 5 review reviewing Mexico map diversity, 700+ cars, and driving physics. See our final verdict before you race!',
@@ -179,6 +187,7 @@ export const SEO_PRESETS: Record<string, GameReviewSEO> = {
   },
   'god-of-war-ragnarok': {
     primaryKeyword: 'God of War Ragnarok Review',
+    shortTailKeywords: ['God of War', 'Ragnarok', 'PlayStation', 'Action games', 'Mythology games'],
     secondaryKeywords: ['God of War Ragnarok review', 'Kratos and Atreus story', 'Draupnir Spear combat'],
     metaTitle: 'God of War Ragnarok Review: Norse Saga Masterpiece? | pixcel',
     metaDescription: 'Deep God of War Ragnarok review covering Kratos and Atreus, Draupnir Spear combat, and Odin. Check out our honest score breakdown now!',
@@ -201,6 +210,7 @@ export const SEO_PRESETS: Record<string, GameReviewSEO> = {
   },
   'stardew-valley': {
     primaryKeyword: 'Stardew Valley Review',
+    shortTailKeywords: ['Stardew Valley', 'Farming sim', 'Cozy games', 'Indie games', 'Life sim'],
     secondaryKeywords: ['Stardew Valley review 2024', 'ConcernedApe 1.6 review', 'cozy farming simulator'],
     metaTitle: 'Stardew Valley Review: Still the Cozy King in 2024? | pixcel',
     metaDescription: 'Enduring Stardew Valley review highlighting farm life loops, Pelican Town characters, and 1.6 content. Find out why you should play it now!',

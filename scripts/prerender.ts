@@ -21,10 +21,20 @@ for (const [reviewId, seo] of Object.entries(SEO_PRESETS)) {
   fs.mkdirSync(reviewDir, { recursive: true });
 
   let updated = baseHtml;
+  // Combined short-tail and long-tail keywords
+  const allKeywords = [
+    ...(seo.shortTailKeywords || []),
+    ...(seo.secondaryKeywords || []),
+    seo.primaryKeyword
+  ];
+  const keywordsString = Array.from(new Set(allKeywords)).join(', ');
+
   // Replace title
   updated = updated.replace(/<title>.*?<\/title>/i, `<title>${seo.metaTitle}</title>`);
   // Replace meta description
   updated = updated.replace(/<meta\s+name="description"\s+content=".*?"\s*\/?>/i, `<meta name="description" content="${seo.metaDescription}" />`);
+  // Replace meta keywords with short-tail and long-tail keywords
+  updated = updated.replace(/<meta\s+name="keywords"\s+content=".*?"\s*\/?>/i, `<meta name="keywords" content="${keywordsString}" />`);
   // Replace canonical link
   updated = updated.replace(/<link\s+rel="canonical"\s+href=".*?"\s*\/?>/i, `<link rel="canonical" href="https://pixcel.gg/review/${reviewId}" />`);
   // Replace og:title & og:description & og:image
@@ -47,10 +57,12 @@ for (const [reviewId, seo] of Object.entries(SEO_PRESETS)) {
         'itemReviewed': {
           '@type': 'VideoGame',
           'name': seo.headings.h1,
-          'image': `/games/${reviewId.replace(/-/g, '_')}.jpg`
+          'image': `/games/${reviewId.replace(/-/g, '_')}.jpg`,
+          'keywords': keywordsString
         },
         'headline': seo.metaTitle,
         'description': seo.metaDescription,
+        'keywords': keywordsString,
         'url': `https://pixcel.gg/review/${reviewId}`
       },
       {

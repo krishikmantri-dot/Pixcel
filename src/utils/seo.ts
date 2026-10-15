@@ -18,6 +18,7 @@ export function generateSEOForReview(review: {
   summary: string;
 }): GameReviewSEO {
   const keyword = `${review.title} Review`;
+  const shortTail = [review.title, review.genre, 'Game reviews', 'Video games', 'PC games'];
 
   // Craft title <= 60 chars with keyword at start and high click appeal
   let metaTitle = `${keyword}: Worth Playing? | pixcel`;
@@ -41,6 +42,7 @@ export function generateSEOForReview(review: {
 
   return {
     primaryKeyword: keyword,
+    shortTailKeywords: shortTail,
     secondaryKeywords: [`${review.title} gameplay`, `${review.title} score`, `${review.genre} games`],
     metaTitle,
     metaDescription,
@@ -77,6 +79,14 @@ export function generateReviewJsonLd(review: GameReview, url: string) {
     }
   }));
 
+  const allKeywords = [
+    ...(seo?.shortTailKeywords || [review.title, review.genre, 'Game reviews', 'Video games']),
+    ...(seo?.secondaryKeywords || []),
+    seo?.primaryKeyword || `${review.title} Review`
+  ].filter(Boolean);
+
+  const keywordsString = Array.from(new Set(allKeywords)).join(', ');
+
   return {
     '@context': 'https://schema.org',
     '@graph': [
@@ -87,7 +97,8 @@ export function generateReviewJsonLd(review: GameReview, url: string) {
           'name': review.title,
           'genre': review.genre,
           'gamePlatform': review.platform,
-          'image': review.image
+          'image': review.image,
+          'keywords': keywordsString
         },
         'reviewRating': {
           '@type': 'Rating',
@@ -107,6 +118,7 @@ export function generateReviewJsonLd(review: GameReview, url: string) {
         'datePublished': review.date,
         'headline': review.seo?.metaTitle || review.title,
         'description': review.seo?.metaDescription || review.summary,
+        'keywords': keywordsString,
         'url': url
       },
       {
@@ -126,6 +138,7 @@ export function applyPageSEO(options: {
   url?: string;
   image?: string;
   type?: string;
+  keywords?: string | string[];
   jsonLd?: object;
 }) {
   if (typeof document === 'undefined') return;
@@ -144,8 +157,15 @@ export function applyPageSEO(options: {
     tag.setAttribute('content', content);
   };
 
-  // Standard Meta Description & Robots Directives
+  // Standard Meta Description, Keywords & Robots Directives
   setMetaTag('name', 'description', options.description);
+
+  const defaultKeywords = 'game reviews, video games, gaming, game ratings, video game reviews, PC games, PS5 games, Xbox games, Nintendo Switch, action games, RPG, indie games, pixcel.gg';
+  const keywordsContent = Array.isArray(options.keywords) 
+    ? options.keywords.join(', ') 
+    : (options.keywords || defaultKeywords);
+  setMetaTag('name', 'keywords', keywordsContent);
+
   setMetaTag('name', 'robots', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
 
   // Canonical Link
