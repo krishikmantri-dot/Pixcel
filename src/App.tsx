@@ -432,8 +432,8 @@ export default function App() {
             <h1 className="text-xl sm:text-3xl font-8bit text-[#ffe600] tracking-wide uppercase">
               PIXCEL<span className="text-white">.GG</span> GAMING CHRONICLE
             </h1>
-            <p className="text-sm sm:text-base text-[#a3a3a3] mt-1 font-medium">
-              In-Depth Reviews · Honest Ratings · Modern Gaming Stories
+            <p className="text-sm sm:text-base text-[#d4d4d4] mt-1 font-medium">
+              Pixcel.gg Gaming Chronicle: Honest Video Game Reviews, 10-Point Technical Ratings &amp; Modern Critique Essays
             </p>
           </div>
 
